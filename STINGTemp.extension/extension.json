@@ -1,0 +1,9 @@
+{
+  "name": "STINGTemp",
+  "type": "extension",
+  "description": "ISO 19650-3:2020 BIM template automation toolkit",
+  "author": "Author",
+  "version": "6.0.0",
+  "min_revit_version": "2025",
+  "max_revit_version": "2027"
+}

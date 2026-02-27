@@ -1,0 +1,1 @@
+# STINGTags lib package

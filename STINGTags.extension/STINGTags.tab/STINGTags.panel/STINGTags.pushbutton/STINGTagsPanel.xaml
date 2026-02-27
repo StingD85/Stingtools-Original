@@ -1,0 +1,1763 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="STINGTags v9.6" Width="355" Height="740"
+        WindowStartupLocation="Manual" ResizeMode="CanResizeWithGrip"
+        ShowInTaskbar="True" Topmost="False" Background="#F4F6F8">
+  <Window.Resources>
+
+    <Style TargetType="ToolTip">
+      <Setter Property="Background"      Value="#1C313A"/>
+      <Setter Property="Foreground"      Value="#ECEFF1"/>
+      <Setter Property="FontSize"        Value="11"/>
+      <Setter Property="Padding"         Value="8,5"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="MaxWidth"        Value="290"/>
+    </Style>
+
+    <Style x:Key="Btn" TargetType="Button">
+      <Setter Property="Background"      Value="#E8EAED"/>
+      <Setter Property="BorderBrush"     Value="#B0BEC5"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Foreground"      Value="#263238"/>
+      <Setter Property="FontSize"        Value="9"/>
+      <Setter Property="Cursor"          Value="Hand"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="3">
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Margin="{TemplateBinding Padding}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background"  Value="#CFD8DC"/>
+                <Setter Property="BorderBrush" Value="#546E7A"/>
+              </Trigger>
+              <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#90A4AE"/>
+              </Trigger>
+              <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.4"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="BtnAI"   TargetType="Button" BasedOn="{StaticResource Btn}">
+      <Setter Property="Background"  Value="#EDE7F6"/>
+      <Setter Property="BorderBrush" Value="#7B1FA2"/>
+      <Setter Property="Foreground"  Value="#4A148C"/>
+    </Style>
+    <Style x:Key="BtnGo"   TargetType="Button" BasedOn="{StaticResource Btn}">
+      <Setter Property="Background"  Value="#E8F5E9"/>
+      <Setter Property="BorderBrush" Value="#388E3C"/>
+      <Setter Property="Foreground"  Value="#1B5E20"/>
+    </Style>
+    <Style x:Key="BtnWarn" TargetType="Button" BasedOn="{StaticResource Btn}">
+      <Setter Property="Background"  Value="#FFF3E0"/>
+      <Setter Property="BorderBrush" Value="#E65100"/>
+      <Setter Property="Foreground"  Value="#BF360C"/>
+    </Style>
+    <Style x:Key="BtnDel"  TargetType="Button" BasedOn="{StaticResource Btn}">
+      <Setter Property="Background"  Value="#FFEBEE"/>
+      <Setter Property="BorderBrush" Value="#C62828"/>
+      <Setter Property="Foreground"  Value="#B71C1C"/>
+    </Style>
+    <Style x:Key="BtnView" TargetType="Button" BasedOn="{StaticResource Btn}">
+      <Setter Property="Background"  Value="#E3F2FD"/>
+      <Setter Property="BorderBrush" Value="#1565C0"/>
+      <Setter Property="Foreground"  Value="#0D47A1"/>
+    </Style>
+    <Style x:Key="BtnSel" TargetType="Button" BasedOn="{StaticResource Btn}">
+      <Setter Property="Background"  Value="#E8EAF6"/>
+      <Setter Property="BorderBrush" Value="#3949AB"/>
+      <Setter Property="Foreground"  Value="#1A237E"/>
+    </Style>
+
+    <Style x:Key="Sec" TargetType="TextBlock">
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="FontSize"   Value="8"/>
+      <Setter Property="Foreground" Value="#607D8B"/>
+      <Setter Property="Margin"     Value="1,5,0,2"/>
+    </Style>
+
+    <Style x:Key="CBo" TargetType="ComboBox">
+      <Setter Property="FontSize"    Value="8"/>
+      <Setter Property="Background"  Value="#E8EAED"/>
+      <Setter Property="BorderBrush" Value="#B0BEC5"/>
+      <Setter Property="Foreground"  Value="#263238"/>
+      <Setter Property="Padding"     Value="3,1"/>
+    </Style>
+
+    <Style x:Key="Exp" TargetType="Expander">
+      <Setter Property="Background"      Value="Transparent"/>
+      <Setter Property="BorderBrush"     Value="#CFD8DC"/>
+      <Setter Property="BorderThickness" Value="0,0,0,1"/>
+      <Setter Property="Padding"         Value="0,2,0,3"/>
+      <Setter Property="Margin"          Value="0,1,0,1"/>
+      <Setter Property="FontSize"        Value="8"/>
+      <Setter Property="FontWeight"      Value="Bold"/>
+      <Setter Property="Foreground"      Value="#607D8B"/>
+      <Setter Property="IsExpanded"      Value="True"/>
+    </Style>
+
+    <Style x:Key="Swatch" TargetType="Button">
+      <Setter Property="Width"           Value="20"/>
+      <Setter Property="Height"          Value="20"/>
+      <Setter Property="BorderThickness" Value="2"/>
+      <Setter Property="Cursor"          Value="Hand"/>
+      <Setter Property="Margin"          Value="1"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="2">
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver"  Value="True"><Setter Property="BorderThickness" Value="3"/></Trigger>
+              <Trigger Property="IsPressed"    Value="True"><Setter Property="Opacity"         Value="0.7"/></Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <!-- RAG cell styles for ISO dashboard -->
+    <Style x:Key="RAG_R" TargetType="TextBlock">
+      <Setter Property="Background"  Value="#FFCDD2"/>
+      <Setter Property="Foreground"  Value="#B71C1C"/>
+      <Setter Property="FontSize"    Value="8"/>
+      <Setter Property="FontWeight"  Value="Bold"/>
+      <Setter Property="TextAlignment" Value="Center"/>
+      <Setter Property="Padding"     Value="2,1"/>
+    </Style>
+    <Style x:Key="RAG_A" TargetType="TextBlock">
+      <Setter Property="Background"  Value="#FFF9C4"/>
+      <Setter Property="Foreground"  Value="#F57F17"/>
+      <Setter Property="FontSize"    Value="8"/>
+      <Setter Property="FontWeight"  Value="Bold"/>
+      <Setter Property="TextAlignment" Value="Center"/>
+      <Setter Property="Padding"     Value="2,1"/>
+    </Style>
+    <Style x:Key="RAG_G" TargetType="TextBlock">
+      <Setter Property="Background"  Value="#C8E6C9"/>
+      <Setter Property="Foreground"  Value="#1B5E20"/>
+      <Setter Property="FontSize"    Value="8"/>
+      <Setter Property="FontWeight"  Value="Bold"/>
+      <Setter Property="TextAlignment" Value="Center"/>
+      <Setter Property="Padding"     Value="2,1"/>
+    </Style>
+
+  </Window.Resources>
+
+  <Grid Margin="6,4,6,4">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="50"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <!-- ═══════════════════════ HEADER ═══════════════════════ -->
+    <Border Grid.Row="0" x:Name="HeaderBar" Background="#1A237E" CornerRadius="4" Padding="8,5" Margin="0,0,0,5"
+            ToolTip="Double-click to collapse/expand panel">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+          <TextBlock Text="STING TAGS v9.6" FontSize="13" FontWeight="Bold" Foreground="White"/>
+          <TextBlock x:Name="LastToolText" Text="Smart Tag Intelligence Engine"
+                     FontSize="8" Foreground="#90CAF9"/>
+        </StackPanel>
+        <!-- sel count badge -->
+        <Border Grid.Column="1" Background="#283593" CornerRadius="3"
+                Padding="5,2" Margin="0,0,3,0" VerticalAlignment="Center"
+                ToolTip="Live selection count">
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="sel" FontSize="7" Foreground="#80CBC4" VerticalAlignment="Center" Margin="0,0,3,0"/>
+            <TextBlock x:Name="SelCountBadge" Text="0" FontSize="11" FontWeight="Bold"
+                       Foreground="#FFD54F" VerticalAlignment="Center"/>
+          </StackPanel>
+        </Border>
+        <!-- view sync indicator -->
+        <Border Grid.Column="2" x:Name="ViewSyncBadge" Background="#283593" CornerRadius="3"
+                Padding="5,2" Margin="0,0,3,0" VerticalAlignment="Center"
+                ToolTip="Active view synced — panel updates automatically on view change">
+          <TextBlock x:Name="ViewSyncText" Text="⟳ synced" FontSize="7" FontWeight="Bold"
+                     Foreground="#A5D6A7" VerticalAlignment="Center"/>
+        </Border>
+        <Border Grid.Column="3" Background="#283593" CornerRadius="3"
+                Padding="6,3" Margin="0,0,3,0" VerticalAlignment="Center">
+          <TextBlock x:Name="LastToolIcon" Text="⚡" FontSize="12" Foreground="#FFD54F"/>
+        </Border>
+        <Button Grid.Column="4" x:Name="TopmostBtn" Content="[Pin]" Width="26" Height="26"
+                Background="Transparent" BorderBrush="#3949AB" BorderThickness="1"
+                Foreground="White" FontSize="11" Cursor="Hand" ToolTip="Toggle always-on-top"/>
+      </Grid>
+    </Border>
+
+    <!-- ═══════════════════════ TAB CONTROL ═══════════════════════ -->
+    <TabControl Grid.Row="1" x:Name="MainTabControl" Padding="1"
+                Background="#F4F6F8" BorderBrush="#CFD8DC" BorderThickness="1">
+
+      <!-- ══════════════  SELECT  ══════════════ -->
+      <TabItem FontWeight="Bold" FontSize="9">
+        <TabItem.Header><TextBlock Text=" SELECT " Foreground="#1565C0"/></TabItem.Header>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="2">
+          <StackPanel>
+
+            <!-- AI Smart -->
+            <Border Background="#EDE7F6" BorderBrush="#7B1FA2" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,0,0,3">
+              <StackPanel>
+                <TextBlock Text="⚡ AI SMART SELECT" FontWeight="Bold" FontSize="10" Foreground="#4A148C" Margin="0,0,0,3"/>
+                <WrapPanel>
+                  <Button Content="[AI] Predict" Width="64" Height="24" Margin="1" Style="{StaticResource BtnAI}" Tag="SmartPredict_Click"   ToolTip="4-layer AI: untagged → type dominance → spatial cluster → MEP fallback"/>
+                  <Button Content="Similar"    Width="50" Height="24" Margin="1" Style="{StaticResource BtnAI}" Tag="SelectSimilar_Click"  ToolTip="Same Revit type(s)"/>
+                  <Button Content="Chain"      Width="46" Height="24" Margin="1" Style="{StaticResource BtnAI}" Tag="SelectChain_Click"    ToolTip="Proximity flood-fill"/>
+                  <Button Content="Cluster"    Width="52" Height="24" Margin="1" Style="{StaticResource BtnAI}" Tag="SelectCluster_Click"  ToolTip="DBSCAN nearest cluster"/>
+                </WrapPanel>
+                <WrapPanel Margin="0,2,0,0">
+                  <Button Content="Pattern"  Width="50" Height="21" Margin="1" Style="{StaticResource Btn}" Tag="SelectPattern_Click"  ToolTip="Extend grid pattern"/>
+                  <Button Content="Boundary" Width="58" Height="21" Margin="1" Style="{StaticResource Btn}" Tag="SelectBoundary_Click" ToolTip="Outer 15% margin"/>
+                  <Button Content="Outliers" Width="52" Height="21" Margin="1" Style="{StaticResource Btn}" Tag="SelectOutliers_Click" ToolTip="DBSCAN noise elements"/>
+                  <Button Content="Dense"    Width="46" Height="21" Margin="1" Style="{StaticResource Btn}" Tag="SelectDense_Click"    ToolTip="Top 25% density"/>
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <!-- Category -->
+            <TextBlock Text="CATEGORY" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="Lgt"  Width="30" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelLights_Click"/>
+              <Button Content="Elc"  Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelElec_Click"/>
+              <Button Content="Mch"  Width="30" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelMech_Click"/>
+              <Button Content="Plb"  Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelPlumb_Click"/>
+              <Button Content="Air"  Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelAir_Click"/>
+              <Button Content="Fur"  Width="26" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelFurn_Click"/>
+              <Button Content="Dr"   Width="24" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelDoors_Click"/>
+              <Button Content="Win"  Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelWindows_Click"/>
+              <Button Content="Rm"   Width="26" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelRooms_Click"/>
+              <Button Content="Spr"  Width="26" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelSprinkler_Click"/>
+              <Button Content="Pipe" Width="32" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelPipes_Click"/>
+              <Button Content="Duct" Width="32" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelDucts_Click"/>
+              <Button Content="Cnd"  Width="26" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelConduit_Click"/>
+              <Button Content="Cbl"  Width="26" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelCable_Click"/>
+              <Button Content="ALL…" Width="36" Height="22" Margin="1" FontWeight="Bold" Style="{StaticResource BtnGo}"  Tag="SelAllCats_Click"  ToolTip="Pick any model category"/>
+              <Button Content="View" Width="36" Height="22" Margin="1" Style="{StaticResource BtnGo}"                    Tag="SelViewCats_Click" ToolTip="Pick from in-view categories"/>
+            </WrapPanel>
+
+            <!-- Spatial -->
+            <TextBlock Text="SPATIAL" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="Near"  Width="36" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelNear_Click"/>
+              <Button Content="Room"  Width="38" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelInRoom_Click" ToolTip="Same room(s)"/>
+              <Button Content="Level" Width="38" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelLevel_Click"/>
+              <Button Content="Quad"  Width="36" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelQuadrant_Click"/>
+              <Button Content="Edge"  Width="34" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelEdge_Click"/>
+              <Button Content="Grid"  Width="32" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelGrid_Click"/>
+              <Button Content="BBox"  Width="34" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelByBBox_Click" ToolTip="BBox overlaps selection"/>
+            </WrapPanel>
+
+            <!-- State -->
+            <TextBlock Text="STATE" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="Untagged"   Width="60" Height="22" Margin="1" Style="{StaticResource BtnWarn}" Tag="SelUntagged_Click"/>
+              <Button Content="Tagged"     Width="48" Height="22" Margin="1" Style="{StaticResource BtnGo}"   Tag="SelTagged_Click"/>
+              <Button Content="EmptyMark"  Width="68" Height="22" Margin="1" Style="{StaticResource BtnWarn}" Tag="SelEmptyMark_Click"/>
+              <Button Content="Visible"    Width="48" Height="22" Margin="1" Style="{StaticResource Btn}"     Tag="SelVisible_Click"/>
+              <Button Content="[Pin]Pinned"   Width="56" Height="22" Margin="1" Style="{StaticResource Btn}"     Tag="SelPinned_Click"/>
+              <Button Content="Unpinned"   Width="56" Height="22" Margin="1" Style="{StaticResource Btn}"     Tag="SelUnpinned_Click"/>
+            </WrapPanel>
+
+            <!-- Project filter -->
+            <TextBlock Text="VIEW — ISOLATE &amp; HIDE" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="[Find] Isolate"   Width="60" Height="22" Margin="1" Style="{StaticResource BtnView}" Tag="SelIsolate_Click"/>
+              <Button Content="[Hide] Hide"      Width="46" Height="22" Margin="1" Style="{StaticResource BtnView}" Tag="SelHide_Click"/>
+              <Button Content="[Look] Reveal"    Width="54" Height="22" Margin="1" Style="{StaticResource BtnGo}"   Tag="SelRevealHidden_Click"/>
+              <Button Content="↺ Reset"      Width="50" Height="22" Margin="1" Style="{StaticResource BtnWarn}" Tag="SelResetTemp_Click"/>
+            </WrapPanel>
+
+            <!-- Selection ops -->
+            <TextBlock Text="SELECTION OPS" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="All"         Width="28" Height="22" Margin="1" Style="{StaticResource Btn}"    Tag="SelAll_Click"/>
+              <Button Content="⊘Clr"        Width="40" Height="22" Margin="1" Style="{StaticResource BtnDel}" Tag="SelClear_Click"
+                      ToolTip="Clear selection (keep elements visible)"/>
+              <Button Content="Deselect"    Width="54" Height="22" Margin="1" Style="{StaticResource BtnDel}" Tag="Deselect_Click"
+                      ToolTip="Deselect — remove clicked element type from current selection"/>
+              <Button Content="✕Del"        Width="36" Height="22" Margin="1" Style="{StaticResource BtnDel}" Tag="DeleteSelection_Click"
+                      ToolTip="Delete all selected elements (confirm first)"/>
+              <Button Content="Invert"      Width="42" Height="22" Margin="1" Style="{StaticResource Btn}"    Tag="SelInvert_Click"/>
+              <Button Content="+M1"         Width="34" Height="22" Margin="1" Style="{StaticResource Btn}"    Tag="SelAdd_Click"/>
+              <Button Content="−M1"         Width="32" Height="22" Margin="1" Style="{StaticResource Btn}"    Tag="SelSubtract_Click"/>
+              <Button Content="∩M1"         Width="32" Height="22" Margin="1" Style="{StaticResource Btn}"    Tag="SelIntersect_Click"/>
+              <Button Content="→Tags"       Width="44" Height="22" Margin="1" Style="{StaticResource Btn}"    Tag="SelTags_Click"/>
+              <Button Content="→Elem"       Width="44" Height="22" Margin="1" Style="{StaticResource Btn}"    Tag="SelElements_Click"/>
+            </WrapPanel>
+
+            <!-- Memory -->
+            <TextBlock Text="SELECTION MEMORY" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="M1▼" Width="32" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="MemSave1_Click"/>
+              <Button Content="M1▲" Width="32" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="MemLoad1_Click"/>
+              <Button Content="M2▼" Width="32" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="MemSave2_Click"/>
+              <Button Content="M2▲" Width="32" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="MemLoad2_Click"/>
+              <Button Content="M3▼" Width="32" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="MemSave3_Click"/>
+              <Button Content="M3▲" Width="32" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="MemLoad3_Click"/>
+              <Button Content="1⇄2" Width="30" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="MemSwap_Click"/>
+              <Button Content="Info" Width="30" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="MemInfo_Click"/>
+            </WrapPanel>
+
+            <TextBlock Text="PROJECT FILTER" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="Workset…"   Width="62" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelByWorkset_Click"/>
+              <Button Content="Phase…"     Width="50" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelByPhase_Click"/>
+              <Button Content="D.Option…"  Width="64" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelByDesignOption_Click"/>
+              <Button Content="Group…"     Width="50" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelByGroup_Click"/>
+              <Button Content="Assembly…"  Width="66" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelByAssembly_Click"/>
+              <Button Content="Connected"  Width="64" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelByConnected_Click"/>
+            </WrapPanel>
+
+            <TextBlock Text="QUICK PARAM" Style="{StaticResource Sec}"/>
+            <WrapPanel Margin="0,0,0,3">
+              <Button Content="Mark"   Width="40" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelByMark_Click"/>
+              <Button Content="Type"   Width="36" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelByType_Click"/>
+              <Button Content="Family" Width="46" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelByFamily_Click"/>
+              <Button Content="System" Width="50" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="SelBySystem_Click"/>
+            </WrapPanel>
+
+            <!-- ── Bulk Parameter Write ── -->
+            <Border Background="#FFF8E1" BorderBrush="#F9A825" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,0,0,3">
+              <StackPanel>
+                <TextBlock Text="✏ BULK PARAMETER WRITE" FontWeight="Bold" FontSize="9"
+                           Foreground="#E65100" Margin="0,0,0,3"/>
+                <Grid Margin="0,0,0,3">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <ComboBox x:Name="BulkParamCombo" Grid.Column="0"
+                            Style="{StaticResource CBo}" Height="22"
+                            ToolTip="Pick from live project params — click ↻ to populate"/>
+                  <Button Grid.Column="1" Content="↻" Width="26" Height="22" Margin="3,0,0,0"
+                          Style="{StaticResource Btn}" Tag="BulkParamRefresh_Click"
+                          ToolTip="Refresh param list from active view"/>
+                  <Button Grid.Column="2" Content="[Brain]" Width="26" Height="22" Margin="3,0,0,0"
+                          Style="{StaticResource BtnAI}" Tag="BulkParamSuggest_Click"
+                          ToolTip="AI: suggest parameter based on selection category"/>
+                </Grid>
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <TextBox x:Name="BulkParamValue" Grid.Column="0" FontSize="9"
+                           Padding="4,2" BorderBrush="#FFA726" Height="24"
+                           ToolTip="Value to write — leave blank to CLEAR the parameter"/>
+                  <Button Grid.Column="1" Content="Preview" Width="52" Height="24" Margin="3,0,0,0"
+                          FontSize="8" Style="{StaticResource Btn}" Tag="BulkParamPreview_Click"
+                          ToolTip="Count how many elements have this parameter"/>
+                  <Button Grid.Column="2" Content="▶ Write" Width="54" Height="24" Margin="3,0,0,0"
+                          FontSize="8" FontWeight="Bold" Cursor="Hand"
+                          Background="#E65100" Foreground="White" BorderThickness="0"
+                          Tag="BulkParamWrite_Click"
+                          ToolTip="Write value to all selected elements — one transaction"/>
+                  <Button Grid.Column="3" Content="Clear" Width="36" Height="24" Margin="3,0,0,0"
+                          FontSize="8" Style="{StaticResource BtnDel}" Tag="BulkParamClear_Click"
+                          ToolTip="Set parameter to empty string on all selected elements"/>
+                </Grid>
+                <TextBlock x:Name="BulkParamStatus" Text="Select elements, pick param, enter value"
+                           FontSize="7" Foreground="#795548" Margin="0,3,0,0"/>
+              </StackPanel>
+            </Border>
+
+            <!-- Quick param shortcuts -->
+            <!-- ── Graitec-style parameter lookup ── -->
+            <Border Background="#E3F2FD" BorderBrush="#1565C0" BorderThickness="1"
+                    CornerRadius="4" Padding="5,5" Margin="0,0,0,3">
+              <StackPanel>
+                <TextBlock Text="[Find] PARAMETER LOOKUP  (885 params)" FontWeight="Bold"
+                           FontSize="9" Foreground="#0D47A1" Margin="0,0,0,4"/>
+
+                <!-- Row 0: Live project params from open doc -->
+                <Grid Margin="0,0,0,3">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" Text="Live param:" FontSize="8" FontWeight="Bold"
+                             Foreground="#0D47A1" VerticalAlignment="Center" Margin="0,0,5,0"
+                             ToolTip="All parameters present in the current Revit model — refreshed on ↻"/>
+                  <ComboBox x:Name="LiveParamCombo" Grid.Column="1"
+                            Style="{StaticResource CBo}" Height="22"
+                            ToolTip="Pick any project parameter — auto-fills Cond1Param and shows its data type"/>
+                  <Button Grid.Column="2" Content="↻" Width="26" Height="22" Margin="3,0,0,0"
+                          Style="{StaticResource Btn}" Tag="RefreshLiveParams_Click"
+                          ToolTip="Refresh list from the current Revit document"/>
+                </Grid>
+
+                <!-- Row 1: search + category -->
+                <Grid Margin="0,0,0,3">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="80"/>
+                  </Grid.ColumnDefinitions>
+                  <TextBox x:Name="ParamSearchBox" Grid.Column="0"
+                           FontSize="8" Height="22" Padding="4,2"
+                           BorderBrush="#90CAF9" Margin="0,0,3,0"
+                           ToolTip="Type to search 847 project parameters by name or description"/>
+                  <ComboBox x:Name="ParamCatFilter" Grid.Column="1"
+                            Style="{StaticResource CBo}" Height="22"
+                            ToolTip="Filter by Revit category">
+                    <ComboBoxItem IsSelected="True">All Categories</ComboBoxItem>
+                  </ComboBox>
+                </Grid>
+
+                <!-- Row 2: results list + info panel -->
+                <Grid Margin="0,0,0,3">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="110"/>
+                  </Grid.ColumnDefinitions>
+                  <ListBox x:Name="ParamResultsList" Grid.Column="0"
+                           Height="90" FontSize="8" BorderBrush="#90CAF9"
+                           ToolTip="Select a parameter to see details and set operator/value"/>
+                  <StackPanel Grid.Column="1" Margin="3,0,0,0">
+                    <Border Background="#ECEFF1" BorderBrush="#B0BEC5" BorderThickness="1"
+                            CornerRadius="2" Padding="3,3" MinHeight="90">
+                      <StackPanel>
+                        <TextBlock x:Name="ParamInfoType"  Text="Type: —"
+                                   FontSize="7" Foreground="#455A64" TextWrapping="Wrap"/>
+                        <TextBlock x:Name="ParamInfoGroup" Text="Group: —"
+                                   FontSize="7" Foreground="#455A64" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                        <TextBlock x:Name="ParamInfoGuid"  Text="GUID: —"
+                                   FontSize="7" Foreground="#78909C" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                        <TextBlock x:Name="ParamInfoDesc"  Text=""
+                                   FontSize="7" Foreground="#607D8B" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                        <TextBlock x:Name="ParamInfoCats"  Text=""
+                                   FontSize="7" Foreground="#78909C" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                      </StackPanel>
+                    </Border>
+                  </StackPanel>
+                </Grid>
+
+                <!-- Row 3: condition rows -->
+                <Border Background="#FAFAFA" BorderBrush="#90CAF9" BorderThickness="1"
+                        CornerRadius="2" Padding="3,3" Margin="0,0,0,3">
+                  <StackPanel>
+                    <TextBlock Text="CONDITIONS" FontSize="7" FontWeight="Bold" Foreground="#5C6BC0" Margin="0,0,0,2"/>
+
+                    <!-- Condition row 1 -->
+                    <Grid x:Name="CondRow1" Margin="0,0,0,2">
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="72"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="18"/>
+                      </Grid.ColumnDefinitions>
+                      <TextBox x:Name="Cond1Param"    Grid.Column="0" FontSize="8" Height="20"
+                               Padding="2,1" BorderBrush="#90CAF9" ToolTip="Parameter name (auto-filled from list)"/>
+                      <ComboBox x:Name="Cond1Op"      Grid.Column="1" Style="{StaticResource CBo}" Height="20" Margin="2,0">
+                        <ComboBoxItem IsSelected="True">contains</ComboBoxItem>
+                        <ComboBoxItem>equals</ComboBoxItem>
+                        <ComboBoxItem>starts with</ComboBoxItem>
+                        <ComboBoxItem>ends with</ComboBoxItem>
+                        <ComboBoxItem>is empty</ComboBoxItem>
+                        <ComboBoxItem>has value</ComboBoxItem>
+                        <ComboBoxItem>=</ComboBoxItem>
+                        <ComboBoxItem>!=</ComboBoxItem>
+                        <ComboBoxItem>&gt;</ComboBoxItem>
+                        <ComboBoxItem>&lt;</ComboBoxItem>
+                        <ComboBoxItem>&gt;=</ComboBoxItem>
+                        <ComboBoxItem>&lt;=</ComboBoxItem>
+                        <ComboBoxItem>in range</ComboBoxItem>
+                      </ComboBox>
+                      <TextBox x:Name="Cond1Val"      Grid.Column="2" FontSize="8" Height="20"
+                               Padding="2,1" BorderBrush="#90CAF9" ToolTip="Value (for range: min|max)"/>
+                      <TextBlock Grid.Column="3" Text="①" FontSize="9" Foreground="#9FA8DA"
+                                 VerticalAlignment="Center" Margin="2,0,0,0"/>
+                    </Grid>
+
+                    <!-- Condition row 2 (hidden by default) -->
+                    <Grid x:Name="CondRow2" Visibility="Collapsed" Margin="0,0,0,2">
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="72"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="18"/>
+                      </Grid.ColumnDefinitions>
+                      <ComboBox x:Name="Cond2Logic" Grid.Column="0" Style="{StaticResource CBo}" Height="20" Margin="0,0,2,0">
+                        <ComboBoxItem IsSelected="True">AND</ComboBoxItem>
+                        <ComboBoxItem>OR</ComboBoxItem>
+                      </ComboBox>
+                      <TextBox x:Name="Cond2Param" Grid.Column="1" FontSize="8" Height="20" Padding="2,1" BorderBrush="#90CAF9" Margin="0,0,2,0"/>
+                      <ComboBox x:Name="Cond2Op"   Grid.Column="2" Style="{StaticResource CBo}" Height="20" Margin="0,0,2,0">
+                        <ComboBoxItem IsSelected="True">contains</ComboBoxItem>
+                        <ComboBoxItem>equals</ComboBoxItem>
+                        <ComboBoxItem>starts with</ComboBoxItem>
+                        <ComboBoxItem>ends with</ComboBoxItem>
+                        <ComboBoxItem>is empty</ComboBoxItem>
+                        <ComboBoxItem>has value</ComboBoxItem>
+                        <ComboBoxItem>=</ComboBoxItem>
+                        <ComboBoxItem>!=</ComboBoxItem>
+                        <ComboBoxItem>&gt;</ComboBoxItem>
+                        <ComboBoxItem>&lt;</ComboBoxItem>
+                        <ComboBoxItem>&gt;=</ComboBoxItem>
+                        <ComboBoxItem>&lt;=</ComboBoxItem>
+                        <ComboBoxItem>in range</ComboBoxItem>
+                      </ComboBox>
+                      <TextBox x:Name="Cond2Val"   Grid.Column="3" FontSize="8" Height="20" Padding="2,1" BorderBrush="#90CAF9"/>
+                      <TextBlock Grid.Column="4" Text="②" FontSize="9" Foreground="#9FA8DA" VerticalAlignment="Center" Margin="2,0,0,0"/>
+                    </Grid>
+
+                    <!-- Condition row 3 (hidden by default) -->
+                    <Grid x:Name="CondRow3" Visibility="Collapsed">
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="72"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="18"/>
+                      </Grid.ColumnDefinitions>
+                      <ComboBox x:Name="Cond3Logic" Grid.Column="0" Style="{StaticResource CBo}" Height="20" Margin="0,0,2,0">
+                        <ComboBoxItem IsSelected="True">AND</ComboBoxItem>
+                        <ComboBoxItem>OR</ComboBoxItem>
+                      </ComboBox>
+                      <TextBox x:Name="Cond3Param" Grid.Column="1" FontSize="8" Height="20" Padding="2,1" BorderBrush="#90CAF9" Margin="0,0,2,0"/>
+                      <ComboBox x:Name="Cond3Op"   Grid.Column="2" Style="{StaticResource CBo}" Height="20" Margin="0,0,2,0">
+                        <ComboBoxItem IsSelected="True">contains</ComboBoxItem>
+                        <ComboBoxItem>equals</ComboBoxItem>
+                        <ComboBoxItem>starts with</ComboBoxItem>
+                        <ComboBoxItem>ends with</ComboBoxItem>
+                        <ComboBoxItem>is empty</ComboBoxItem>
+                        <ComboBoxItem>has value</ComboBoxItem>
+                        <ComboBoxItem>=</ComboBoxItem>
+                        <ComboBoxItem>!=</ComboBoxItem>
+                        <ComboBoxItem>&gt;</ComboBoxItem>
+                        <ComboBoxItem>&lt;</ComboBoxItem>
+                        <ComboBoxItem>&gt;=</ComboBoxItem>
+                        <ComboBoxItem>&lt;=</ComboBoxItem>
+                        <ComboBoxItem>in range</ComboBoxItem>
+                      </ComboBox>
+                      <TextBox x:Name="Cond3Val"   Grid.Column="3" FontSize="8" Height="20" Padding="2,1" BorderBrush="#90CAF9"/>
+                      <TextBlock Grid.Column="4" Text="③" FontSize="9" Foreground="#9FA8DA" VerticalAlignment="Center" Margin="2,0,0,0"/>
+                    </Grid>
+                  </StackPanel>
+                </Border>
+
+                <!-- Row 4: condition controls + apply -->
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <Button Grid.Column="0" Content="+Cond" Height="22" Width="46" Margin="0,0,2,0"
+                          FontSize="8" Style="{StaticResource Btn}" Tag="ParamConditionAdd_Click"
+                          ToolTip="Add a second/third condition row"/>
+                  <Button Grid.Column="1" Content="-Cond" Height="22" Width="42" Margin="0,0,2,0"
+                          FontSize="8" Style="{StaticResource Btn}" Tag="ParamConditionRemove_Click"
+                          ToolTip="Remove last condition row"/>
+                  <Button Grid.Column="2" Content="Clear" Height="22" Width="36" Margin="0,0,2,0"
+                          FontSize="8" Style="{StaticResource Btn}" Tag="ParamConditionClear_Click"
+                          ToolTip="Reset all conditions"/>
+                  <TextBlock Grid.Column="3" x:Name="ParamMatchCount" Text="0 matches"
+                             FontSize="8" Foreground="#546E7A" VerticalAlignment="Center" Margin="3,0"/>
+                  <Button Grid.Column="4" Content="Preview" Height="22" Width="54" Margin="0,0,2,0"
+                          FontSize="8" Style="{StaticResource Btn}" Tag="ParamFilterPreview_Click"
+                          ToolTip="Count matches without changing selection"/>
+                  <Button Grid.Column="5" Content="▶ Apply" Height="22" Width="56"
+                          FontSize="8" FontWeight="Bold" Cursor="Hand"
+                          Background="#1565C0" Foreground="White" BorderThickness="0"
+                          Tag="ApplyParamFilter_Click"
+                          ToolTip="Apply all conditions — select matching elements in active view"/>
+                </Grid>
+
+              </StackPanel>
+            </Border>
+
+
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <!-- ══════════════  ORGANISE  ══════════════ -->
+      <TabItem FontWeight="Bold" FontSize="9">
+        <TabItem.Header><TextBlock Text=" ORGANISE " Foreground="#00695C"/></TabItem.Header>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="2">
+          <StackPanel>
+
+            <!-- AI Engine -->
+            <Border Background="#FCE4EC" BorderBrush="#C62828" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,0,0,3">
+              <StackPanel>
+                <TextBlock Text="[Brain] AI ORGANISE ENGINE" FontWeight="Bold" FontSize="10" Foreground="#B71C1C" Margin="0,0,0,3"/>
+                <Grid Margin="0,0,0,3">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <Button x:Name="SmartOrgBtn" Grid.Column="0"
+                          Content="▶  SMART ORGANISE" Height="28"
+                          FontSize="10" FontWeight="Bold" Cursor="Hand"
+                          Background="#C62828" Foreground="White" BorderThickness="0" ToolTip="8 passes: Analyse→Cluster→Expand→Physics→Anneal→Leaders→Polish→Score"/>
+                  <Border Grid.Column="1" Background="#B71C1C" CornerRadius="3"
+                          Padding="5,0" Margin="3,0,0,0" VerticalAlignment="Center">
+                    <TextBlock x:Name="PassCountBadge" Text="- /8" FontSize="9"
+                               FontWeight="Bold" Foreground="#FFCDD2" VerticalAlignment="Center"/>
+                  </Border>
+                </Grid>
+                <WrapPanel>
+                  <Button Content="Quick"        Width="44" Height="21" Margin="1" Style="{StaticResource Btn}"     Tag="QuickFix_Click"/>
+                  <Button Content="Deep"         Width="40" Height="21" Margin="1" Style="{StaticResource Btn}"     Tag="DeepOptimize_Click"/>
+                  <Button Content="Anneal"       Width="48" Height="21" Margin="1" Style="{StaticResource Btn}"     Tag="AnnealOpt_Click"/>
+                  <Button Content="↩Reset"       Width="46" Height="21" Margin="1" Style="{StaticResource BtnWarn}" Tag="ResetOrganize_Click"/>
+                  <Button Content="[Brain]Spc"        Width="44" Height="21" Margin="1" Style="{StaticResource BtnAI}"  Tag="AutoSpace_Click"/>
+                </WrapPanel>
+                <!-- Undo row with history dropdown -->
+                <Grid Margin="0,3,0,0">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <Button Grid.Column="0" Content="⌫ Undo" Width="56" Height="22" Margin="0,0,3,0"
+                          Style="{StaticResource BtnWarn}" Tag="UndoOrganise_Click"
+                          ToolTip="Per-view undo — 5 steps each view"/>
+                  <ComboBox x:Name="UndoHistoryCombo" Grid.Column="1"
+                            Style="{StaticResource CBo}" Height="22"
+                            ToolTip="Undo history for this view — select to jump to that snapshot"/>
+                  <TextBlock Grid.Column="2" x:Name="UndoDepthBadge" Text="0/5" FontSize="8"
+                             Foreground="#E65100" FontWeight="Bold" VerticalAlignment="Center"
+                             Margin="4,0,0,0" ToolTip="Steps in undo stack for current view"/>
+                </Grid>
+              </StackPanel>
+            </Border>
+
+            <!-- Tag family picker -->
+            <Border Background="#F9FBE7" BorderBrush="#827717" BorderThickness="1"
+                    CornerRadius="3" Padding="4,4" Margin="0,0,0,3">
+              <StackPanel>
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" Text="Tag family:" FontSize="8" FontWeight="Bold"
+                             Foreground="#33691E" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                  <ComboBox x:Name="TagFamilyCombo" Grid.Column="1" Style="{StaticResource CBo}" Height="20"/>
+                  <Button Grid.Column="2" Content="↻" Width="24" Height="20" Margin="3,0,0,0"
+                          Style="{StaticResource Btn}" Tag="RefreshTagFamilies_Click"/>
+                </Grid>
+                <TextBlock x:Name="TagFamilyGroupInfo" Text="Click ↻ to load by discipline"
+                           FontSize="7" Foreground="#827717" Margin="0,3,0,0"/>
+              </StackPanel>
+            </Border>
+
+            <!-- Tag Ops -->
+            <TextBlock Text="TAG OPERATIONS" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="Tag Sel"    Width="50" Height="22" Margin="1" Style="{StaticResource BtnGo}"   Tag="TagSelected_Click"/>
+              <Button Content="Tag Cat"    Width="50" Height="22" Margin="1" Style="{StaticResource Btn}"     Tag="TagByCategory_Click"/>
+              <Button Content="Tag All"    Width="48" Height="22" Margin="1" Style="{StaticResource Btn}"     Tag="TagUntagged_Click"/>
+              <Button Content="Del Tags"   Width="56" Height="22" Margin="1" Style="{StaticResource BtnDel}"  Tag="DeleteTags_Click"/>
+              <Button Content="Orphans"    Width="54" Height="22" Margin="1" Style="{StaticResource BtnDel}"  Tag="OrphanedTags_Click"/>
+              <Button Content="[Num]Renumber" Width="70" Height="22" Margin="1" Style="{StaticResource BtnGo}"
+                      Tag="SmartRenumber_Click" ToolTip="Sequential Mark renumber in reading order (top→bottom, left→right)"/>
+              <Button Content="[List]Clone"    Width="56" Height="22" Margin="1" Style="{StaticResource BtnAI}"
+                      Tag="TagClone_Click" ToolTip="Copy family, leader, orientation, text-align from first selected to all others of same category"/>
+              <Button Content="Audit"      Width="44" Height="22" Margin="1" Style="{StaticResource Btn}"     Tag="TagAudit_Click"/>
+              <Button Content="AuditCSV"   Width="58" Height="22" Margin="1" Style="{StaticResource BtnGo}"   Tag="TagAuditExport_Click"    ToolTip="Active view: Id, Cat, Leader, X, Y, NN-dist"/>
+              <Button Content="MultiView"  Width="64" Height="22" Margin="1" Style="{StaticResource BtnGo}"   Tag="TagAuditMultiView_Click"
+                      ToolTip="All views on all sheets → one CSV with ViewName column"/>
+              <Button Content="Clashing▶"  Width="66" Height="22" Margin="1" Style="{StaticResource BtnWarn}" Tag="SelectClashing_Click"/>
+            </WrapPanel>
+
+            <Expander Style="{StaticResource Exp}" Header="ORIENTATION &amp; TEXT ALIGNMENT">
+              <StackPanel Margin="0,2,0,0">
+                <WrapPanel>
+                  <Button Content="⟳H↔V" Width="42" Height="22" Margin="1" Style="{StaticResource Btn}"   Tag="RotateTags_Click"/>
+                  <Button Content="All H" Width="36" Height="22" Margin="1" Style="{StaticResource Btn}"   Tag="AllHorizontal_Click"/>
+                  <Button Content="All V" Width="36" Height="22" Margin="1" Style="{StaticResource Btn}"   Tag="AllVertical_Click"/>
+                  <Button Content="↔FlipH" Width="46" Height="22" Margin="1" Style="{StaticResource Btn}"  Tag="FlipH_Click"/>
+                  <Button Content="↕FlipV" Width="46" Height="22" Margin="1" Style="{StaticResource Btn}"  Tag="FlipV_Click"/>
+                  <Button Content="[Brain]SmH/V" Width="60" Height="22" Margin="1" Style="{StaticResource BtnAI}" Tag="SmartOrient_Click"/>
+                </WrapPanel>
+                <WrapPanel Margin="0,4,0,0">
+                  <TextBlock Text="Text:" FontSize="8" Foreground="#546E7A" VerticalAlignment="Center" Margin="0,0,4,0"/>
+                  <Button Content="◀L"   Width="34" Height="22" Margin="1" Style="{StaticResource Btn}"  Tag="TagTextAlignLeft_Click"   ToolTip="Left-justify text in tag bubble (Revit 2022+)"/>
+                  <Button Content="≡C"   Width="34" Height="22" Margin="1" Style="{StaticResource Btn}"  Tag="TagTextAlignCenter_Click" ToolTip="Centre-justify"/>
+                  <Button Content="R▶"   Width="34" Height="22" Margin="1" Style="{StaticResource Btn}"  Tag="TagTextAlignRight_Click"  ToolTip="Right-justify"/>
+                </WrapPanel>
+              </StackPanel>
+            </Expander>
+
+            <Expander Style="{StaticResource Exp}" Header="NUDGE  (↑↓←→ keys active when panel focused)">
+              <WrapPanel Margin="0,2,0,0">
+                <Button Content="↑" Width="26" Height="22" Margin="1" FontSize="13" Style="{StaticResource Btn}" Tag="NudgeUp_Click"/>
+                <Button Content="↓" Width="26" Height="22" Margin="1" FontSize="13" Style="{StaticResource Btn}" Tag="NudgeDown_Click"/>
+                <Button Content="←" Width="26" Height="22" Margin="1" FontSize="13" Style="{StaticResource Btn}" Tag="NudgeLeft_Click"/>
+                <Button Content="→" Width="26" Height="22" Margin="1" FontSize="13" Style="{StaticResource Btn}" Tag="NudgeRight_Click"/>
+                <Button Content="Near 0.25"  Width="60" Height="22" Margin="1" Style="{StaticResource Btn}"    Tag="OffsetClose_Click"/>
+                <Button Content="Far 1.0"    Width="52" Height="22" Margin="1" Style="{StaticResource Btn}"    Tag="OffsetFar_Click"/>
+                <Button Content="[Brain]SmOff"    Width="56" Height="22" Margin="1" Style="{StaticResource BtnAI}" Tag="SmartOffset_Click"/>
+              </WrapPanel>
+            </Expander>
+
+            <Expander Style="{StaticResource Exp}" Header="ALIGN &amp; DISTRIBUTE">
+              <StackPanel Margin="0,2,0,0">
+                <WrapPanel>
+                  <Button Content="◄L"  Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="AlignLeft_Click"/>
+                  <Button Content="R►"  Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="AlignRight_Click"/>
+                  <Button Content="▲T"  Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="AlignTop_Click"/>
+                  <Button Content="B▼"  Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="AlignBottom_Click"/>
+                  <Button Content="—CH" Width="32" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="AlignCenterH_Click"/>
+                  <Button Content="|CV" Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="AlignCenterV_Click"/>
+                  <Button Content="↔H"  Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="DistributeH_Click"
+                          ToolTip="Distribute evenly between first and last tag"/>
+                  <Button Content="↕V"  Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="DistributeV_Click"
+                          ToolTip="Distribute evenly between first and last tag"/>
+                  <Button Content="tH"  Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="DistFixedH_Click"
+                          ToolTip="Fixed-pitch horizontal distribute (uses spacing slider)"/>
+                  <Button Content="tV"  Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="DistFixedV_Click"
+                          ToolTip="Fixed-pitch vertical distribute (uses spacing slider)"/>
+                  <Button Content="[Brain]SmAl" Width="54" Height="22" Margin="1" Style="{StaticResource BtnAI}" Tag="SmartAlign_Click"/>
+                </WrapPanel>
+                <WrapPanel>
+                  <Button Content="Grid"   Width="36" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="ToGrid_Click"/>
+                  <Button Content="Circle" Width="44" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="ToCircle_Click"/>
+                  <Button Content="Stack"  Width="42" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="ToStack_Click"/>
+                  <Button Content="StackH" Width="48" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="ToStackH_Click"
+                          ToolTip="Stack horizontally — align Y, step X"/>
+                  <Button Content="Mirror" Width="44" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="MirrorPattern_Click"/>
+                  <Button Content="Radial" Width="44" Height="22" Margin="1" Style="{StaticResource Btn}" Tag="ToRadial_Click"/>
+                </WrapPanel>
+              </StackPanel>
+            </Expander>
+
+            <Expander Style="{StaticResource Exp}" Header="LEADERS" IsExpanded="True">
+              <StackPanel Margin="0,2,0,0">
+                <TextBlock Text="ADD / REMOVE" FontSize="7" FontWeight="Bold" Foreground="#546E7A" Margin="0,0,0,2"/>
+                <WrapPanel>
+                  <Button Content="+Leader"     Width="50" Height="22" Margin="1" Style="{StaticResource BtnGo}"  Tag="AddLeaders_Click"
+                          ToolTip="Enable leader on selected tags"/>
+                  <Button Content="−Leader"     Width="50" Height="22" Margin="1" Style="{StaticResource BtnDel}" Tag="RemoveLeaders_Click"
+                          ToolTip="Remove leader from selected tags"/>
+                  <Button Content="+Multi"      Width="44" Height="22" Margin="1" Style="{StaticResource BtnGo}"  Tag="AddMultiLeader_Click"
+                          ToolTip="Add additional leader (Revit 2022+ multi-leader)"/>
+                  <Button Content="Combine"     Width="52" Height="22" Margin="1" Style="{StaticResource Btn}"    Tag="CombineLeaders_Click"
+                          ToolTip="Merge nearby tags into one multi-leader tag"/>
+                </WrapPanel>
+
+                <TextBlock Text="ELBOW — click to switch style" FontSize="7" FontWeight="Bold" Foreground="#546E7A" Margin="0,4,0,2"/>
+                <WrapPanel>
+                  <Button Content="⌐90°"       Width="40" Height="22" Margin="1" Style="{StaticResource BtnGo}"
+                          Tag="LeaderSnapElbow90_Click"
+                          ToolTip="Set leader to 90° L-shaped elbow (right-angle bend)"/>
+                  <Button Content="∠45°"       Width="40" Height="22" Margin="1" Style="{StaticResource BtnGo}"
+                          Tag="LeaderSnapElbow45_Click"
+                          ToolTip="Set leader to 45° diagonal elbow"/>
+                  <Button Content="─Str"       Width="36" Height="22" Margin="1" Style="{StaticResource Btn}"
+                          Tag="LeaderElbowStraight_Click"
+                          ToolTip="Make leader straight (remove elbow bend)"/>
+                  <Button Content="Flip"       Width="34" Height="22" Margin="1" Style="{StaticResource Btn}"
+                          Tag="FlipElbow_Click"
+                          ToolTip="Mirror elbow to opposite side of leader line"/>
+                  <Button Content="⌐Add"       Width="38" Height="22" Margin="1" Style="{StaticResource Btn}"
+                          Tag="CreateLeaderElbow_Click"
+                          ToolTip="Create elbow bend at midpoint"/>
+                  <Button Content="─Straight"  Width="56" Height="22" Margin="1" Style="{StaticResource Btn}"
+                          Tag="MakeLeaderStraight_Click"
+                          ToolTip="Remove elbow bend (legacy method)"/>
+                </WrapPanel>
+
+                <TextBlock Text="SNAP TAG POSITION" FontSize="7" FontWeight="Bold" Foreground="#546E7A" Margin="0,4,0,2"/>
+                <WrapPanel>
+                  <Button Content="Tag→45°"     Width="50" Height="22" Margin="1" Style="{StaticResource Btn}"    Tag="Snap45_Click"
+                          ToolTip="Snap tag head to nearest 45° angle from host"/>
+                  <Button Content="Tag→90°"     Width="50" Height="22" Margin="1" Style="{StaticResource Btn}"    Tag="Snap90_Click"
+                          ToolTip="Snap tag head to nearest 90° angle from host"/>
+                </WrapPanel>
+
+                <TextBlock Text="LENGTH" FontSize="7" FontWeight="Bold" Foreground="#546E7A" Margin="0,4,0,2"/>
+                <WrapPanel>
+                  <Button Content="0.25ft"      Width="42" Height="22" Margin="1" Style="{StaticResource Btn}"    Tag="LeaderShort_Click"/>
+                  <Button Content="0.5ft"       Width="38" Height="22" Margin="1" Style="{StaticResource Btn}"    Tag="LeaderMedium_Click"/>
+                  <Button Content="1.0ft"       Width="38" Height="22" Margin="1" Style="{StaticResource Btn}"    Tag="LeaderLong_Click"/>
+                  <Button Content="=Spacing"    Width="56" Height="22" Margin="1" Style="{StaticResource Btn}"    Tag="MinimizeLeaders_Click"
+                          ToolTip="Set leader length to current spacing value"/>
+                  <Button Content="Equalise"    Width="52" Height="22" Margin="1" Style="{StaticResource Btn}"    Tag="EqualiseLeaders_Click"
+                          ToolTip="Make all selected leaders the same length (average)"/>
+                </WrapPanel>
+
+                <TextBlock Text="AI / AUTO" FontSize="7" FontWeight="Bold" Foreground="#546E7A" Margin="0,4,0,2"/>
+                <WrapPanel>
+                  <Button Content="[Brain]SmartLdr"  Width="72" Height="22" Margin="1" Style="{StaticResource BtnAI}" Tag="SmartLeader_Click"
+                          ToolTip="AI: place tag in least-congested direction with elbow"/>
+                  <Button Content="[Brain]Uncross"   Width="66" Height="22" Margin="1" Style="{StaticResource BtnAI}" Tag="UncrossLeaders_Click"
+                          ToolTip="Swap tag positions to eliminate leader line crossings"/>
+                  <Button Content="[Brain]Tidy"      Width="56" Height="22" Margin="1" Style="{StaticResource BtnAI}" Tag="TidyLeaders_Click"
+                          ToolTip="Auto-straighten, equalise and uncross all leaders"/>
+                </WrapPanel>
+              </StackPanel>
+            </Expander>
+
+            <Expander Style="{StaticResource Exp}" Header="ANALYSE">
+              <WrapPanel Margin="0,2,0,0">
+                <Button Content="Score"     Width="44" Height="22" Margin="1" Style="{StaticResource Btn}"     Tag="LayoutScore_Click"/>
+                <Button Content="Clashes"   Width="50" Height="22" Margin="1" Style="{StaticResource BtnWarn}" Tag="CheckClashes_Click"/>
+                <Button Content="Crossings" Width="58" Height="22" Margin="1" Style="{StaticResource BtnWarn}" Tag="LeaderClash_Click"/>
+                <Button Content="Density"   Width="50" Height="22" Margin="1" Style="{StaticResource Btn}"     Tag="DensityMap_Click"/>
+                <Button Content="Clusters"  Width="54" Height="22" Margin="1" Style="{StaticResource Btn}"     Tag="ShowClusters_Click"/>
+              </WrapPanel>
+            </Expander>
+
+            <TextBlock Text="PATTERN LEARNING" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="[Edu]Learn"  Width="50" Height="22" Margin="1" Style="{StaticResource BtnAI}" Tag="LearnPattern_Click"/>
+              <Button Content="✨Apply"  Width="50" Height="22" Margin="1" Style="{StaticResource BtnGo}" Tag="ApplyPattern_Click"/>
+            </WrapPanel>
+
+            <Border Background="#E0F2F1" BorderBrush="#00796B" BorderThickness="1"
+                    CornerRadius="3" Padding="5,4" Margin="0,5,0,2">
+              <StackPanel>
+                <TextBlock Text="[Cats]  BATCH VIEW PROCESSING" FontWeight="Bold" FontSize="9" Foreground="#004D40"/>
+                <Button Content="▶▶  Run on All Sheets" Height="24" Margin="0,5,0,0"
+                        FontSize="9" FontWeight="Bold" Cursor="Hand"
+                        Background="#00796B" Foreground="White" BorderThickness="0"
+                        Tag="BatchSheets_Click"/>
+              </StackPanel>
+            </Border>
+
+            <!-- ── Schedule Width Sync ── -->
+            <Border Background="#E8F5E9" BorderBrush="#388E3C" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,3,0,3">
+              <StackPanel>
+                <TextBlock Text="[Align] SCHEDULE COLUMN WIDTH SYNC" FontWeight="Bold"
+                           FontSize="9" Foreground="#1B5E20" Margin="0,0,0,3"/>
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" Text="Width mm:" FontSize="8" Foreground="#2E7D32"
+                             VerticalAlignment="Center" Margin="0,0,4,0"/>
+                  <TextBox x:Name="SchedWidthInput" Grid.Column="1" Text="25"
+                           FontSize="9" Padding="3,2" BorderBrush="#66BB6A" Height="22"
+                           ToolTip="Column width in mm — or leave 0 to match widest selected schedule"/>
+                  <TextBlock Grid.Column="2" Text="" FontSize="8" Foreground="#388E3C"/>
+                  <Button Grid.Column="3" Content="Match Widest" Width="80" Height="22" Margin="0,0,3,0"
+                          FontSize="8" Style="{StaticResource BtnGo}" Tag="SchedMatchWidest_Click"
+                          ToolTip="Set all selected schedules' columns to match the widest column in the group"/>
+                  <Button Grid.Column="4" Content="Set Width" Width="60" Height="22" Margin="0,0,3,0"
+                          FontSize="8" Style="{StaticResource BtnGo}" Tag="SchedSetWidth_Click"
+                          ToolTip="Set all columns of all selected schedules to the typed width"/>
+                  <Button Grid.Column="5" Content="Equalise" Width="54" Height="22"
+                          FontSize="8" Style="{StaticResource Btn}" Tag="SchedEqualise_Click"
+                          ToolTip="Make all columns equal width within each selected schedule"/>
+                </Grid>
+              </StackPanel>
+            </Border>
+
+            <!-- ── Room Tag Sync ── -->
+            <Border Background="#F3E5F5" BorderBrush="#7B1FA2" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,0,0,3">
+              <StackPanel>
+                <TextBlock Text="[Home] ROOM TAG POSITION SYNC" FontWeight="Bold"
+                           FontSize="9" Foreground="#4A148C" Margin="0,0,0,3"/>
+                <WrapPanel>
+                  <Button Content="Centroid"    Width="60" Height="22" Margin="1" Style="{StaticResource Btn}"
+                          Tag="RoomTagCentroid_Click" ToolTip="Move tag to room bounding-box centroid"/>
+                  <Button Content="Top-Left"    Width="58" Height="22" Margin="1" Style="{StaticResource Btn}"
+                          Tag="RoomTagTopLeft_Click" ToolTip="Move tag to top-left corner of room bounding box + offset"/>
+                  <Button Content="Top-Centre"  Width="68" Height="22" Margin="1" Style="{StaticResource Btn}"
+                          Tag="RoomTagTopCentre_Click" ToolTip="Move tag to top-centre of room bounding box"/>
+                  <Button Content="Leader Lock"  Width="68" Height="22" Margin="1" Style="{StaticResource BtnAI}"
+                          Tag="LeaderEndLock_Click"
+                          ToolTip="Freeze leader arrowhead position — prevents it shifting when tag is moved"/>
+                  <Button Content="Leader Free"  Width="68" Height="22" Margin="1" Style="{StaticResource Btn}"
+                          Tag="LeaderEndFree_Click"
+                          ToolTip="Release leader endpoint so it snaps back to host element"/>
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <!-- ── Linked Model Selection ── -->
+            <Border Background="#ECEFF1" BorderBrush="#78909C" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,0,0,3">
+              <StackPanel>
+                <TextBlock Text="[Link] LINKED MODEL ELEMENTS" FontWeight="Bold"
+                           FontSize="9" Foreground="#37474F" Margin="0,0,0,3"/>
+                <WrapPanel>
+                  <Button Content="List Links"    Width="64" Height="22" Margin="1" Style="{StaticResource Btn}"
+                          Tag="LinksList_Click" ToolTip="List all loaded Revit links in the project"/>
+                  <Button Content="Sel in Link…"  Width="72" Height="22" Margin="1" Style="{StaticResource BtnSel}"
+                          Tag="SelInLink_Click" ToolTip="Pick a link then select elements by category within it"/>
+                  <Button Content="Tag Linked"    Width="66" Height="22" Margin="1" Style="{StaticResource BtnGo}"
+                          Tag="TagLinked_Click" ToolTip="Place tags on selected linked-file elements"/>
+                  <Button Content="Audit Links"   Width="66" Height="22" Margin="1" Style="{StaticResource Btn}"
+                          Tag="LinksAudit_Click" ToolTip="Export link status (loaded/unloaded/missing) to CSV"/>
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <!-- ── PDF Export ── -->
+            <Border Background="#FBE9E7" BorderBrush="#BF360C" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,0,0,3">
+              <StackPanel>
+                <TextBlock Text="[Doc] PDF EXPORT" FontWeight="Bold"
+                           FontSize="9" Foreground="#BF360C" Margin="0,0,0,3"/>
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <ComboBox x:Name="PDFSizeCombo" Grid.Column="0" Style="{StaticResource CBo}" Height="22"
+                            ToolTip="Paper size for export">
+                    <ComboBoxItem IsSelected="True">A1</ComboBoxItem>
+                    <ComboBoxItem>A2</ComboBoxItem>
+                    <ComboBoxItem>A3</ComboBoxItem>
+                    <ComboBoxItem>A4</ComboBoxItem>
+                    <ComboBoxItem>Custom</ComboBoxItem>
+                  </ComboBox>
+                  <Button Grid.Column="1" Content="Selected Sheets" Width="100" Height="22" Margin="3,0,3,0"
+                          FontSize="8" Style="{StaticResource BtnWarn}" Tag="PDFExportSheets_Click"
+                          ToolTip="Export selected sheets to PDF (Revit 2022+)"/>
+                  <Button Grid.Column="2" Content="Active View" Width="76" Height="22"
+                          FontSize="8" Style="{StaticResource Btn}" Tag="PDFExportActive_Click"
+                          ToolTip="Export active view to PDF"/>
+                </Grid>
+              </StackPanel>
+            </Border>
+
+            <!-- ── Sheet Index ── -->
+            <Border Background="#E8EAF6" BorderBrush="#3949AB" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,0,0,2">
+              <StackPanel>
+                <TextBlock Text="[List] SHEET INDEX" FontWeight="Bold"
+                           FontSize="9" Foreground="#1A237E" Margin="0,0,0,3"/>
+                <WrapPanel>
+                  <Button Content="Generate Index" Width="92" Height="22" Margin="1"
+                          FontSize="8" Style="{StaticResource BtnSel}" Tag="SheetIndexGenerate_Click"
+                          ToolTip="Create a new schedule-based sheet index filtered by discipline prefix"/>
+                  <Button Content="Export CSV"     Width="68" Height="22" Margin="1"
+                          FontSize="8" Style="{StaticResource BtnGo}" Tag="SheetIndexExport_Click"
+                          ToolTip="Export all sheet data (number, name, discipline, revision) to CSV"/>
+                  <Button Content="Prefix filter…" Width="80" Height="22" Margin="1"
+                          FontSize="8" Style="{StaticResource Btn}" Tag="SheetIndexFilter_Click"
+                          ToolTip="Filter to sheets matching a number prefix (e.g. 'E-' for electrical)"/>
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <!-- ══════════════  CREATE  ══════════════ -->
+      <TabItem FontWeight="Bold" FontSize="9">
+        <TabItem.Header><TextBlock Text=" CREATE " Foreground="#4E342E"/></TabItem.Header>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="2">
+          <StackPanel>
+
+            <!-- Scope -->
+            <Border Background="#E8F5E9" BorderBrush="#388E3C" BorderThickness="1"
+                    CornerRadius="4" Padding="6,5" Margin="0,0,0,4">
+              <StackPanel>
+                <TextBlock Text="ISO 19650  —  CREATE &amp; POPULATE"
+                           FontWeight="Bold" FontSize="10" Foreground="#1B5E20"/>
+                <TextBlock x:Name="IsoStatus" Text="Scope: View  |  Overwrite: No"
+                           FontSize="8" Foreground="#388E3C" Margin="0,2,0,4"/>
+                <WrapPanel>
+                  <Button Content="Scope: View"   x:Name="IsoScopeBtn"     Width="80" Height="20" Margin="1"
+                          Style="{StaticResource Btn}"/>
+                  <Button Content="Overwrite: No" x:Name="IsoOverwriteBtn" Width="88" Height="20" Margin="1"
+                          Style="{StaticResource BtnWarn}"/>
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <!-- Setup -->
+            <Border Background="#F3E5F5" BorderBrush="#7B1FA2" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,0,0,3">
+              <StackPanel>
+                <TextBlock Text="① SETUP" FontWeight="Bold" FontSize="9" Foreground="#4A148C" Margin="0,0,0,3"/>
+                <WrapPanel>
+                  <Button Content="Load Shared Params" Width="124" Height="24" Margin="1" Style="{StaticResource BtnAI}" Tag="IsoLoadParams_Click"/>
+                  <Button Content="Project Config"     Width="94"  Height="24" Margin="1" Style="{StaticResource Btn}"   Tag="IsoProjectConfig_Click"/>
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <!-- Populate -->
+            <Border Background="#E3F2FD" BorderBrush="#1565C0" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,0,0,3">
+              <StackPanel>
+                <TextBlock Text="② POPULATE TOKENS" FontWeight="Bold" FontSize="9" Foreground="#0D47A1" Margin="0,0,0,3"/>
+                <WrapPanel>
+                  <Button Content="▶ Auto Populate"    Width="100" Height="24" Margin="1"
+                          Background="#1565C0" Foreground="White" FontWeight="Bold"
+                          BorderThickness="0" FontSize="9" Cursor="Hand"
+                          Tag="IsoAutoPopulate_Click"/>
+                  <Button Content="Assign Numbers"     Width="100" Height="24" Margin="1" Style="{StaticResource Btn}"   Tag="IsoAssignNumbers_Click"/>
+                  <Button Content="[Brain] Smart Tokens"    Width="96"  Height="24" Margin="1" Style="{StaticResource BtnAI}" Tag="IsoSmartTokens_Click"/>
+                  <Button Content="⚙ Build Tags"       Width="90"  Height="24" Margin="1" Style="{StaticResource BtnGo}" Tag="IsoBuildTags_Click"
+                          ToolTip="Assemble TAG_1 through TAG_6 from individual tokens"/>
+                  <Button Content="T3 Tags"            Width="58"  Height="24" Margin="1" Style="{StaticResource Btn}"   Tag="IsoBuildT3Tags_Click"
+                          ToolTip="Assemble 15 Tier-3 discipline-specific tags"/>
+                  <Button Content="Mat Tags"           Width="58"  Height="24" Margin="1" Style="{StaticResource Btn}"   Tag="IsoBuildMatTags_Click"
+                          ToolTip="Assemble 21 material tags from MAT/BLE/PROP/PER source parameters"/>
+                  <Button Content="⚙ Build ALL"        Width="72"  Height="24" Margin="1" Style="{StaticResource BtnGo}" Tag="IsoBuildAllTags_Click"
+                          ToolTip="Build all tags: T1+T2 + T3 discipline + material tags"/>
+                </WrapPanel>
+                <TextBlock Text="Manual — all 13 tokens:" FontSize="8" Foreground="#5C6BC0" Margin="0,4,0,2"/>
+                <WrapPanel>
+                  <Button Content="PROJ"   Width="38" Height="20" Margin="1" Style="{StaticResource Btn}" Tag="IsoSetProject_Click" ToolTip="ASS_PROJECT_COD_TXT — token 1"/>
+                  <Button Content="ORIG"   Width="36" Height="20" Margin="1" Style="{StaticResource Btn}" Tag="IsoSetOrig_Click"    ToolTip="ASS_ORIGINATOR_COD_TXT — token 2"/>
+                  <Button Content="VOL"    Width="32" Height="20" Margin="1" Style="{StaticResource Btn}" Tag="IsoSetVol_Click"     ToolTip="ASS_VOLUME_COD_TXT — token 3"/>
+                  <Button Content="LVL"    Width="32" Height="20" Margin="1" Style="{StaticResource Btn}" Tag="IsoSetLvl_Click"     ToolTip="ASS_LVL_COD_TXT — token 4"/>
+                  <Button Content="DISC"   Width="36" Height="20" Margin="1" Style="{StaticResource Btn}" Tag="IsoSetDisc_Click"    ToolTip="ASS_DISCIPLINE_COD_TXT — token 5"/>
+                  <Button Content="LOC"    Width="32" Height="20" Margin="1" Style="{StaticResource Btn}" Tag="IsoSetLoc_Click"     ToolTip="ASS_LOC_TXT — token 6"/>
+                  <Button Content="ZONE"   Width="36" Height="20" Margin="1" Style="{StaticResource Btn}" Tag="IsoSetZone_Click"    ToolTip="ASS_ZONE_TXT — token 7"/>
+                  <Button Content="SYS"    Width="32" Height="20" Margin="1" Style="{StaticResource Btn}" Tag="IsoSetSys_Click"     ToolTip="ASS_SYSTEM_TYPE_TXT — token 8"/>
+                  <Button Content="FUNC"   Width="36" Height="20" Margin="1" Style="{StaticResource Btn}" Tag="IsoSetFunc_Click"    ToolTip="ASS_FUNC_TXT — token 9"/>
+                  <Button Content="PROD"   Width="36" Height="20" Margin="1" Style="{StaticResource Btn}" Tag="IsoSetProd_Click"    ToolTip="ASS_PRODCT_COD_TXT — token 10"/>
+                  <Button Content="SEQ"    Width="32" Height="20" Margin="1" Style="{StaticResource Btn}" Tag="IsoSetSeq_Click"     ToolTip="ASS_SEQ_NUM_TXT — token 11"/>
+                  <Button Content="STATUS" Width="46" Height="20" Margin="1" Style="{StaticResource Btn}" Tag="IsoSetStatus_Click"  ToolTip="ASS_STATUS_COD_TXT — token 12"/>
+                  <Button Content="REV"    Width="32" Height="20" Margin="1" Style="{StaticResource Btn}" Tag="IsoSetRev_Click"     ToolTip="ASS_REV_COD_TXT — token 13"/>
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <!-- QA -->
+            <Border Background="#FFFDE7" BorderBrush="#F9A825" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,0,0,3">
+              <StackPanel>
+                <TextBlock Text="③ QUALITY ASSURANCE" FontWeight="Bold" FontSize="9" Foreground="#E65100" Margin="0,0,0,3"/>
+                <WrapPanel>
+                  <Button Content="✔ Validate"   Width="74" Height="24" Margin="1" Style="{StaticResource BtnGo}"   Tag="IsoValidate_Click"/>
+                  <Button Content="[R] Highlight" Width="80" Height="24" Margin="1" Style="{StaticResource BtnWarn}" Tag="IsoHighlight_Click"/>
+                  <Button Content="Clear [Art]"     Width="74" Height="24" Margin="1" Style="{StaticResource Btn}"     Tag="IsoClearHighlight_Click"/>
+                </WrapPanel>
+                <WrapPanel Margin="0,3,0,0">
+                  <Button Content="Completeness %" Width="100" Height="20" Margin="1" Style="{StaticResource Btn}"     Tag="IsoCompleteness_Click"/>
+                  <Button Content="Find Duplicates" Width="100" Height="20" Margin="1" Style="{StaticResource BtnWarn}" Tag="IsoDupFinder_Click"/>
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <!-- ISO Dashboard -->
+            <Border Background="#ECEFF1" BorderBrush="#78909C" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,0,0,3">
+              <StackPanel>
+                <Grid Margin="0,0,0,4">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" Text="[Chart] ISO COMPLETENESS DASHBOARD"
+                             FontWeight="Bold" FontSize="9" Foreground="#37474F"
+                             VerticalAlignment="Center"/>
+                  <Button Grid.Column="1" Content="▶ Load" Width="44" Height="20" Margin="0,0,3,0"
+                          FontSize="8" Style="{StaticResource BtnGo}" Tag="IsoDashboardLoad_Click"
+                          ToolTip="Populate dashboard from active view / scope"/>
+                  <Button Grid.Column="2" Content="Export" Width="44" Height="20"
+                          FontSize="8" Style="{StaticResource Btn}" Tag="IsoDashboardExport_Click"
+                          ToolTip="Export dashboard rows to CSV"/>
+                </Grid>
+                <!-- Filter row -->
+                <Grid Margin="0,0,0,3">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" Text="Min %:" FontSize="8" Foreground="#607D8B"
+                             VerticalAlignment="Center" Margin="0,0,3,0"/>
+                  <Slider x:Name="DashboardFilterSlider" Grid.Column="1"
+                          Minimum="0" Maximum="100" Value="0"
+                          IsSnapToTickEnabled="True" TickFrequency="10"
+                          VerticalAlignment="Center" Height="18"
+                          ToolTip="Show only elements with completeness ≥ this %"/>
+                  <TextBlock Grid.Column="2" x:Name="DashboardFilterLabel" Text="0%"
+                             FontSize="8" Foreground="#607D8B" VerticalAlignment="Center" Margin="3,0"/>
+                  <ComboBox x:Name="DashboardRAGFilter" Grid.Column="3"
+                            Style="{StaticResource CBo}" Width="50" Height="20"
+                            ToolTip="Filter by RAG status">
+                    <ComboBoxItem IsSelected="True">All</ComboBoxItem>
+                    <ComboBoxItem>[R] Red</ComboBoxItem>
+                    <ComboBoxItem>[A] Amber</ComboBoxItem>
+                    <ComboBoxItem>[G] Green</ComboBoxItem>
+                  </ComboBox>
+                </Grid>
+                <!-- DataGrid -->
+                <DataGrid x:Name="IsoDashboardGrid"
+                          Height="130" AutoGenerateColumns="False"
+                          IsReadOnly="True" FontSize="8"
+                          RowHeight="20" HeadersVisibility="Column"
+                          GridLinesVisibility="Horizontal"
+                          BorderBrush="#B0BEC5" BorderThickness="1"
+                          ToolTip="Click row to select that element in Revit">
+                  <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id"       Binding="{Binding Id}"       Width="52"/>
+                    <DataGridTextColumn Header="Cat"      Binding="{Binding Cat}"      Width="70"/>
+                    <DataGridTextColumn Header="%"        Binding="{Binding Pct}"      Width="34"/>
+                    <DataGridTextColumn Header="RAG"      Binding="{Binding Rag}"      Width="34"/>
+                    <DataGridTextColumn Header="Missing"  Binding="{Binding Missing}"  Width="*"/>
+                  </DataGrid.Columns>
+                </DataGrid>
+                <TextBlock x:Name="DashboardCountLabel" Text="0 rows"
+                           FontSize="7" Foreground="#78909C" Margin="0,3,0,0"/>
+              </StackPanel>
+            </Border>
+
+            <!-- Export -->
+            <Border Background="#F1F8E9" BorderBrush="#558B2F" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,0,0,3">
+              <StackPanel>
+                <TextBlock Text="④ EXPORT" FontWeight="Bold" FontSize="9" Foreground="#33691E" Margin="0,0,0,3"/>
+                <WrapPanel>
+                  <Button Content="Export Tag Register"  Width="114" Height="24" Margin="1" Style="{StaticResource BtnGo}" Tag="IsoExport_Click"/>
+                  <Button Content="Naviate Config"       Width="96"  Height="24" Margin="1" Style="{StaticResource Btn}"   Tag="IsoNaviateConfig_Click"/>
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <!-- Inspector -->
+            <Border Background="#ECEFF1" BorderBrush="#90A4AE" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4">
+              <StackPanel>
+                <TextBlock Text="TOKEN INSPECTOR" FontWeight="Bold" FontSize="9" Foreground="#37474F"/>
+                <TextBlock x:Name="IsoInspect" Text="Select element then Inspect ↓"
+                           FontSize="8" Foreground="#546E7A" TextWrapping="Wrap" Margin="0,2,0,3"/>
+                <Button Content="[Find] Inspect Selection" Height="22" FontSize="9"
+                        Style="{StaticResource Btn}" Tag="IsoInspect_Click"/>
+              </StackPanel>
+            </Border>
+
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <!-- ══════════════  VIEW  ══════════════ -->
+      <TabItem FontWeight="Bold" FontSize="9">
+        <TabItem.Header><TextBlock Text=" VIEW " Foreground="#4A148C"/></TabItem.Header>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="2">
+          <StackPanel>
+
+            <!-- ── Project Health Score ── -->
+            <Border Background="#E0F2F1" BorderBrush="#00695C" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,4,0,4">
+              <StackPanel>
+                <Grid>
+                  <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" Text="[Param] PROJECT HEALTH SCORE"
+                             FontWeight="Bold" FontSize="9" Foreground="#004D40"/>
+                  <Border Grid.Column="1" CornerRadius="8" Padding="8,1" Background="#00796B">
+                    <TextBlock x:Name="HealthScoreBadge" Text="—/100" FontSize="8"
+                               Foreground="White" FontWeight="Bold"/>
+                  </Border>
+                </Grid>
+                <TextBlock Text="ISO completeness · tag coverage · leader consistency · view naming · param fill rates · annotation density"
+                           TextWrapping="Wrap" FontSize="7" Foreground="#00695C" Margin="0,2,0,4"/>
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" Text="Scope:" FontSize="8" Foreground="#00695C"
+                             VerticalAlignment="Center" Margin="0,0,4,0"/>
+                  <ComboBox x:Name="HealthScopeCombo" Grid.Column="1" Style="{StaticResource CBo}" Height="22">
+                    <ComboBoxItem IsSelected="True">Active View</ComboBoxItem>
+                    <ComboBoxItem>All Sheets</ComboBoxItem>
+                    <ComboBoxItem>Selected Elements</ComboBoxItem>
+                    <ComboBoxItem>Entire Model</ComboBoxItem>
+                  </ComboBox>
+                  <Button Grid.Column="2" Content="▶ Score" Width="56" Height="22" Margin="3,0,0,0"
+                          FontSize="8" FontWeight="Bold" Cursor="Hand"
+                          Background="#00796B" Foreground="White" BorderThickness="0"
+                          Tag="HealthScore_Click"
+                          ToolTip="Run health analysis and update score badge"/>
+                  <Button Grid.Column="3" Content="[Chart] Report" Width="58" Height="22" Margin="3,0,0,0"
+                          FontSize="8" Style="{StaticResource BtnGo}" Tag="HealthReport_Click"
+                          ToolTip="Export detailed health report to CSV"/>
+                  <Button Grid.Column="4" Content="[Fix] Fix All" Width="52" Height="22" Margin="3,0,0,0"
+                          FontSize="8" Style="{StaticResource BtnAI}" Tag="HealthFixAll_Click"
+                          ToolTip="AI: auto-fix all low-scoring issues where safe"/>
+                </Grid>
+                <Border BorderBrush="#80CBC4" BorderThickness="1" CornerRadius="2" MaxHeight="120" Margin="0,4,0,0">
+                  <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="HealthBreakdownPanel" Margin="4"/>
+                  </ScrollViewer>
+                </Border>
+              </StackPanel>
+            </Border>
+
+            <!-- ── Parameter Anomaly Detection ── -->
+            <Border Background="#FFF3E0" BorderBrush="#E65100" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,0,0,4">
+              <StackPanel>
+                <TextBlock Text="[Scan] PARAMETER ANOMALY DETECTION" FontWeight="Bold"
+                           FontSize="9" Foreground="#BF360C" Margin="0,0,0,2"/>
+                <TextBlock Text="Statistical outlier analysis — values &gt;2σ from mean, empty mandatory fields, duplicates, type/instance mismatches."
+                           TextWrapping="Wrap" FontSize="7" Foreground="#BF360C" Margin="0,0,0,4"/>
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <ComboBox x:Name="AnomalyParamCombo" Grid.Column="0"
+                            Style="{StaticResource CBo}" Height="22"
+                            ToolTip="Parameter to analyse — blank = all numeric params"/>
+                  <Button Grid.Column="1" Content="↻" Width="26" Height="22" Margin="3,0,0,0"
+                          Style="{StaticResource Btn}" Tag="AnomalyParamRefresh_Click"/>
+                  <Button Grid.Column="2" Content="[Scan] Run" Width="48" Height="22" Margin="3,0,0,0"
+                          FontSize="8" FontWeight="Bold" Cursor="Hand"
+                          Background="#E65100" Foreground="White" BorderThickness="0"
+                          Tag="AnomalyDetect_Click"/>
+                  <Button Grid.Column="3" Content="Export" Width="46" Height="22" Margin="3,0,0,0"
+                          FontSize="8" Style="{StaticResource BtnGo}" Tag="AnomalyExport_Click"/>
+                </Grid>
+                <Border BorderBrush="#FFAB91" BorderThickness="1" CornerRadius="2"
+                        MaxHeight="100" Margin="0,4,0,0">
+                  <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <TextBlock x:Name="AnomalyResults" Text="Select elements · click [Scan] Run"
+                               FontSize="7" Foreground="#5D4037" Padding="4" TextWrapping="Wrap"/>
+                  </ScrollViewer>
+                </Border>
+              </StackPanel>
+            </Border>
+
+            <!-- ── AI Context-Aware Tag Placement ── -->
+            <Border Background="#E8EAF6" BorderBrush="#3F51B5" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,0,0,4">
+              <StackPanel>
+                <Grid>
+                  <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" Text="[Bot] AI CONTEXT-AWARE TAG PLACEMENT"
+                             FontWeight="Bold" FontSize="9" Foreground="#1A237E"/>
+                  <Border Grid.Column="1" Background="#3F51B5" CornerRadius="6" Padding="5,1">
+                    <TextBlock x:Name="AIPlaceConfidence" Text="– –" FontSize="7"
+                               Foreground="White" FontWeight="Bold"/>
+                  </Border>
+                </Grid>
+                <TextBlock Text="Analyses view density, clash zones and element bounding boxes to find optimal tag head positions — no manual nudging needed."
+                           TextWrapping="Wrap" FontSize="7" Foreground="#3949AB" Margin="0,2,0,4"/>
+                <WrapPanel>
+                  <Button Content="[Bot] Smart Place"  Width="88" Height="24" Margin="1"
+                          FontSize="8" FontWeight="Bold" Cursor="Hand"
+                          Background="#3F51B5" Foreground="White" BorderThickness="0"
+                          Tag="AISmartPlace_Click"
+                          ToolTip="Place tags at AI-computed optimal positions for selected elements"/>
+                  <Button Content="[Place] Density Map" Width="82" Height="24" Margin="1"
+                          FontSize="8" Style="{StaticResource BtnAI}"
+                          Tag="AIDensityMap_Click"
+                          ToolTip="Colour-code view by annotation density — reveals crowded zones"/>
+                  <Button Content="↺ Undo AI"      Width="58" Height="24" Margin="1"
+                          FontSize="8" Style="{StaticResource BtnWarn}"
+                          Tag="AIPlaceUndo_Click"
+                          ToolTip="Restore tag positions from pre-placement snapshot"/>
+                  <Button Content="⚙ Options"      Width="58" Height="24" Margin="1"
+                          FontSize="8" Style="{StaticResource Btn}"
+                          Tag="AIPlaceOptions_Click"
+                          ToolTip="Set clearance radius, leader limits, preferred quadrant"/>
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <!-- ── COLOURISER ── -->
+            <Border Background="#F3E5F5" BorderBrush="#7B1FA2" BorderThickness="1"
+                    CornerRadius="4" Padding="5,5" Margin="0,0,0,4">
+              <StackPanel>
+                <TextBlock Text="[Art] COLOURISER" FontWeight="Bold" FontSize="10" Foreground="#4A148C" Margin="0,0,0,4"/>
+
+                <!-- Scheme save/load -->
+                <Grid Margin="0,0,0,4">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <ComboBox x:Name="ColourSchemeCombo" Grid.Column="0"
+                            Style="{StaticResource CBo}" Height="22"
+                            ToolTip="Named colour schemes saved in project_config.json">
+                    <ComboBoxItem IsSelected="True">— saved schemes —</ComboBoxItem>
+                  </ComboBox>
+                  <Button Grid.Column="1" Content="[Save]Save" Width="46" Height="22" Margin="3,0,0,0"
+                          FontSize="8" Style="{StaticResource BtnGo}"  Tag="SaveColourScheme_Click"
+                          ToolTip="Name and save the current palette settings"/>
+                  <Button Grid.Column="2" Content="[Open]Load" Width="46" Height="22" Margin="3,0,0,0"
+                          FontSize="8" Style="{StaticResource Btn}"    Tag="LoadColourScheme_Click"
+                          ToolTip="Load selected scheme from project_config.json"/>
+                  <Button Grid.Column="3" Content="✕Del"  Width="36" Height="22" Margin="3,0,0,0"
+                          FontSize="8" Style="{StaticResource BtnDel}" Tag="DeleteColourScheme_Click"/>
+                </Grid>
+
+                <!-- Auto-colour row -->
+                <Grid Margin="0,0,0,4">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <ComboBox x:Name="ColourByCombo" Grid.Column="0" Style="{StaticResource CBo}" Height="22">
+                    <ComboBoxItem IsSelected="True">By Category</ComboBoxItem>
+                    <ComboBoxItem>By Level</ComboBoxItem>
+                    <ComboBoxItem>By Phase</ComboBoxItem>
+                    <ComboBoxItem>By Workset</ComboBoxItem>
+                    <ComboBoxItem>By System</ComboBoxItem>
+                    <ComboBoxItem>By Parameter…</ComboBoxItem>
+                    <ComboBoxItem>By Value Range…</ComboBoxItem>
+                    <ComboBoxItem>By Selection</ComboBoxItem>
+                    <ComboBoxItem>By ISO Completeness</ComboBoxItem>
+                  </ComboBox>
+                  <Button Grid.Column="1" Content="▶ Apply" Height="22" Width="60" Margin="3,0,3,0"
+                          FontSize="8" Cursor="Hand" Background="#7B1FA2" Foreground="White"
+                          BorderThickness="0" Tag="ColourByAuto_Click"/>
+                  <Button Grid.Column="2" Content="[Art]ISO%" Height="22" Width="52"
+                          FontSize="8" Cursor="Hand" Background="#4A148C" Foreground="White"
+                          BorderThickness="0" Tag="ColourByISOCompleteness_Click"
+                          ToolTip="Gradient fill: green (100%) → amber → red (0%) for each element in scope based on ISO dashboard data"/>
+                </Grid>
+
+                <!-- Palette selector row -->
+                <Grid Margin="0,0,0,3">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" Text="Palette:" FontSize="8" FontWeight="Bold"
+                             Foreground="#607D8B" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                  <ComboBox x:Name="PaletteSelector" Grid.Column="1"
+                            Style="{StaticResource CBo}" Height="20"
+                            ToolTip="Switch colour palette — swatches update below">
+                    <ComboBoxItem IsSelected="True">Material 500</ComboBoxItem>
+                    <ComboBoxItem>Material 700</ComboBoxItem>
+                    <ComboBoxItem>Material A200</ComboBoxItem>
+                    <ComboBoxItem>Pastel</ComboBoxItem>
+                    <ComboBoxItem>Muted Dark</ComboBoxItem>
+                    <ComboBoxItem>RAG Traffic</ComboBoxItem>
+                    <ComboBoxItem>Greyscale</ComboBoxItem>
+                    <ComboBoxItem>MEP Discipline</ComboBoxItem>
+                    <ComboBoxItem>Warm Tones</ComboBoxItem>
+                    <ComboBoxItem>Cool Tones</ComboBoxItem>
+                    <ComboBoxItem>Earth Tones</ComboBoxItem>
+                    <ComboBoxItem>Neon Vivid</ComboBoxItem>
+                    <ComboBoxItem>Ocean Depths</ComboBoxItem>
+                    <ComboBoxItem>Forest Canopy</ComboBoxItem>
+                    <ComboBoxItem>Sunset Gradient</ComboBoxItem>
+                    <ComboBoxItem>ISO Status</ComboBoxItem>
+                    <ComboBoxItem>Accessibility</ComboBoxItem>
+                    <ComboBoxItem>High Contrast</ComboBoxItem>
+                  </ComboBox>
+                </Grid>
+
+                <!-- Swatch label -->
+                <TextBlock Text="FILL — click swatch to apply to selection:"
+                           FontSize="7" Foreground="#607D8B" Margin="0,0,0,2"/>
+
+                <!-- Swatch rows (20 + reset) — refreshed by PaletteSelector -->
+                <WrapPanel x:Name="FillSwatchRow1">
+                  <Button Style="{StaticResource Swatch}" Background="#F44336" BorderBrush="#B71C1C" Tag="#F44336" ToolTip="Red 500"/>
+                  <Button Style="{StaticResource Swatch}" Background="#FF7043" BorderBrush="#BF360C" Tag="#FF7043" ToolTip="Deep Orange 500"/>
+                  <Button Style="{StaticResource Swatch}" Background="#FF9800" BorderBrush="#E65100" Tag="#FF9800" ToolTip="Orange 500"/>
+                  <Button Style="{StaticResource Swatch}" Background="#FFC107" BorderBrush="#FF6F00" Tag="#FFC107" ToolTip="Amber 500"/>
+                  <Button Style="{StaticResource Swatch}" Background="#FFEB3B" BorderBrush="#F57F17" Tag="#FFEB3B" ToolTip="Yellow 500"/>
+                  <Button Style="{StaticResource Swatch}" Background="#8BC34A" BorderBrush="#33691E" Tag="#8BC34A" ToolTip="Lt Green 500"/>
+                  <Button Style="{StaticResource Swatch}" Background="#4CAF50" BorderBrush="#1B5E20" Tag="#4CAF50" ToolTip="Green 500"/>
+                  <Button Style="{StaticResource Swatch}" Background="#009688" BorderBrush="#004D40" Tag="#009688" ToolTip="Teal 500"/>
+                  <Button Style="{StaticResource Swatch}" Background="#00BCD4" BorderBrush="#006064" Tag="#00BCD4" ToolTip="Cyan 500"/>
+                  <Button Style="{StaticResource Swatch}" Background="#03A9F4" BorderBrush="#01579B" Tag="#03A9F4" ToolTip="Lt Blue 500"/>
+                </WrapPanel>
+                <WrapPanel x:Name="FillSwatchRow2" Margin="0,1,0,0">
+                  <Button Style="{StaticResource Swatch}" Background="#2196F3" BorderBrush="#0D47A1" Tag="#2196F3" ToolTip="Blue 500"/>
+                  <Button Style="{StaticResource Swatch}" Background="#3F51B5" BorderBrush="#1A237E" Tag="#3F51B5" ToolTip="Indigo 500"/>
+                  <Button Style="{StaticResource Swatch}" Background="#673AB7" BorderBrush="#311B92" Tag="#673AB7" ToolTip="Deep Purple 500"/>
+                  <Button Style="{StaticResource Swatch}" Background="#9C27B0" BorderBrush="#4A148C" Tag="#9C27B0" ToolTip="Purple 500"/>
+                  <Button Style="{StaticResource Swatch}" Background="#E91E63" BorderBrush="#880E4F" Tag="#E91E63" ToolTip="Pink 500"/>
+                  <Button Style="{StaticResource Swatch}" Background="#795548" BorderBrush="#3E2723" Tag="#795548" ToolTip="Brown 500"/>
+                  <Button Style="{StaticResource Swatch}" Background="#9E9E9E" BorderBrush="#212121" Tag="#9E9E9E" ToolTip="Grey 500"/>
+                  <Button Style="{StaticResource Swatch}" Background="#607D8B" BorderBrush="#263238" Tag="#607D8B" ToolTip="Blue-Grey 500"/>
+                  <Button Style="{StaticResource Swatch}" Background="#FFFFFF" BorderBrush="#90A4AE" Tag="#FFFFFF" ToolTip="White"/>
+                  <Button Style="{StaticResource Swatch}" Background="#212121" BorderBrush="#000000" Tag="#212121" ToolTip="Near-Black"/>
+                </WrapPanel>
+
+                <!-- Custom hex input -->
+                <Grid Margin="0,4,0,3">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" Text="#" FontSize="10" FontWeight="Bold"
+                             Foreground="#7B1FA2" VerticalAlignment="Center" Margin="0,0,2,0"/>
+                  <TextBox x:Name="CustomHexInput" Grid.Column="1" FontSize="9"
+                           Padding="3,2" BorderBrush="#CE93D8" Height="22"
+                           Text="RRGGBB" Foreground="#9E9E9E"
+                           ToolTip="Enter any hex colour (without #) then Apply or press Enter"/>
+                  <Button Grid.Column="2" x:Name="CustomHexPreview" Content="   " Width="26" Height="22"
+                          Margin="3,0,0,0" Background="#FFFFFF" BorderBrush="#9E9E9E"
+                          BorderThickness="2" Cursor="Hand" IsEnabled="False"/>
+                  <Button Grid.Column="3" Content="Apply" Width="42" Height="22" Margin="3,0,0,0"
+                          FontSize="8" Background="#7B1FA2" Foreground="White" BorderThickness="0"
+                          Cursor="Hand" Tag="ColourCustomHex_Click"
+                          ToolTip="Apply custom hex fill colour to selection"/>
+                </Grid>
+
+                <!-- Transparency slider -->
+                <Grid Margin="0,0,0,3">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" Text="Transparency:" FontSize="8" Foreground="#7B1FA2"
+                             VerticalAlignment="Center" Margin="0,0,5,0"/>
+                  <Slider x:Name="TransparencySlider" Grid.Column="1"
+                          Minimum="0" Maximum="90" Value="0"
+                          IsSnapToTickEnabled="True" TickFrequency="10"
+                          VerticalAlignment="Center" Height="18"
+                          ToolTip="Surface transparency 0–90%"/>
+                  <TextBlock Grid.Column="2" x:Name="TransparencyLabel" Text="0%"
+                             FontSize="8" Foreground="#7B1FA2" VerticalAlignment="Center" Margin="3,0"/>
+                  <Button Grid.Column="3" Content="Apply" Width="40" Height="20"
+                          FontSize="8" Background="#7B1FA2" Foreground="White" BorderThickness="0"
+                          Cursor="Hand" Tag="ColourApplyTransparency_Click"
+                          ToolTip="Apply current transparency setting to selection"/>
+                </Grid>
+
+                <!-- Gradient row -->
+                <Border Background="#EDE7F6" CornerRadius="3" Padding="4,4" Margin="0,0,0,3">
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto"/>
+                      <ColumnDefinition Width="Auto"/>
+                      <ColumnDefinition Width="Auto"/>
+                      <ColumnDefinition Width="*"/>
+                      <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Gradient:" FontSize="8" FontWeight="Bold"
+                               Foreground="#4A148C" VerticalAlignment="Center" Margin="0,0,4,0"/>
+                    <Button Grid.Column="1" x:Name="GradFromBtn" Content="   " Width="28" Height="22"
+                            Background="#2196F3" BorderBrush="#0D47A1" BorderThickness="2"
+                            Cursor="Hand" ToolTip="Click to set gradient FROM colour via swatch"/>
+                    <TextBlock Grid.Column="2" Text="→" FontSize="12" Foreground="#7B1FA2"
+                               VerticalAlignment="Center" Margin="3,0"/>
+                    <Button Grid.Column="3" x:Name="GradToBtn" Content="   " Width="28" Height="22"
+                            Background="#F44336" BorderBrush="#B71C1C" BorderThickness="2"
+                            Cursor="Hand" ToolTip="Click to set gradient TO colour via swatch"/>
+                    <Button Grid.Column="4" Content="Apply Gradient" Width="90" Height="22" Margin="5,0,0,0"
+                            FontSize="8" Background="#4A148C" Foreground="White" BorderThickness="0"
+                            Cursor="Hand" Tag="ColourApplyGradient_Click"
+                            ToolTip="Linearly interpolate fill colour from→to across selection, sorted by X position"/>
+                  </Grid>
+                </Border>
+
+                <!-- Pattern fill -->
+                <Grid Margin="0,0,0,3">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" Text="Pattern:" FontSize="8" Foreground="#7B1FA2"
+                             VerticalAlignment="Center" Margin="0,0,5,0"/>
+                  <ComboBox x:Name="FillPatternCombo" Grid.Column="1"
+                            Style="{StaticResource CBo}" Height="20"
+                            ToolTip="Select a fill pattern to use instead of solid fill">
+                    <ComboBoxItem IsSelected="True">Solid</ComboBoxItem>
+                    <ComboBoxItem>Diagonal Up</ComboBoxItem>
+                    <ComboBoxItem>Diagonal Down</ComboBoxItem>
+                    <ComboBoxItem>Crosshatch</ComboBoxItem>
+                    <ComboBoxItem>Horizontal Lines</ComboBoxItem>
+                    <ComboBoxItem>Vertical Lines</ComboBoxItem>
+                    <ComboBoxItem>Dots</ComboBoxItem>
+                  </ComboBox>
+                  <Button Grid.Column="2" Content="Apply" Width="42" Height="20" Margin="3,0,0,0"
+                          FontSize="8" Background="#7B1FA2" Foreground="White" BorderThickness="0"
+                          Cursor="Hand" Tag="ColourApplyPattern_Click"
+                          ToolTip="Apply selected fill pattern with current fill colour to selection"/>
+                </Grid>
+
+                <!-- Outline section -->
+                <Border Background="#EDE7F6" CornerRadius="3" Padding="4,4" Margin="0,0,0,3">
+                  <StackPanel>
+                    <Grid Margin="0,0,0,3">
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                      </Grid.ColumnDefinitions>
+                      <TextBlock Grid.Column="0" Text="OUTLINE COLOUR" FontSize="8" FontWeight="Bold"
+                                 Foreground="#4A148C" VerticalAlignment="Center"/>
+                      <Button x:Name="ColourOutlineToggleBtn" Grid.Column="1"
+                              Content="Custom: OFF" Width="80" Height="20" FontSize="7"
+                              Style="{StaticResource Btn}"/>
+                    </Grid>
+                    <WrapPanel x:Name="OutlineSwatchPanel" IsEnabled="False" Opacity="0.4">
+                      <Button Style="{StaticResource Swatch}" Background="#F44336" BorderBrush="#B71C1C" Tag="#F44336"/>
+                      <Button Style="{StaticResource Swatch}" Background="#FF9800" BorderBrush="#E65100" Tag="#FF9800"/>
+                      <Button Style="{StaticResource Swatch}" Background="#FFEB3B" BorderBrush="#F57F17" Tag="#FFEB3B"/>
+                      <Button Style="{StaticResource Swatch}" Background="#4CAF50" BorderBrush="#1B5E20" Tag="#4CAF50"/>
+                      <Button Style="{StaticResource Swatch}" Background="#009688" BorderBrush="#004D40" Tag="#009688"/>
+                      <Button Style="{StaticResource Swatch}" Background="#2196F3" BorderBrush="#0D47A1" Tag="#2196F3"/>
+                      <Button Style="{StaticResource Swatch}" Background="#3F51B5" BorderBrush="#1A237E" Tag="#3F51B5"/>
+                      <Button Style="{StaticResource Swatch}" Background="#9C27B0" BorderBrush="#4A148C" Tag="#9C27B0"/>
+                      <Button Style="{StaticResource Swatch}" Background="#E91E63" BorderBrush="#880E4F" Tag="#E91E63"/>
+                      <Button Style="{StaticResource Swatch}" Background="#795548" BorderBrush="#3E2723" Tag="#795548"/>
+                      <Button Style="{StaticResource Swatch}" Background="#607D8B" BorderBrush="#263238" Tag="#607D8B"/>
+                      <Button Style="{StaticResource Swatch}" Background="#9E9E9E" BorderBrush="#212121" Tag="#9E9E9E"/>
+                      <Button Style="{StaticResource Swatch}" Background="#FFFFFF" BorderBrush="#90A4AE" Tag="#FFFFFF"/>
+                      <Button Style="{StaticResource Swatch}" Background="#212121" BorderBrush="#000000" Tag="#212121"/>
+                      <Button Width="20" Height="20" Margin="1" Content="⊘" FontSize="10"
+                              Background="#ECEFF1" BorderBrush="#90A4AE" BorderThickness="2"
+                              Cursor="Hand" Tag="ColourResetOutline_Click"
+                              ToolTip="Remove outline override from selection"/>
+                    </WrapPanel>
+                  </StackPanel>
+                </Border>
+
+                <!-- Preview + weight -->
+                <Grid Margin="0,0,0,4">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="22"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="22"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" Text="Fill:" FontSize="7" Foreground="#607D8B" VerticalAlignment="Center" Margin="0,0,3,0"/>
+                  <Border Grid.Column="1" x:Name="FillPreview" Width="20" Height="20"
+                          Background="#2196F3" BorderBrush="#90A4AE" BorderThickness="1" CornerRadius="2"/>
+                  <TextBlock Grid.Column="2" Text="" Foreground="#607D8B" FontSize="7" VerticalAlignment="Center"/>
+                  <TextBlock Grid.Column="3" Text="Outline:" FontSize="7" Foreground="#607D8B" VerticalAlignment="Center" Margin="0,0,3,0"/>
+                  <Border Grid.Column="4" x:Name="OutlinePreview" Width="20" Height="20"
+                          Background="#1565C0" BorderBrush="#90A4AE" BorderThickness="1" CornerRadius="2"/>
+                  <TextBlock Grid.Column="5" Text=" Wt:" FontSize="7" Foreground="#607D8B" VerticalAlignment="Center" Margin="0,0,3,0"/>
+                  <ComboBox x:Name="LineWeightCombo" Grid.Column="6"
+                            Style="{StaticResource CBo}" Height="20" Width="50"
+                            ToolTip="Projection line weight override (1–16)">
+                    <ComboBoxItem IsSelected="True">Default</ComboBoxItem>
+                    <ComboBoxItem>1</ComboBoxItem><ComboBoxItem>2</ComboBoxItem>
+                    <ComboBoxItem>3</ComboBoxItem><ComboBoxItem>4</ComboBoxItem>
+                    <ComboBoxItem>5</ComboBoxItem><ComboBoxItem>6</ComboBoxItem>
+                    <ComboBoxItem>8</ComboBoxItem><ComboBoxItem>10</ComboBoxItem>
+                    <ComboBoxItem>12</ComboBoxItem><ComboBoxItem>16</ComboBoxItem>
+                  </ComboBox>
+                  <Button Grid.Column="7" Content="Wt" Width="30" Height="20" Margin="3,0,0,0"
+                          FontSize="8" Style="{StaticResource Btn}" Tag="ColourApplyLineWeight_Click"
+                          ToolTip="Apply selected line weight override to selection"/>
+                  <Button Grid.Column="8" Content="⊘Fill" Width="40" Height="20" Margin="3,0,0,0"
+                          FontSize="8" Style="{StaticResource Btn}" Tag="ColourResetFill_Click"
+                          ToolTip="Remove fill override from selection"/>
+                </Grid>
+
+                <!-- Clear all -->
+                <Button Content="[Clean] Clear ALL Colour Overrides in View" Height="24"
+                        FontSize="9" FontWeight="Bold" Cursor="Hand"
+                        Background="#ECEFF1" Foreground="#37474F" BorderBrush="#B0BEC5" BorderThickness="1"
+                        Tag="ColourClear_Click"/>
+              </StackPanel>
+            </Border>
+
+            <!-- VIEW CONTROLS -->
+            <Border Background="#E3F2FD" BorderBrush="#1565C0" BorderThickness="1"
+                    CornerRadius="4" Padding="5,5" Margin="0,0,0,4">
+              <StackPanel>
+                <TextBlock Text="[Eye] VIEW CONTROLS" FontWeight="Bold" FontSize="10" Foreground="#0D47A1" Margin="0,0,0,4"/>
+                <TextBlock Text="TEMP HIDE / ISOLATE" Style="{StaticResource Sec}" Margin="0,0,0,3"/>
+                <WrapPanel>
+                  <Button Content="[Find] Isolate"    Width="62" Height="24" Margin="1" Style="{StaticResource BtnView}" Tag="SelIsolate_Click"/>
+                  <Button Content="[Hide] Hide"       Width="50" Height="24" Margin="1" Style="{StaticResource BtnView}" Tag="SelHide_Click"/>
+                  <Button Content="[Look] Reveal"     Width="58" Height="24" Margin="1" Style="{StaticResource BtnGo}"   Tag="SelRevealHidden_Click"/>
+                  <Button Content="↺ Reset"       Width="54" Height="24" Margin="1" Style="{StaticResource BtnWarn}" Tag="SelResetTemp_Click"/>
+                </WrapPanel>
+                <TextBlock Text="PERMANENT HIDE" Style="{StaticResource Sec}" Margin="0,4,0,3"/>
+                <WrapPanel>
+                  <Button Content="Perm Hide"      Width="68" Height="22" Margin="1" Style="{StaticResource BtnWarn}" Tag="ViewPermHide_Click"/>
+                  <Button Content="Perm Unhide"    Width="80" Height="22" Margin="1" Style="{StaticResource BtnGo}"   Tag="ViewPermUnhide_Click"/>
+                  <Button Content="Unhide Cat"     Width="72" Height="22" Margin="1" Style="{StaticResource Btn}"     Tag="ViewUnhideCategory_Click"/>
+                </WrapPanel>
+                <TextBlock Text="GRAPHIC OVERRIDES" Style="{StaticResource Sec}" Margin="0,4,0,3"/>
+                <WrapPanel>
+                  <Button Content="Halftone ON"    Width="74" Height="22" Margin="1" Style="{StaticResource Btn}"     Tag="ViewHalftone_Click"/>
+                  <Button Content="Halftone OFF"   Width="76" Height="22" Margin="1" Style="{StaticResource Btn}"     Tag="ViewHalftoneOff_Click"/>
+                  <Button Content="Reset Override" Width="88" Height="22" Margin="1" Style="{StaticResource BtnWarn}" Tag="ViewResetOverride_Click"/>
+                </WrapPanel>
+
+                <!-- ── Crop Region ── -->
+                <TextBlock Text="CROP REGION" Style="{StaticResource Sec}" Margin="0,4,0,3"/>
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="52"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="52"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" Text="W:" FontSize="8" Foreground="#0D47A1"
+                             VerticalAlignment="Center" Margin="0,0,2,0"/>
+                  <TextBox x:Name="CropWidthInput" Grid.Column="1" Text="297"
+                           FontSize="9" Padding="3,2" BorderBrush="#90CAF9" Height="22"
+                           ToolTip="Crop width in mm at print scale (e.g. 297 = A4 width)"/>
+                  <TextBlock Grid.Column="2" Text=" H:" FontSize="8" Foreground="#0D47A1"
+                             VerticalAlignment="Center" Margin="0,0,2,0"/>
+                  <TextBox x:Name="CropHeightInput" Grid.Column="3" Text="210"
+                           FontSize="9" Padding="3,2" BorderBrush="#90CAF9" Height="22"
+                           ToolTip="Crop height in mm at print scale"/>
+                  <TextBlock Grid.Column="4" Text=" mm @" FontSize="8" Foreground="#607D8B"
+                             VerticalAlignment="Center" Margin="0,0,2,0"/>
+                  <TextBox x:Name="CropScaleInput" Grid.Column="5" Text="100"
+                           FontSize="9" Padding="3,2" BorderBrush="#90CAF9" Height="22" Width="36"
+                           ToolTip="View scale denominator (e.g. 100 for 1:100)"/>
+                  <Button Grid.Column="6" Content="Set Crop" Width="58" Height="22" Margin="3,0,0,0"
+                          FontSize="8" Style="{StaticResource BtnView}" Tag="CropRegionSet_Click"
+                          ToolTip="Resize active view crop box to W×H at the given scale"/>
+                  <Button Grid.Column="7" Content="[List]Read" Width="46" Height="22" Margin="3,0,0,0"
+                          FontSize="8" Style="{StaticResource Btn}" Tag="CropRegionRead_Click"
+                          ToolTip="Read current crop size and fill the fields"/>
+                </Grid>
+
+                <!-- ── View Filter Toggles ── -->
+                <TextBlock Text="FILTER TOGGLES  (active view)" Style="{StaticResource Sec}" Margin="0,4,0,3"/>
+                <Grid Margin="0,0,0,3">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" x:Name="FilterToggleStatus" Text="Click ↻ to load view filters"
+                             FontSize="7" Foreground="#607D8B" VerticalAlignment="Center"/>
+                  <Button Grid.Column="1" Content="↻" Width="26" Height="20" Margin="0,0,3,0"
+                          Style="{StaticResource Btn}" Tag="FilterToggleRefresh_Click"
+                          ToolTip="Reload filter list from active view"/>
+                  <Button Grid.Column="2" Content="All ON"  Width="46" Height="20" Margin="0,0,3,0"
+                          FontSize="8" Style="{StaticResource BtnGo}" Tag="FilterToggleAllOn_Click"
+                          ToolTip="Enable all filters in active view"/>
+                  <Button Grid.Column="3" Content="All OFF" Width="46" Height="20"
+                          FontSize="8" Style="{StaticResource BtnDel}" Tag="FilterToggleAllOff_Click"
+                          ToolTip="Disable all filters in active view"/>
+                </Grid>
+                <Border BorderBrush="#B0BEC5" BorderThickness="1" CornerRadius="2" MaxHeight="120">
+                  <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="FilterTogglePanel"/>
+                  </ScrollViewer>
+                </Border>
+
+              </StackPanel>
+            </Border>
+
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+    </TabControl>
+
+    <!-- ═══  LOG  ═══ -->
+    <Border Grid.Row="2" Background="#FAFAFA" BorderBrush="#CFD8DC" BorderThickness="1"
+            CornerRadius="3" Margin="0,4,0,0">
+      <ScrollViewer x:Name="LogScroll" VerticalScrollBarVisibility="Auto">
+        <TextBlock x:Name="ResultText"
+                   Text="STINGTags v9.6 — Graitec-style filter, colouriser, ISO dashboard, viewport sync, undo history."
+                   TextWrapping="Wrap" Padding="5,3" FontSize="9" Foreground="#455A64"
+                   FontFamily="Consolas"/>
+      </ScrollViewer>
+    </Border>
+
+    <!-- ═══  SPACING SLIDER  ═══ -->
+    <Grid Grid.Row="3" Margin="0,3,0,1">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
+      <TextBlock Grid.Column="0" Text="0.01" FontSize="7" Foreground="#90A4AE" VerticalAlignment="Center" Margin="0,0,3,0"/>
+      <Slider x:Name="SpacingSlider" Grid.Column="1" Minimum="0.01" Maximum="2.0" Value="0.25"
+              IsSnapToTickEnabled="False" VerticalAlignment="Center" Height="18"
+              ToolTip="Spacing 0.01–2.0 ft — syncs with text field"/>
+      <TextBlock Grid.Column="2" Text="2.0ft" FontSize="7" Foreground="#90A4AE" VerticalAlignment="Center" Margin="3,0,0,0"/>
+    </Grid>
+
+    <!-- ═══  FOOTER  ═══ -->
+    <Grid Grid.Row="4" Margin="0,1,0,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="46"/>
+        <ColumnDefinition Width="20"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
+      <TextBlock Grid.Column="0" Text="ft:" FontSize="8" VerticalAlignment="Center" Margin="0,0,2,0"/>
+      <TextBox x:Name="SpacingInput" Grid.Column="1" Text="0.25" FontSize="9"
+               Padding="3,2" VerticalAlignment="Center" BorderBrush="#B0BEC5"/>
+      <ComboBox x:Name="SpacingPresets" Grid.Column="2" FontSize="7"
+                Height="22" Width="20" BorderBrush="#B0BEC5" Background="#E8EAED" ToolTip="Scale presets">
+        <ComboBoxItem Tag="0.083">1:1</ComboBoxItem>
+        <ComboBoxItem Tag="0.125">1:10</ComboBoxItem>
+        <ComboBoxItem Tag="0.167">1:20</ComboBoxItem>
+        <ComboBoxItem Tag="0.208">1:25</ComboBoxItem>
+        <ComboBoxItem Tag="0.25">1:50</ComboBoxItem>
+        <ComboBoxItem Tag="0.375">1:100</ComboBoxItem>
+        <ComboBoxItem Tag="0.5">1:200</ComboBoxItem>
+        <ComboBoxItem Tag="0.75">1:500</ComboBoxItem>
+        <ComboBoxItem Tag="1.0">Site</ComboBoxItem>
+      </ComboBox>
+      <TextBlock x:Name="StatusText" Grid.Column="3" Text="Ready"
+                 FontSize="8" Foreground="#90A4AE" VerticalAlignment="Center"
+                 Margin="4,0,0,0" TextTrimming="CharacterEllipsis"/>
+      <Button Grid.Column="4" Content="⊘" Width="26" Height="22" FontSize="13" Margin="2,0,0,0"
+              Foreground="#C62828" Style="{StaticResource BtnDel}" Tag="SelClear_Click"/>
+      <Button Grid.Column="5" Content="[Del]" Width="26" Height="22" FontSize="11" Margin="2,0,0,0"
+              Style="{StaticResource Btn}" Tag="ClearLog_Click"/>
+      <Button Grid.Column="6" Content="?" Width="24" Height="22" FontSize="10" FontWeight="Bold"
+              Margin="2,0,0,0" Style="{StaticResource Btn}" Tag="Help_Click"/>
+    </Grid>
+
+  </Grid>
+</Window>

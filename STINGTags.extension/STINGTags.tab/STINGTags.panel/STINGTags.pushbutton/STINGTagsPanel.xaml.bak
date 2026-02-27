@@ -1,0 +1,565 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="STINGTags v9.0" Width="340" Height="660"
+        WindowStartupLocation="Manual" ResizeMode="CanResizeWithGrip"
+        ShowInTaskbar="True" Topmost="False" Background="#F4F6F8">
+
+  <Window.Resources>
+    <!-- Tooltip -->
+    <Style TargetType="ToolTip">
+      <Setter Property="Background" Value="#1C313A"/>
+      <Setter Property="Foreground" Value="#ECEFF1"/>
+      <Setter Property="FontSize" Value="11"/>
+      <Setter Property="Padding" Value="8,5"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="MaxWidth" Value="270"/>
+    </Style>
+
+    <!-- Base -->
+    <Style x:Key="Btn" TargetType="Button">
+      <Setter Property="Background" Value="#E8EAED"/>
+      <Setter Property="BorderBrush" Value="#B0BEC5"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Foreground" Value="#263238"/>
+      <Setter Property="FontSize" Value="9"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="3">
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Margin="{TemplateBinding Padding}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#CFD8DC"/>
+                <Setter Property="BorderBrush" Value="#546E7A"/>
+              </Trigger>
+              <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#90A4AE"/>
+              </Trigger>
+              <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.4"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <!-- AI violet -->
+    <Style x:Key="BtnAI" TargetType="Button" BasedOn="{StaticResource Btn}">
+      <Setter Property="Background" Value="#EDE7F6"/>
+      <Setter Property="BorderBrush" Value="#7B1FA2"/>
+      <Setter Property="Foreground" Value="#4A148C"/>
+    </Style>
+
+    <!-- Green confirm -->
+    <Style x:Key="BtnGo" TargetType="Button" BasedOn="{StaticResource Btn}">
+      <Setter Property="Background" Value="#E8F5E9"/>
+      <Setter Property="BorderBrush" Value="#388E3C"/>
+      <Setter Property="Foreground" Value="#1B5E20"/>
+    </Style>
+
+    <!-- Orange warn -->
+    <Style x:Key="BtnWarn" TargetType="Button" BasedOn="{StaticResource Btn}">
+      <Setter Property="Background" Value="#FFF3E0"/>
+      <Setter Property="BorderBrush" Value="#E65100"/>
+      <Setter Property="Foreground" Value="#BF360C"/>
+    </Style>
+
+    <!-- Red -->
+    <Style x:Key="BtnDel" TargetType="Button" BasedOn="{StaticResource Btn}">
+      <Setter Property="Background" Value="#FFEBEE"/>
+      <Setter Property="BorderBrush" Value="#C62828"/>
+      <Setter Property="Foreground" Value="#B71C1C"/>
+    </Style>
+
+    <!-- Section label -->
+    <Style x:Key="Sec" TargetType="TextBlock">
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="FontSize" Value="8"/>
+      <Setter Property="Foreground" Value="#607D8B"/>
+      <Setter Property="Margin" Value="1,6,0,2"/>
+      <Setter Property="TextTransform" Value="Uppercase"/>
+    </Style>
+  </Window.Resources>
+
+  <Grid Margin="6,4,6,4">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>   <!-- header -->
+      <RowDefinition Height="*"/>      <!-- tabs -->
+      <RowDefinition Height="52"/>     <!-- result -->
+      <RowDefinition Height="Auto"/>   <!-- footer -->
+    </Grid.RowDefinitions>
+
+    <!-- ── HEADER ── -->
+    <Border Grid.Row="0" Background="#1A237E" CornerRadius="4" Padding="8,5" Margin="0,0,0,5">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+          <TextBlock Text="STING TAGS v9.0" FontSize="13" FontWeight="Bold"
+                     Foreground="White" LetterSpacing="1"/>
+          <TextBlock x:Name="LastToolText" Text="Smart Tag Intelligence Engine"
+                     FontSize="8" Foreground="#90CAF9"/>
+        </StackPanel>
+        <Border Grid.Column="1" Background="#283593" CornerRadius="3"
+                Padding="6,3" Margin="0,0,4,0" VerticalAlignment="Center">
+          <TextBlock x:Name="LastToolIcon" Text="&#x26A1;" FontSize="12" Foreground="#FFD54F"/>
+        </Border>
+        <Button Grid.Column="2" x:Name="TopmostBtn" Content="&#x1F4CC;" Width="26" Height="26"
+                Background="Transparent" BorderBrush="#3949AB" BorderThickness="1"
+                Foreground="White" FontSize="11" Cursor="Hand"
+                Click="ToggleTopmost_Click" ToolTip="Toggle always-on-top"/>
+      </Grid>
+    </Border>
+
+    <!-- ── TAB CONTROL ── -->
+    <TabControl Grid.Row="1" Padding="1" Background="#F4F6F8"
+                BorderBrush="#CFD8DC" BorderThickness="1">
+
+      <!-- ══════════════════════════════════════════════
+           TAB 1 — SELECT
+           ══════════════════════════════════════════════ -->
+      <TabItem FontWeight="Bold" FontSize="9">
+        <TabItem.Header>
+          <TextBlock Text=" SELECT " Foreground="#1565C0"/>
+        </TabItem.Header>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="2">
+          <StackPanel>
+
+            <!-- AI Smart -->
+            <Border Background="#EDE7F6" BorderBrush="#7B1FA2" BorderThickness="1,1,1,1"
+                    CornerRadius="4" Padding="5,4" Margin="0,0,0,3">
+              <StackPanel>
+                <TextBlock Text="&#x26A1; AI SMART SELECT" FontWeight="Bold" FontSize="10"
+                           Foreground="#4A148C" Margin="0,0,0,3"/>
+                <WrapPanel>
+                  <Button Content="&#x1F52E; Predict" Width="66" Height="24" Margin="1"
+                          Style="{StaticResource BtnAI}" Click="SmartPredict_Click"
+                          ToolTip="Multi-layer AI: scans untagged count, type dominance, spatial clusters, parameter patterns — picks most actionable selection automatically"/>
+                  <Button Content="Similar" Width="50" Height="24" Margin="1"
+                          Style="{StaticResource BtnAI}" Click="SelectSimilar_Click"
+                          ToolTip="Select all elements sharing the same Revit type(s) as current selection"/>
+                  <Button Content="Chain" Width="46" Height="24" Margin="1"
+                          Style="{StaticResource BtnAI}" Click="SelectChain_Click"
+                          ToolTip="Proximity-graph flood fill — expands outward from selection through connected neighbours"/>
+                  <Button Content="Cluster" Width="54" Height="24" Margin="1"
+                          Style="{StaticResource BtnAI}" Click="SelectCluster_Click"
+                          ToolTip="DBSCAN spatial clustering — selects the densest group nearest to current selection"/>
+                </WrapPanel>
+                <WrapPanel Margin="0,2,0,0">
+                  <Button Content="Pattern" Width="50" Height="21" Margin="1"
+                          Style="{StaticResource Btn}" Click="SelectPattern_Click"
+                          ToolTip="Detect grid spacing from selection, extend to all elements on same Dx/Dy grid"/>
+                  <Button Content="Boundary" Width="60" Height="21" Margin="1"
+                          Style="{StaticResource Btn}" Click="SelectBoundary_Click"
+                          ToolTip="Elements in outer 15% margin of view. Choose edge: top/bottom/left/right/all"/>
+                  <Button Content="Outliers" Width="52" Height="21" Margin="1"
+                          Style="{StaticResource Btn}" Click="SelectOutliers_Click"
+                          ToolTip="DBSCAN noise points — isolated elements that belong to no cluster"/>
+                  <Button Content="Dense" Width="46" Height="21" Margin="1"
+                          Style="{StaticResource Btn}" Click="SelectDense_Click"
+                          ToolTip="Top 25% highest neighbour-count elements — most crowded areas"/>
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <!-- Category -->
+            <TextBlock Text="Category" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="Lgt"  Width="32" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelLights_Click"   ToolTip="Lighting Fixtures"/>
+              <Button Content="Elc"  Width="30" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelElec_Click"     ToolTip="Electrical Equipment"/>
+              <Button Content="Mch"  Width="32" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelMech_Click"     ToolTip="Mechanical Equipment"/>
+              <Button Content="Plb"  Width="30" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelPlumb_Click"    ToolTip="Plumbing Fixtures"/>
+              <Button Content="Air"  Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelAir_Click"      ToolTip="Air Terminals"/>
+              <Button Content="Fur"  Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelFurn_Click"     ToolTip="Furniture"/>
+              <Button Content="Dr"   Width="26" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelDoors_Click"    ToolTip="Doors"/>
+              <Button Content="Win"  Width="30" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelWindows_Click"  ToolTip="Windows"/>
+              <Button Content="Rm"   Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelRooms_Click"    ToolTip="Rooms"/>
+              <Button Content="Spr"  Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelSprinkler_Click" ToolTip="Sprinklers"/>
+              <Button Content="Pipe" Width="34" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelPipes_Click"    ToolTip="Pipes"/>
+              <Button Content="Duct" Width="34" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelDucts_Click"    ToolTip="Ducts"/>
+              <Button Content="Cond" Width="36" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelConduit_Click"  ToolTip="Conduit"/>
+              <Button Content="Cbl"  Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelCable_Click"    ToolTip="Cable Tray"/>
+              <Button Content="ALL&#x2026;" Width="38" Height="22" Margin="1" FontWeight="Bold"
+                      Style="{StaticResource BtnGo}" Click="SelAllCats_Click"
+                      ToolTip="Pick from every model category visible in this project"/>
+              <Button Content="View&#x2026;" Width="42" Height="22" Margin="1"
+                      Style="{StaticResource BtnGo}" Click="SelViewCats_Click"
+                      ToolTip="Pick from categories present in current active view"/>
+            </WrapPanel>
+
+            <!-- Spatial -->
+            <TextBlock Text="Spatial" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="Near"  Width="36" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelNear_Click"     ToolTip="All elements within 5&#xD7; spacing radius of seed selection"/>
+              <Button Content="Room"  Width="38" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelInRoom_Click"   ToolTip="All elements in the same room(s) as current selection"/>
+              <Button Content="Level" Width="38" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelLevel_Click"    ToolTip="All elements on the same level(s) as current selection"/>
+              <Button Content="Quad"  Width="36" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelQuadrant_Click" ToolTip="Pick view quadrant NW/NE/SW/SE and select all elements inside"/>
+              <Button Content="Edge"  Width="34" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelEdge_Click"     ToolTip="Elements in outer 15% margin — same as Boundary (all)"/>
+              <Button Content="Grid"  Width="32" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelGrid_Click"     ToolTip="Elements snapped within 0.5ft of a Revit grid line or intersection"/>
+            </WrapPanel>
+
+            <!-- State -->
+            <TextBlock Text="State" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="Untagged"   Width="62" Height="22" Margin="1" Style="{StaticResource BtnWarn}" Click="SelUntagged_Click"   ToolTip="All MEP elements with no IndependentTag in current view"/>
+              <Button Content="Tagged"     Width="50" Height="22" Margin="1" Style="{StaticResource BtnGo}"   Click="SelTagged_Click"     ToolTip="All elements that have at least one tag in view"/>
+              <Button Content="Empty Mark" Width="68" Height="22" Margin="1" Style="{StaticResource BtnWarn}" Click="SelEmptyMark_Click"  ToolTip="Elements whose Mark parameter is empty or null"/>
+              <Button Content="Visible"    Width="48" Height="22" Margin="1" Style="{StaticResource Btn}"     Click="SelVisible_Click"    ToolTip="Approximate visible: elements that have a bounding box in the view"/>
+            </WrapPanel>
+
+            <!-- Parameter -->
+            <TextBlock Text="Parameter Filter" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="Mark"   Width="40" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelByMark_Click"   ToolTip="Filter all view elements where Mark contains typed value"/>
+              <Button Content="Type"   Width="36" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelByType_Click"   ToolTip="Filter by Type Name (contains match)"/>
+              <Button Content="Family" Width="46" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelByFamily_Click" ToolTip="Filter by Family Name (contains match)"/>
+              <Button Content="System" Width="50" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelBySystem_Click" ToolTip="Filter by MEP System Name (contains match)"/>
+              <Button Content="PARAM&#x2026;" Width="60" Height="22" Margin="1" FontWeight="Bold"
+                      Style="{StaticResource BtnGo}" Click="SelCustomParam_Click"
+                      ToolTip="Enter any parameter name, choose operator (contains/equals/empty/has value), enter value"/>
+            </WrapPanel>
+
+            <!-- Selection ops -->
+            <TextBlock Text="Selection Ops" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="All"     Width="28" Height="22" Margin="1" Style="{StaticResource Btn}"    Click="SelAll_Click"      ToolTip="Select all MEP elements in current view"/>
+              <Button Content="&#x2298;Clear" Width="46" Height="22" Margin="1" Style="{StaticResource BtnDel}" Click="SelClear_Click" ToolTip="Deselect everything — clear Revit selection"/>
+              <Button Content="Invert"  Width="42" Height="22" Margin="1" Style="{StaticResource Btn}"    Click="SelInvert_Click"   ToolTip="Invert selection within all view elements"/>
+              <Button Content="+M1"     Width="34" Height="22" Margin="1" Style="{StaticResource Btn}"    Click="SelAdd_Click"      ToolTip="Add memory slot M1 to current selection"/>
+              <Button Content="&#x2212;M1" Width="34" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelSubtract_Click" ToolTip="Subtract memory slot M1 from current selection"/>
+              <Button Content="&#x2229;M1" Width="34" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelIntersect_Click" ToolTip="Keep only elements in both current selection and M1"/>
+              <Button Content="&#x2192;Tags" Width="44" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelTags_Click"   ToolTip="Select the IndependentTags that belong to selected elements"/>
+              <Button Content="&#x2192;Elem" Width="44" Height="22" Margin="1" Style="{StaticResource Btn}" Click="SelElements_Click" ToolTip="Select the host elements of selected tags"/>
+            </WrapPanel>
+
+            <!-- Memory -->
+            <TextBlock Text="Selection Memory (3 slots)" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="M1&#x25BC;" Width="36" Height="22" Margin="1" Style="{StaticResource Btn}" Click="MemSave1_Click" ToolTip="Save current selection to slot 1"/>
+              <Button Content="M1&#x25B2;" Width="36" Height="22" Margin="1" Style="{StaticResource Btn}" Click="MemLoad1_Click" ToolTip="Restore selection from slot 1"/>
+              <Button Content="M2&#x25BC;" Width="36" Height="22" Margin="1" Style="{StaticResource Btn}" Click="MemSave2_Click" ToolTip="Save current selection to slot 2"/>
+              <Button Content="M2&#x25B2;" Width="36" Height="22" Margin="1" Style="{StaticResource Btn}" Click="MemLoad2_Click" ToolTip="Restore selection from slot 2"/>
+              <Button Content="M3&#x25BC;" Width="36" Height="22" Margin="1" Style="{StaticResource Btn}" Click="MemSave3_Click" ToolTip="Save current selection to slot 3"/>
+              <Button Content="M3&#x25B2;" Width="36" Height="22" Margin="1" Style="{StaticResource Btn}" Click="MemLoad3_Click" ToolTip="Restore selection from slot 3"/>
+              <Button Content="1&#x21C4;2" Width="30" Height="22" Margin="1" Style="{StaticResource Btn}" Click="MemSwap_Click"  ToolTip="Swap slot 1 and slot 2"/>
+              <Button Content="Info"  Width="32" Height="22" Margin="1" Style="{StaticResource Btn}"  Click="MemInfo_Click"  ToolTip="Show element counts stored in all 3 memory slots"/>
+            </WrapPanel>
+
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <!-- ══════════════════════════════════════════════
+           TAB 2 — ORGANISE
+           ══════════════════════════════════════════════ -->
+      <TabItem FontWeight="Bold" FontSize="9">
+        <TabItem.Header>
+          <TextBlock Text=" ORGANISE " Foreground="#00695C"/>
+        </TabItem.Header>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="2">
+          <StackPanel>
+
+            <!-- AI Organise hero -->
+            <Border Background="#FCE4EC" BorderBrush="#C62828" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,0,0,3">
+              <StackPanel>
+                <TextBlock Text="&#x1F9E0; AI ORGANISE ENGINE" FontWeight="Bold" FontSize="10"
+                           Foreground="#B71C1C" Margin="0,0,0,3"/>
+                <Button Content="&#x25B6;  SMART ORGANISE  (advances pass each click)" Height="28"
+                        Margin="0,0,0,3" FontSize="10" FontWeight="Bold"
+                        Background="#C62828" Foreground="White" BorderThickness="0"
+                        Click="SmartOrganize_Click"
+                        ToolTip="8 passes: Analyse > Cluster > Expand > Physics > Anneal > Leaders > Polish > Score. Auto-detects tag spacing from view scale."/>
+                <WrapPanel HorizontalAlignment="Center">
+                  <Button Content="Quick" Width="44" Height="21" Margin="1" Style="{StaticResource Btn}"    Click="QuickFix_Click"      ToolTip="Force-directed separation — 40 iterations, fixes worst clashes in seconds"/>
+                  <Button Content="Deep"  Width="40" Height="21" Margin="1" Style="{StaticResource Btn}"    Click="DeepOptimize_Click"  ToolTip="Genetic algorithm — 50 generations, finds global layout optimum"/>
+                  <Button Content="Anneal" Width="48" Height="21" Margin="1" Style="{StaticResource Btn}"   Click="AnnealOpt_Click"     ToolTip="Simulated annealing — probabilistic escape from local minima, 600 iterations"/>
+                  <Button Content="Reset" Width="42" Height="21" Margin="1" Style="{StaticResource BtnWarn}" Click="ResetOrganize_Click" ToolTip="Restore all tag positions to where they were before Smart Organise started"/>
+                  <Button Content="&#x1F9E0;AutoSpace" Width="72" Height="21" Margin="1" Style="{StaticResource BtnAI}" Click="AutoSpace_Click" ToolTip="Derive optimal spacing from view scale and median inter-tag distance, writes to Spacing field"/>
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <!-- Tag ops -->
+            <TextBlock Text="Tag Operations" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="Tag Sel"  Width="50" Height="22" Margin="1" Style="{StaticResource BtnGo}"   Click="TagSelected_Click"    ToolTip="Place tags on all selected non-tag elements at Spacing offset above element centre"/>
+              <Button Content="Tag Cat"  Width="50" Height="22" Margin="1" Style="{StaticResource Btn}"     Click="TagByCategory_Click"  ToolTip="Choose a category — tag all untagged elements of that category in view"/>
+              <Button Content="Tag All"  Width="48" Height="22" Margin="1" Style="{StaticResource Btn}"     Click="TagUntagged_Click"    ToolTip="Tag every untagged MEP element in view (Lighting, Elec, Mech, Plumbing, Air, Sprinklers)"/>
+              <Button Content="Del Tags" Width="56" Height="22" Margin="1" Style="{StaticResource BtnDel}"  Click="DeleteTags_Click"     ToolTip="Delete selected tags. Select the tags first."/>
+              <Button Content="Orphans"  Width="54" Height="22" Margin="1" Style="{StaticResource BtnDel}"  Click="OrphanedTags_Click"   ToolTip="Scan view for tags with no host element (deleted host) and remove them"/>
+              <Button Content="Audit"    Width="44" Height="22" Margin="1" Style="{StaticResource Btn}"     Click="TagAudit_Click"       ToolTip="Report: total tags, leaders, H/V split, clashes at current spacing threshold"/>
+              <Button Content="Clashing&#x25BA;" Width="66" Height="22" Margin="1" Style="{StaticResource BtnWarn}" Click="SelectClashing_Click" ToolTip="Select all tag pairs closer than Spacing threshold so you can fix them"/>
+            </WrapPanel>
+
+            <!-- Orient -->
+            <TextBlock Text="Orientation" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="&#x27F3;H&#x2194;V" Width="42" Height="22" Margin="1" Style="{StaticResource Btn}" Click="RotateTags_Click"   ToolTip="Toggle each selected tag between Horizontal and Vertical"/>
+              <Button Content="All H"    Width="36" Height="22" Margin="1" Style="{StaticResource Btn}" Click="AllHorizontal_Click"  ToolTip="Force all selected tags to Horizontal orientation"/>
+              <Button Content="All V"    Width="36" Height="22" Margin="1" Style="{StaticResource Btn}" Click="AllVertical_Click"    ToolTip="Force all selected tags to Vertical orientation"/>
+              <Button Content="&#x2194;FlipH" Width="46" Height="22" Margin="1" Style="{StaticResource Btn}" Click="FlipH_Click"  ToolTip="Mirror tag head position horizontally across its host element centre"/>
+              <Button Content="&#x2195;FlipV" Width="46" Height="22" Margin="1" Style="{StaticResource Btn}" Click="FlipV_Click"  ToolTip="Mirror tag head position vertically across its host element centre"/>
+              <Button Content="&#x1F9E0;SmartH/V" Width="68" Height="22" Margin="1" Style="{StaticResource BtnAI}" Click="SmartOrient_Click" ToolTip="AI chooses H/V per tag: if leader points mostly up/down → Vertical, else Horizontal"/>
+            </WrapPanel>
+
+            <!-- Nudge -->
+            <TextBlock Text="Nudge  (distance = Spacing field)" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="&#x2191;" Width="28" Height="22" Margin="1" FontSize="13" Style="{StaticResource Btn}" Click="NudgeUp_Click"    ToolTip="Nudge selected tag heads up by Spacing distance"/>
+              <Button Content="&#x2193;" Width="28" Height="22" Margin="1" FontSize="13" Style="{StaticResource Btn}" Click="NudgeDown_Click"  ToolTip="Nudge selected tag heads down by Spacing distance"/>
+              <Button Content="&#x2190;" Width="28" Height="22" Margin="1" FontSize="13" Style="{StaticResource Btn}" Click="NudgeLeft_Click"  ToolTip="Nudge selected tag heads left by Spacing distance"/>
+              <Button Content="&#x2192;" Width="28" Height="22" Margin="1" FontSize="13" Style="{StaticResource Btn}" Click="NudgeRight_Click" ToolTip="Nudge selected tag heads right by Spacing distance"/>
+              <Button Content="Near 0.25ft"  Width="64" Height="22" Margin="1" Style="{StaticResource Btn}" Click="OffsetClose_Click" ToolTip="Move tag head to 0.25ft directly above element centre"/>
+              <Button Content="Far 1.0ft"    Width="58" Height="22" Margin="1" Style="{StaticResource Btn}" Click="OffsetFar_Click"   ToolTip="Move tag head to 1.0ft above element centre"/>
+              <Button Content="&#x1F9E0;SmartOff" Width="64" Height="22" Margin="1" Style="{StaticResource BtnAI}" Click="SmartOffset_Click" ToolTip="AI tests 4 directions per tag and places it in the least-congested quadrant"/>
+            </WrapPanel>
+
+            <!-- Align -->
+            <TextBlock Text="Align &amp; Distribute" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="&#x25C4;L"  Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Click="AlignLeft_Click"    ToolTip="Align all selected tag heads to the leftmost X in selection"/>
+              <Button Content="R&#x25BA;"  Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Click="AlignRight_Click"   ToolTip="Align all selected tag heads to the rightmost X"/>
+              <Button Content="&#x25B2;T"  Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Click="AlignTop_Click"     ToolTip="Align all selected tag heads to the highest Y"/>
+              <Button Content="B&#x25BC;"  Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Click="AlignBottom_Click"  ToolTip="Align all selected tag heads to the lowest Y"/>
+              <Button Content="&#x2014;CH" Width="34" Height="22" Margin="1" Style="{StaticResource Btn}" Click="AlignCenterH_Click" ToolTip="Centre tag heads on average X of selection"/>
+              <Button Content="|CV"        Width="28" Height="22" Margin="1" Style="{StaticResource Btn}" Click="AlignCenterV_Click" ToolTip="Centre tag heads on average Y of selection"/>
+              <Button Content="&#x2190;&#x2192;H" Width="32" Height="22" Margin="1" Style="{StaticResource Btn}" Click="DistributeH_Click" ToolTip="Evenly space selected tag heads on the X axis (keeps first and last)"/>
+              <Button Content="&#x2191;&#x2193;V" Width="32" Height="22" Margin="1" Style="{StaticResource Btn}" Click="DistributeV_Click" ToolTip="Evenly space selected tag heads on the Y axis (keeps first and last)"/>
+              <Button Content="&#x1F9E0;SmAlign" Width="60" Height="22" Margin="1" Style="{StaticResource BtnAI}" Click="SmartAlign_Click" ToolTip="AI groups tags into rows by Y proximity and aligns each row to its mean Y"/>
+            </WrapPanel>
+            <WrapPanel>
+              <Button Content="Grid"    Width="36" Height="22" Margin="1" Style="{StaticResource Btn}" Click="ToGrid_Click"      ToolTip="Arrange 4+ selected tags into a rectangular grid (&#x221A;n columns)"/>
+              <Button Content="Circle"  Width="44" Height="22" Margin="1" Style="{StaticResource Btn}" Click="ToCircle_Click"    ToolTip="Arrange 3+ selected tags evenly on a circle around their centroid"/>
+              <Button Content="Stack"   Width="42" Height="22" Margin="1" Style="{StaticResource Btn}" Click="ToStack_Click"     ToolTip="Stack 2+ selected tags vertically with even spacing at left-most X"/>
+              <Button Content="Mirror"  Width="44" Height="22" Margin="1" Style="{StaticResource Btn}" Click="MirrorPattern_Click" ToolTip="Mirror tag heads horizontally around the selection centroid X"/>
+              <Button Content="Radial"  Width="44" Height="22" Margin="1" Style="{StaticResource Btn}" Click="ToRadial_Click"    ToolTip="Same as Circle — arrange on circumference"/>
+            </WrapPanel>
+
+            <!-- Leaders -->
+            <TextBlock Text="Leaders" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="+Leader"  Width="54" Height="22" Margin="1" Style="{StaticResource BtnGo}"   Click="AddLeaders_Click"      ToolTip="Enable HasLeader on all selected tags"/>
+              <Button Content="&#x2212;Leader" Width="54" Height="22" Margin="1" Style="{StaticResource BtnDel}"  Click="RemoveLeaders_Click"   ToolTip="Disable HasLeader on all selected tags"/>
+              <Button Content="Snap 45&#xB0;" Width="52" Height="22" Margin="1" Style="{StaticResource Btn}" Click="Snap45_Click"          ToolTip="Snap each leader angle to nearest 45&#xB0; increment"/>
+              <Button Content="Snap 90&#xB0;" Width="52" Height="22" Margin="1" Style="{StaticResource Btn}" Click="Snap90_Click"          ToolTip="Snap each leader angle to nearest cardinal 90&#xB0;"/>
+              <Button Content="&#x1F9E0;Uncross" Width="62" Height="22" Margin="1" Style="{StaticResource BtnAI}" Click="UncrossLeaders_Click" ToolTip="Iteratively swap tag head positions to eliminate leader line crossings"/>
+            </WrapPanel>
+            <WrapPanel>
+              <Button Content="Short 0.25ft" Width="72" Height="22" Margin="1" Style="{StaticResource Btn}" Click="LeaderShort_Click"  ToolTip="Set leader length to 0.25ft, preserving direction"/>
+              <Button Content="Med 0.5ft"    Width="62" Height="22" Margin="1" Style="{StaticResource Btn}" Click="LeaderMedium_Click" ToolTip="Set leader length to 0.5ft"/>
+              <Button Content="Long 1.0ft"   Width="62" Height="22" Margin="1" Style="{StaticResource Btn}" Click="LeaderLong_Click"   ToolTip="Set leader length to 1.0ft"/>
+              <Button Content="Minimise"     Width="54" Height="22" Margin="1" Style="{StaticResource Btn}" Click="MinimizeLeaders_Click" ToolTip="Shortest possible leader (0.8&#xD7;Spacing), preserving direction"/>
+              <Button Content="&#x1F9E0;SmartLdr" Width="66" Height="22" Margin="1" Style="{StaticResource BtnAI}" Click="SmartLeader_Click" ToolTip="AI: test 8 directions per tag, place leader into least-congested quadrant"/>
+            </WrapPanel>
+
+            <!-- Analyse -->
+            <TextBlock Text="Analyse" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="Score"    Width="44" Height="22" Margin="1" Style="{StaticResource Btn}"     Click="LayoutScore_Click"  ToolTip="Composite layout quality /100: overlap penalty + leader length penalty"/>
+              <Button Content="Clashes"  Width="50" Height="22" Margin="1" Style="{StaticResource BtnWarn}" Click="CheckClashes_Click" ToolTip="Count tag pairs closer than Spacing threshold in current view"/>
+              <Button Content="Crossings" Width="58" Height="22" Margin="1" Style="{StaticResource BtnWarn}" Click="LeaderClash_Click" ToolTip="Count leaders present and advise — use Uncross to resolve"/>
+              <Button Content="Density"  Width="50" Height="22" Margin="1" Style="{StaticResource Btn}"     Click="DensityMap_Click"   ToolTip="NW/NE/SW/SE quadrant density map — shows how tags are distributed"/>
+              <Button Content="Clusters" Width="54" Height="22" Margin="1" Style="{StaticResource Btn}"     Click="ShowClusters_Click" ToolTip="k-means clustering on tag positions — report cluster sizes and centres"/>
+            </WrapPanel>
+
+            <!-- Pattern -->
+            <TextBlock Text="Pattern Learning" Style="{StaticResource Sec}"/>
+            <WrapPanel>
+              <Button Content="&#x1F393;Learn" Width="52" Height="22" Margin="1" Style="{StaticResource BtnAI}"  Click="LearnPattern_Click" ToolTip="Memorise mean tag-to-element offset direction and distance from 2+ selected tags"/>
+              <Button Content="&#x2728;Apply" Width="52" Height="22" Margin="1" Style="{StaticResource BtnGo}"   Click="ApplyPattern_Click" ToolTip="Project the learned offset onto all selected target tags"/>
+            </WrapPanel>
+
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <!-- ══════════════════════════════════════════════
+           TAB 3 — CREATE  (ISO 19650)
+           ══════════════════════════════════════════════ -->
+      <TabItem FontWeight="Bold" FontSize="9">
+        <TabItem.Header>
+          <TextBlock Text=" CREATE " Foreground="#4E342E"/>
+        </TabItem.Header>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="2">
+          <StackPanel>
+
+            <!-- Scope/Overwrite strip -->
+            <Border Background="#E8F5E9" BorderBrush="#388E3C" BorderThickness="1"
+                    CornerRadius="4" Padding="6,5" Margin="0,0,0,4">
+              <StackPanel>
+                <TextBlock Text="ISO 19650  —  CREATE &amp; POPULATE TAGS" FontWeight="Bold"
+                           FontSize="10" Foreground="#1B5E20"/>
+                <TextBlock x:Name="IsoStatus" Text="Scope: View  |  Overwrite: No"
+                           FontSize="8" Foreground="#388E3C" Margin="0,2,0,4"/>
+                <WrapPanel>
+                  <Button Content="Scope: View" x:Name="IsoScopeBtn" Width="80" Height="20" Margin="1"
+                          Style="{StaticResource Btn}" Click="IsoToggleScope_Click"
+                          ToolTip="Toggle scope: Active View &#x2192; Selection &#x2192; Entire Project"/>
+                  <Button Content="Overwrite: No" x:Name="IsoOverwriteBtn" Width="88" Height="20" Margin="1"
+                          Style="{StaticResource BtnWarn}" Click="IsoToggleOverwrite_Click"
+                          ToolTip="Toggle: skip existing token values (No) or overwrite all (Yes)"/>
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <!-- 1 Setup -->
+            <Border Background="#F3E5F5" BorderBrush="#7B1FA2" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,0,0,3">
+              <StackPanel>
+                <TextBlock Text="&#x2460;  SETUP" FontWeight="Bold" FontSize="9" Foreground="#4A148C" Margin="0,0,0,3"/>
+                <WrapPanel>
+                  <Button Content="Load Shared Params" Width="124" Height="24" Margin="1"
+                          Style="{StaticResource BtnAI}" Click="IsoLoadParams_Click"
+                          ToolTip="Bind all ISO 19650 shared parameters from lib/shared_params.py to project categories. Pass 1 = universal (all categories). Pass 2 = discipline-specific. Preview mode available."/>
+                  <Button Content="Project Config" Width="94" Height="24" Margin="1"
+                          Style="{StaticResource Btn}" Click="IsoProjectConfig_Click"
+                          ToolTip="Set zone codes, LOC codes, and custom discipline-to-category overrides for this project"/>
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <!-- 2 Populate -->
+            <Border Background="#E3F2FD" BorderBrush="#1565C0" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,0,0,3">
+              <StackPanel>
+                <TextBlock Text="&#x2461;  POPULATE TOKENS" FontWeight="Bold" FontSize="9" Foreground="#0D47A1" Margin="0,0,0,3"/>
+                <WrapPanel>
+                  <Button Content="&#x25B6; Auto Populate" Width="100" Height="24" Margin="1"
+                          Background="#1565C0" Foreground="White" FontWeight="Bold"
+                          BorderThickness="0" FontSize="9"
+                          Click="IsoAutoPopulate_Click"
+                          ToolTip="Write DISC/LVL/SYS/FUNC/PROD from category mapping tables in tag_config.py. Respects scope and overwrite settings."/>
+                  <Button Content="Assign Numbers" Width="100" Height="24" Margin="1"
+                          Style="{StaticResource Btn}" Click="IsoAssignNumbers_Click"
+                          ToolTip="Group elements by (Category, ZONE, FUNC), assign zero-padded sequential ASS_SEQ_NUM_TXT within each group"/>
+                  <Button Content="&#x1F9E0; Smart Tokens" Width="96" Height="24" Margin="1"
+                          Style="{StaticResource BtnAI}" Click="IsoSmartTokens_Click"
+                          ToolTip="AI inference layer: fills gaps by reading level name patterns, system names, category, element parameters"/>
+                </WrapPanel>
+                <TextBlock Text="Manual token override (writes to scope)" FontSize="8" Foreground="#5C6BC0" Margin="0,4,0,2"/>
+                <WrapPanel>
+                  <Button Content="DISC" Width="40" Height="20" Margin="1" Style="{StaticResource Btn}" Click="IsoSetDisc_Click" ToolTip="Manually type a DISC code and write to ASS_DISCIPLINE_COD_TXT on all elements in scope"/>
+                  <Button Content="LVL"  Width="36" Height="20" Margin="1" Style="{StaticResource Btn}" Click="IsoSetLvl_Click"  ToolTip="Manually type a LVL code and write to ASS_LVL_COD_TXT"/>
+                  <Button Content="ZONE" Width="40" Height="20" Margin="1" Style="{StaticResource Btn}" Click="IsoSetZone_Click" ToolTip="Write to ASS_ZONE_TXT"/>
+                  <Button Content="LOC"  Width="36" Height="20" Margin="1" Style="{StaticResource Btn}" Click="IsoSetLoc_Click"  ToolTip="Write to ASS_LOC_TXT"/>
+                  <Button Content="SYS"  Width="36" Height="20" Margin="1" Style="{StaticResource Btn}" Click="IsoSetSys_Click"  ToolTip="Write to ASS_SYSTEM_TYPE_TXT"/>
+                  <Button Content="FUNC" Width="40" Height="20" Margin="1" Style="{StaticResource Btn}" Click="IsoSetFunc_Click" ToolTip="Write to ASS_FUNC_TXT"/>
+                  <Button Content="PROD" Width="40" Height="20" Margin="1" Style="{StaticResource Btn}" Click="IsoSetProd_Click" ToolTip="Write to ASS_PRODCT_COD_TXT"/>
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <!-- 3 QA -->
+            <Border Background="#FFFDE7" BorderBrush="#F9A825" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,0,0,3">
+              <StackPanel>
+                <TextBlock Text="&#x2462;  QUALITY ASSURANCE" FontWeight="Bold" FontSize="9" Foreground="#E65100" Margin="0,0,0,3"/>
+                <WrapPanel>
+                  <Button Content="&#x2714; Validate"   Width="74" Height="24" Margin="1"
+                          Style="{StaticResource BtnGo}" Click="IsoValidate_Click"
+                          ToolTip="Check: missing tokens, wrong 8-token count, duplicate ASS_TAG_1_TXT, invalid DISC/SYS codes. Offer to select offending elements."/>
+                  <Button Content="&#x1F534; Highlight" Width="80" Height="24" Margin="1"
+                          Style="{StaticResource BtnWarn}" Click="IsoHighlight_Click"
+                          ToolTip="Colour-code element outlines in view: green=all 8 tokens filled, yellow=partial, red=incomplete"/>
+                  <Button Content="Clear &#x1F3A8;"     Width="74" Height="24" Margin="1"
+                          Style="{StaticResource Btn}" Click="IsoClearHighlight_Click"
+                          ToolTip="Remove all graphic overrides applied by Highlight"/>
+                </WrapPanel>
+                <WrapPanel Margin="0,3,0,0">
+                  <Button Content="Completeness %" Width="100" Height="20" Margin="1"
+                          Style="{StaticResource Btn}" Click="IsoCompleteness_Click"
+                          ToolTip="Show per-token fill rate: DISC 87%, LVL 52% etc — across all elements in scope"/>
+                  <Button Content="Find Duplicates" Width="100" Height="20" Margin="1"
+                          Style="{StaticResource BtnWarn}" Click="IsoDupFinder_Click"
+                          ToolTip="List all duplicate ASS_TAG_1_TXT assembled-tag values and select the offending elements"/>
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <!-- 4 Export -->
+            <Border Background="#F1F8E9" BorderBrush="#558B2F" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4" Margin="0,0,0,3">
+              <StackPanel>
+                <TextBlock Text="&#x2463;  EXPORT" FontWeight="Bold" FontSize="9" Foreground="#33691E" Margin="0,0,0,3"/>
+                <WrapPanel>
+                  <Button Content="Export Tag Register" Width="114" Height="24" Margin="1"
+                          Style="{StaticResource BtnGo}" Click="IsoExport_Click"
+                          ToolTip="Write CSV tag register to TEMP folder: ElementId, Category, all 8 token params, ASS_TAG_1_TXT. Opens confirmation with file path."/>
+                  <Button Content="Naviate Config"      Width="96" Height="24" Margin="1"
+                          Style="{StaticResource Btn}" Click="IsoNaviateConfig_Click"
+                          ToolTip="Show Naviate Combine Param Values formula reference for assembling ASS_TAG_1_TXT from the 8 tokens"/>
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <!-- Token Inspector -->
+            <Border Background="#ECEFF1" BorderBrush="#90A4AE" BorderThickness="1"
+                    CornerRadius="4" Padding="5,4">
+              <StackPanel>
+                <TextBlock Text="TOKEN INSPECTOR" FontWeight="Bold" FontSize="9" Foreground="#37474F"/>
+                <TextBlock x:Name="IsoInspect"
+                           Text="Select an element then click Inspect &#x2193;"
+                           FontSize="8" Foreground="#546E7A" TextWrapping="Wrap" Margin="0,2,0,3"/>
+                <Button Content="&#x1F50D;  Inspect Selection" Height="22" Margin="0,0,0,0"
+                        FontSize="9" Style="{StaticResource Btn}" Click="IsoInspect_Click"
+                        ToolTip="Display all 8 ISO token parameter values for the first element in current selection"/>
+              </StackPanel>
+            </Border>
+
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+    </TabControl>
+
+    <!-- ── RESULT / LOG BOX ── -->
+    <Border Grid.Row="2" Background="#FAFAFA" BorderBrush="#CFD8DC" BorderThickness="1"
+            CornerRadius="3" Margin="0,4,0,0">
+      <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <TextBlock x:Name="ResultText"
+                   Text="STINGTags v9.0 — modeless. Revit remains active while this panel is open."
+                   TextWrapping="Wrap" Padding="5,3" FontSize="9" Foreground="#455A64"
+                   FontFamily="Consolas"/>
+      </ScrollViewer>
+    </Border>
+
+    <!-- ── FOOTER ── -->
+    <Grid Grid.Row="3" Margin="0,3,0,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="50"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
+      <TextBlock Grid.Column="0" Text="Spacing ft:" FontSize="8" VerticalAlignment="Center" Margin="0,0,3,0"/>
+      <TextBox x:Name="SpacingInput" Grid.Column="1" Text="0.25" FontSize="9"
+               Padding="3,2" VerticalAlignment="Center" BorderBrush="#B0BEC5"/>
+      <TextBlock x:Name="StatusText" Grid.Column="2" Text="Ready"
+                 FontSize="8" Foreground="#90A4AE" VerticalAlignment="Center"
+                 Margin="5,0,0,0" TextTrimming="CharacterEllipsis"/>
+      <Button Grid.Column="3" Content="&#x2298;" Width="26" Height="22" FontSize="13"
+              Margin="2,0,0,0" Foreground="#C62828" Style="{StaticResource BtnDel}"
+              Click="SelClear_Click" ToolTip="Deselect all — clear Revit selection (keyboard: Esc)"/>
+      <Button Grid.Column="4" Content="&#x1F5D1;" Width="26" Height="22" FontSize="11"
+              Margin="2,0,0,0" Style="{StaticResource Btn}"
+              Click="ClearLog_Click" ToolTip="Clear the result log below"/>
+      <Button Grid.Column="5" Content="?" Width="24" Height="22" FontSize="10" FontWeight="Bold"
+              Margin="2,0,0,0" Style="{StaticResource Btn}"
+              Click="Help_Click" ToolTip="STINGTags help overview"/>
+    </Grid>
+
+  </Grid>
+</Window>
