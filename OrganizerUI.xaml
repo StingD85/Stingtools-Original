@@ -1,0 +1,255 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Project Organizer" Width="320" 
+        Height="800"
+        MinWidth="280"
+        MinHeight="400"
+        Background="#FF2C2C2C"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip">
+    
+    <Window.Resources>
+        <!-- Style for Section Headers -->
+        <Style x:Key="SectionHeader" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#FFFFFFFF"/>
+            <Setter Property="Margin" Value="10,10,10,5"/>
+        </Style>
+        
+        <!-- Style for Tool Buttons -->
+        <Style x:Key="ToolButton" TargetType="Button">
+            <Setter Property="Background" Value="#FF3E3E42"/>
+            <Setter Property="Foreground" Value="#FFFFFFFF"/>
+            <Setter Property="BorderBrush" Value="#FF007ACC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="5,2"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF007ACC"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        <!-- Style for Small Icon Buttons -->
+        <Style x:Key="IconButton" TargetType="Button">
+            <Setter Property="Background" Value="#FF3E3E42"/>
+            <Setter Property="Foreground" Value="#FFFFFFFF"/>
+            <Setter Property="BorderBrush" Value="#FF007ACC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF007ACC"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        <!-- Style for Expander -->
+        <Style x:Key="ToolExpander" TargetType="Expander">
+            <Setter Property="Foreground" Value="#FFFFFFFF"/>
+            <Setter Property="Background" Value="#FF2C2C2C"/>
+            <Setter Property="BorderBrush" Value="#FF3E3E42"/>
+            <Setter Property="BorderThickness" Value="0,1,0,0"/>
+            <Setter Property="Margin" Value="0,2"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Bar -->
+        <Border x:Name="TitleBorder" Grid.Row="0" Background="#FF007ACC" Height="35">
+            <Grid>
+                <TextBlock Text="📋 Project Organizer" 
+                          VerticalAlignment="Center" 
+                          HorizontalAlignment="Left"
+                          Margin="10,0"
+                          FontSize="14"
+                          FontWeight="Bold"
+                          Foreground="White"/>
+                <Button x:Name="CloseButton" Content="✕" Width="35" Height="35" HorizontalAlignment="Right" Background="Transparent" BorderThickness="0" Foreground="White" FontSize="16" Cursor="Hand"> <Button.Style> <Style TargetType="Button"> <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FFE81123"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+        </Border>
+
+        <!-- Main Content -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="5">
+
+                <!-- VIEWPORT TOOLS -->
+                <Expander Header="📐 Viewport Tools" Style="{StaticResource ToolExpander}" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <!-- Alignment -->
+                        <TextBlock Text="Alignment" FontSize="10" Foreground="#FFAAAAAA" Margin="5,5,5,2"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="AlignViewportsTop" Content="⬆️" Style="{StaticResource IconButton}" ToolTip="Align Top"/>
+                            <Button x:Name="AlignViewportsMiddleY" Content="↕️" Style="{StaticResource IconButton}" ToolTip="Align Middle Y"/>
+                            <Button x:Name="AlignViewportsBottom" Content="⬇️" Style="{StaticResource IconButton}" ToolTip="Align Bottom"/>
+                            <Button x:Name="AlignViewportsLeft" Content="⬅️" Style="{StaticResource IconButton}" ToolTip="Align Left"/>
+                            <Button x:Name="AlignViewportsMiddleX" Content="↔️" Style="{StaticResource IconButton}" ToolTip="Align Middle X"/>
+                            <Button x:Name="AlignViewportsRight" Content="➡️" Style="{StaticResource IconButton}" ToolTip="Align Right"/>
+                        </StackPanel>
+                        
+                        <!-- Numbering -->
+                        <TextBlock Text="Detail Numbering" FontSize="10" Foreground="#FFAAAAAA" Margin="5,8,5,2"/>
+                        <Button x:Name="NumberViewportsByClick" Content="🔢 Number by Click" Style="{StaticResource ToolButton}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="RenumberLeftToRight" Content="⬅️➡️ Left to Right" Style="{StaticResource ToolButton}" Width="145"/>
+                            <Button x:Name="RenumberTopToBottom" Content="⬆️⬇️ Top to Bottom" Style="{StaticResource ToolButton}" Width="145"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="DetailNumberAdd1" Content="+1" Style="{StaticResource IconButton}" ToolTip="Add 1 to Detail Number"/>
+                            <Button x:Name="DetailNumberSubtract1" Content="-1" Style="{StaticResource IconButton}" ToolTip="Subtract 1 from Detail Number"/>
+                            <Button x:Name="DetailNumberPrefix" Content="Pre" Style="{StaticResource IconButton}" Width="50" ToolTip="Add Prefix"/>
+                            <Button x:Name="DetailNumberSuffix" Content="Suf" Style="{StaticResource IconButton}" Width="50" ToolTip="Add Suffix"/>
+                        </StackPanel>
+                        
+                        <!-- Spacing -->
+                        <TextBlock Text="Spacing" FontSize="10" Foreground="#FFAAAAAA" Margin="5,8,5,2"/>
+                        <Button x:Name="OrderHorizontally" Content="↔️ Order Horizontally" Style="{StaticResource ToolButton}"/>
+                        <Button x:Name="OrderFromMiddle" Content="🎯 Order from Middle" Style="{StaticResource ToolButton}"/>
+                    </StackPanel>
+                </Expander>
+
+                <!-- SHEET TOOLS -->
+                <Expander Header="📄 Sheet Tools" Style="{StaticResource ToolExpander}" IsExpanded="True">
+                    <StackPanel Margin="5">
+                        <Button x:Name="ResetTitleOnSheet" Content="📋 Reset Title on Sheet" Style="{StaticResource ToolButton}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="SheetNumberAdd1" Content="+1" Style="{StaticResource IconButton}" ToolTip="Add 1 to Sheet Number"/>
+                            <Button x:Name="SheetNumberSubtract1" Content="-1" Style="{StaticResource IconButton}" ToolTip="Subtract 1 from Sheet Number"/>
+                            <Button x:Name="SheetNumberPrefix" Content="Pre" Style="{StaticResource IconButton}" Width="50" ToolTip="Add Prefix"/>
+                            <Button x:Name="SheetNumberSuffix" Content="Suf" Style="{StaticResource IconButton}" Width="50" ToolTip="Add Suffix"/>
+                        </StackPanel>
+                        <Button x:Name="SheetNumberFindReplace" Content="🔄 Find &amp; Replace" Style="{StaticResource ToolButton}"/>
+                    </StackPanel>
+                </Expander>
+
+                <!-- SCHEDULE TOOLS -->
+                <Expander Header="📊 Schedule Tools" Style="{StaticResource ToolExpander}">
+                    <StackPanel Margin="5">
+                        <Button x:Name="SyncSchedulePositions" Content="📍 Sync All Instance Positions" Style="{StaticResource ToolButton}"/>
+                        <Button x:Name="SyncScheduleRotations" Content="🔄 Sync Rotations" Style="{StaticResource ToolButton}"/>
+                        <Button x:Name="MatchColumnWidths" Content="📏 Match Column Widths" Style="{StaticResource ToolButton}"/>
+                        <Button x:Name="SetAllColumnWidths" Content="⬅️➡️ Set All Column Widths" Style="{StaticResource ToolButton}"/>
+                        <Button x:Name="ShowHiddenColumns" Content="👁️ Show All Hidden Columns" Style="{StaticResource ToolButton}"/>
+                    </StackPanel>
+                </Expander>
+
+                <!-- TEXT NOTE TOOLS -->
+                <Expander Header="📝 Text Note Tools" Style="{StaticResource ToolExpander}">
+                    <StackPanel Margin="5">
+                        <!-- Case Conversion -->
+                        <TextBlock Text="Case Conversion" FontSize="10" Foreground="#FFAAAAAA" Margin="5,5,5,2"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="TextNoteLowerCase" Content="abc" Style="{StaticResource IconButton}" Width="60" ToolTip="lowercase"/>
+                            <Button x:Name="TextNoteUpperCase" Content="ABC" Style="{StaticResource IconButton}" Width="60" ToolTip="UPPERCASE"/>
+                            <Button x:Name="TextNoteTitleCase" Content="Abc" Style="{StaticResource IconButton}" Width="60" ToolTip="Title Case"/>
+                        </StackPanel>
+                        
+                        <!-- Position -->
+                        <TextBlock Text="Position" FontSize="10" Foreground="#FFAAAAAA" Margin="5,8,5,2"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="TextNoteAlignLeft" Content="⬅️" Style="{StaticResource IconButton}" ToolTip="Align Left"/>
+                            <Button x:Name="TextNoteAlignCenter" Content="↔️" Style="{StaticResource IconButton}" ToolTip="Align Center"/>
+                            <Button x:Name="TextNoteAlignRight" Content="➡️" Style="{StaticResource IconButton}" ToolTip="Align Right"/>
+                        </StackPanel>
+                        <Button x:Name="TextNoteAlignAxis" Content="📐 Align to X/Y Axis" Style="{StaticResource ToolButton}"/>
+                        <Button x:Name="TextNoteSetDistance" Content="📏 Set Distances" Style="{StaticResource ToolButton}"/>
+                        <Button x:Name="TextNoteSwap" Content="🔄 Swap Positions" Style="{StaticResource ToolButton}"/>
+                        
+                        <!-- Leaders -->
+                        <TextBlock Text="Leaders" FontSize="10" Foreground="#FFAAAAAA" Margin="5,8,5,2"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="TextNoteLeaderHorizontal" Content="↔️" Style="{StaticResource IconButton}" Width="60" ToolTip="Horizontal Leaders"/>
+                            <Button x:Name="TextNoteLeaderVertical" Content="↕️" Style="{StaticResource IconButton}" Width="60" ToolTip="Vertical Leaders"/>
+                            <Button x:Name="TextNoteLeader90" Content="📐" Style="{StaticResource IconButton}" Width="60" ToolTip="90° Elbow"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Expander>
+
+                <!-- DIMENSION TOOLS -->
+                <Expander Header="📏 Dimension Tools" Style="{StaticResource ToolExpander}">
+                    <StackPanel Margin="5">
+                        <Button x:Name="ResetDimensionOverrides" Content="🔄 Reset Value Overrides" Style="{StaticResource ToolButton}"/>
+                        <Button x:Name="ResetDimensionPositions" Content="📍 Reset Text Positions" Style="{StaticResource ToolButton}"/>
+                        <Button x:Name="FindZeroDimensions" Content="🔍 Find Zeros" Style="{StaticResource ToolButton}"/>
+                        <Button x:Name="DimensionFindReplace" Content="🔄 Find &amp; Replace" Style="{StaticResource ToolButton}"/>
+                    </StackPanel>
+                </Expander>
+
+                <!-- LEGEND TOOLS -->
+                <Expander Header="📑 Legend Tools" Style="{StaticResource ToolExpander}">
+                    <StackPanel Margin="5">
+                        <Button x:Name="SyncLegendPositions" Content="📍 Sync All Instance Positions" Style="{StaticResource ToolButton}"/>
+                        <Button x:Name="SyncLegendTitleLine" Content="📏 Sync Title Line Settings" Style="{StaticResource ToolButton}"/>
+                        <Button x:Name="MakeLegendsSame" Content="✨ Make All Look the Same" Style="{StaticResource ToolButton}"/>
+                    </StackPanel>
+                </Expander>
+
+                <!-- TITLE BLOCK TOOLS -->
+                <Expander Header="🖼️ Title Block Tools" Style="{StaticResource ToolExpander}">
+                    <StackPanel Margin="5">
+                        <Button x:Name="ResetTitleBlock" Content="🔄 Reset to Default Position" Style="{StaticResource ToolButton}"/>
+                        <Button x:Name="RescueTitleBlocks" Content="🆘 Rescue All Title Blocks" Style="{StaticResource ToolButton}"/>
+                    </StackPanel>
+                </Expander>
+
+                <!-- REVISION TOOLS -->
+                <Expander Header="📋 Revision Tools" Style="{StaticResource ToolExpander}">
+                    <StackPanel Margin="5">
+                        <Button x:Name="ShowAllRevisions" Content="👁️ Show All Clouds &amp; Tags" Style="{StaticResource ToolButton}"/>
+                        <Button x:Name="DeleteCloudsActive" Content="🗑️ Delete Clouds in Active View" Style="{StaticResource ToolButton}"/>
+                        <Button x:Name="DeleteCloudsSelected" Content="🗑️ Delete Clouds in Selected" Style="{StaticResource ToolButton}"/>
+                    </StackPanel>
+                </Expander>
+
+                <!-- MEASUREMENT TOOLS -->
+                <Expander Header="📐 Measurement Tools" Style="{StaticResource ToolExpander}">
+                    <StackPanel Margin="5">
+                        <Button x:Name="MeasureLines" Content="📏 Measure Selected Lines" Style="{StaticResource ToolButton}"/>
+                        <Button x:Name="MeasureAreas" Content="📐 Measure Region Areas" Style="{StaticResource ToolButton}"/>
+                        <Button x:Name="MeasurePerimeters" Content="⭕ Measure Region Perimeters" Style="{StaticResource ToolButton}"/>
+                        <Button x:Name="MeasureRoomAreas" Content="🏠 Measure Room Areas" Style="{StaticResource ToolButton}"/>
+                    </StackPanel>
+                </Expander>
+
+                <!-- UTILITIES -->
+                <Expander Header="🔧 Utilities" Style="{StaticResource ToolExpander}">
+                    <StackPanel Margin="5">
+                        <Button x:Name="SwapElements" Content="🔄 SWAP Elements" Style="{StaticResource ToolButton}"/>
+                        <Button x:Name="ConvertRegions" Content="📋 Convert Regions" Style="{StaticResource ToolButton}"/>
+                        <Button x:Name="CleanDoubleSpaces" Content="🧹 Clean Double Spaces" Style="{StaticResource ToolButton}"/>
+                    </StackPanel>
+                </Expander>
+
+                <!-- Status Bar -->
+                <Border Background="#FF1E1E1E" BorderBrush="#FF3E3E42" BorderThickness="0,1,0,0" Margin="0,10,0,0" Padding="10,5">
+                    <TextBlock x:Name="StatusText" Text="Ready" Foreground="#FF999999" FontSize="10"/>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>
