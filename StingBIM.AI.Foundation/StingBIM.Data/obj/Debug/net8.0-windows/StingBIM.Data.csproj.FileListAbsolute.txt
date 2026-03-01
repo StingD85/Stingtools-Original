@@ -1,4 +1,0 @@
-C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Foundation\StingBIM.Data\obj\Debug\net8.0-windows\StingBIM.Data.csproj.AssemblyReference.cache
-C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Foundation\StingBIM.Data\obj\Debug\net8.0-windows\StingBIM.Data.GeneratedMSBuildEditorConfig.editorconfig
-C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Foundation\StingBIM.Data\obj\Debug\net8.0-windows\StingBIM.Data.csproj.CoreCompileInputs.cache
-C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Foundation\StingBIM.Data\obj\Debug\net8.0-windows\StingBIM.Data.sourcelink.json
