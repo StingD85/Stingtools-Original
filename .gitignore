@@ -4,3 +4,7 @@ obj/
 StingBIM.AI.Tests/bin/
 StingBIM.AI.Tests/obj/
 *.onnxruntime*
+StingBIM.AI.Tests/bin/
+StingBIM.AI.Tests/obj/
+*/bin/
+*/obj/
