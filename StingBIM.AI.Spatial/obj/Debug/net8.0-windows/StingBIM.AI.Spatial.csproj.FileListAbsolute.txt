@@ -1,0 +1,16 @@
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Spatial\bin\Debug\net8.0-windows\StingBIM.AI.Spatial.deps.json
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Spatial\bin\Debug\net8.0-windows\StingBIM.AI.Spatial.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Spatial\bin\Debug\net8.0-windows\StingBIM.AI.Spatial.pdb
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Spatial\bin\Debug\net8.0-windows\StingBIM.AI.Core.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Spatial\bin\Debug\net8.0-windows\StingBIM.AI.Knowledge.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Spatial\bin\Debug\net8.0-windows\StingBIM.AI.Core.pdb
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Spatial\bin\Debug\net8.0-windows\StingBIM.AI.Knowledge.pdb
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Spatial\obj\Debug\net8.0-windows\StingBIM.AI.Spatial.csproj.AssemblyReference.cache
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Spatial\obj\Debug\net8.0-windows\StingBIM.AI.Spatial.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Spatial\obj\Debug\net8.0-windows\StingBIM.AI.Spatial.csproj.CoreCompileInputs.cache
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Spatial\obj\Debug\net8.0-windows\StingBIM.AI.Spatial.sourcelink.json
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Spatial\obj\Debug\net8.0-windows\StingBIM.E2D52F67.Up2Date
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Spatial\obj\Debug\net8.0-windows\StingBIM.AI.Spatial.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Spatial\obj\Debug\net8.0-windows\refint\StingBIM.AI.Spatial.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Spatial\obj\Debug\net8.0-windows\StingBIM.AI.Spatial.pdb
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Spatial\obj\Debug\net8.0-windows\ref\StingBIM.AI.Spatial.dll

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>StingBIM.Standards</RootNamespace>
+    <AssemblyName>StingBIM.Standards</AssemblyName>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Description>Building standards implementations - 32 international and regional building codes</Description>
+    <Company>StingBIM</Company>
+    <Product>StingBIM</Product>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+</Project>

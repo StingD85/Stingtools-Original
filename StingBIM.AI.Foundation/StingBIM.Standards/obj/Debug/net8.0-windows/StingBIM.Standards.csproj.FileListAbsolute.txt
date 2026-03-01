@@ -1,0 +1,10 @@
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Foundation\StingBIM.Standards\bin\Debug\net8.0-windows\StingBIM.Standards.deps.json
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Foundation\StingBIM.Standards\bin\Debug\net8.0-windows\StingBIM.Standards.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Foundation\StingBIM.Standards\bin\Debug\net8.0-windows\StingBIM.Standards.pdb
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Foundation\StingBIM.Standards\obj\Debug\net8.0-windows\StingBIM.Standards.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Foundation\StingBIM.Standards\obj\Debug\net8.0-windows\StingBIM.Standards.csproj.CoreCompileInputs.cache
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Foundation\StingBIM.Standards\obj\Debug\net8.0-windows\StingBIM.Standards.sourcelink.json
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Foundation\StingBIM.Standards\obj\Debug\net8.0-windows\StingBIM.Standards.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Foundation\StingBIM.Standards\obj\Debug\net8.0-windows\refint\StingBIM.Standards.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Foundation\StingBIM.Standards\obj\Debug\net8.0-windows\StingBIM.Standards.pdb
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Foundation\StingBIM.Standards\obj\Debug\net8.0-windows\ref\StingBIM.Standards.dll

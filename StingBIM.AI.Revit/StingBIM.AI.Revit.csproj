@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>StingBIM.AI.Revit</RootNamespace>
+    <AssemblyName>StingBIM.AI.Revit</AssemblyName>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Description>Revit API integration layer - external commands, external applications, event handlers, add-in entry points</Description>
+    <Company>StingBIM</Company>
+    <Product>StingBIM AI</Product>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- JSON Serialization -->
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+
+    <!-- Logging -->
+    <PackageReference Include="NLog" Version="5.2.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StingBIM.AI.Core\StingBIM.AI.Core.csproj" />
+    <ProjectReference Include="..\StingBIM.AI.Foundation\StingBIM.AI.Foundation.csproj" />
+    <ProjectReference Include="..\StingBIM.AI.NLP\StingBIM.AI.NLP.csproj" />
+    <ProjectReference Include="..\StingBIM.AI.UI\StingBIM.AI.UI.csproj" />
+    <ProjectReference Include="..\StingBIM.AI.Knowledge\StingBIM.AI.Knowledge.csproj" />
+    <ProjectReference Include="..\StingBIM.AI.Agents\StingBIM.AI.Agents.csproj" />
+    <ProjectReference Include="..\StingBIM.AI.Automation\StingBIM.AI.Automation.csproj" />
+    <ProjectReference Include="..\StingBIM.AI.Collaboration\StingBIM.AI.Collaboration.csproj" />
+    <ProjectReference Include="..\StingBIM.AI.Reasoning\StingBIM.AI.Reasoning.csproj" />
+    <ProjectReference Include="..\StingBIM.AI.Creation\StingBIM.AI.Creation.csproj" />
+  </ItemGroup>
+
+  <!-- Revit API References - Update paths for your Revit installation -->
+  <ItemGroup>
+    <Reference Include="RevitAPI">
+      <HintPath>C:\Program Files\Autodesk\Revit 2025\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>C:\Program Files\Autodesk\Revit 2025\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

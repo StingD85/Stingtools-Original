@@ -1,0 +1,16 @@
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Portfolio\bin\Debug\net8.0-windows\StingBIM.AI.Portfolio.deps.json
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Portfolio\bin\Debug\net8.0-windows\StingBIM.AI.Portfolio.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Portfolio\bin\Debug\net8.0-windows\StingBIM.AI.Portfolio.pdb
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Portfolio\bin\Debug\net8.0-windows\StingBIM.AI.Core.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Portfolio\bin\Debug\net8.0-windows\StingBIM.AI.Knowledge.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Portfolio\bin\Debug\net8.0-windows\StingBIM.AI.Core.pdb
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Portfolio\bin\Debug\net8.0-windows\StingBIM.AI.Knowledge.pdb
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Portfolio\obj\Debug\net8.0-windows\StingBIM.AI.Portfolio.csproj.AssemblyReference.cache
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Portfolio\obj\Debug\net8.0-windows\StingBIM.AI.Portfolio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Portfolio\obj\Debug\net8.0-windows\StingBIM.AI.Portfolio.csproj.CoreCompileInputs.cache
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Portfolio\obj\Debug\net8.0-windows\StingBIM.AI.Portfolio.sourcelink.json
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Portfolio\obj\Debug\net8.0-windows\StingBIM.E473E47B.Up2Date
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Portfolio\obj\Debug\net8.0-windows\StingBIM.AI.Portfolio.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Portfolio\obj\Debug\net8.0-windows\refint\StingBIM.AI.Portfolio.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Portfolio\obj\Debug\net8.0-windows\StingBIM.AI.Portfolio.pdb
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Portfolio\obj\Debug\net8.0-windows\ref\StingBIM.AI.Portfolio.dll

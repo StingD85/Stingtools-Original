@@ -1,0 +1,684 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.UI\\StingBIM.AI.UI.csproj": {}
+  },
+  "projects": {
+    "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Analysis\\Intelligence\\StingBIM.AI.Intelligence.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Analysis\\Intelligence\\StingBIM.AI.Intelligence.csproj",
+        "projectName": "StingBIM.AI.Intelligence",
+        "projectPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Analysis\\Intelligence\\StingBIM.AI.Intelligence.csproj",
+        "packagesPath": "C:\\Users\\del\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Analysis\\Intelligence\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\del\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
+            "projectReferences": {
+              "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Core\\StingBIM.AI.Core.csproj": {
+                "projectPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Core\\StingBIM.AI.Core.csproj"
+              },
+              "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Foundation\\StingBIM.Data\\StingBIM.Data.csproj": {
+                "projectPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Foundation\\StingBIM.Data\\StingBIM.Data.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "Microsoft.ML.OnnxRuntime": {
+              "target": "Package",
+              "version": "[1.16.3, )"
+            },
+            "NLog": {
+              "target": "Package",
+              "version": "[5.2.8, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Analysis\\StingBIM.AI.Analysis.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Analysis\\StingBIM.AI.Analysis.csproj",
+        "projectName": "StingBIM.AI.Analysis",
+        "projectPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Analysis\\StingBIM.AI.Analysis.csproj",
+        "packagesPath": "C:\\Users\\del\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Analysis\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\del\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
+            "projectReferences": {
+              "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Core\\StingBIM.AI.Core.csproj": {
+                "projectPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Core\\StingBIM.AI.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "MathNet.Numerics": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "NLog": {
+              "target": "Package",
+              "version": "[5.2.8, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Core\\StingBIM.AI.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Core\\StingBIM.AI.Core.csproj",
+        "projectName": "StingBIM.AI.Core",
+        "projectPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Core\\StingBIM.AI.Core.csproj",
+        "packagesPath": "C:\\Users\\del\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\del\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
+            "projectReferences": {
+              "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Foundation\\StingBIM.Standards\\StingBIM.Standards.csproj": {
+                "projectPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Foundation\\StingBIM.Standards\\StingBIM.Standards.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "Microsoft.Data.Sqlite": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.ML.OnnxRuntime": {
+              "target": "Package",
+              "version": "[1.16.3, )"
+            },
+            "Microsoft.ML.OnnxRuntime.Managed": {
+              "target": "Package",
+              "version": "[1.16.3, )"
+            },
+            "NAudio": {
+              "target": "Package",
+              "version": "[2.2.1, )"
+            },
+            "NLog": {
+              "target": "Package",
+              "version": "[5.2.8, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "System.Runtime.Caching": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "System.Speech": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Foundation\\StingBIM.Core\\StingBIM.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Foundation\\StingBIM.Core\\StingBIM.Core.csproj",
+        "projectName": "StingBIM.Core",
+        "projectPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Foundation\\StingBIM.Core\\StingBIM.Core.csproj",
+        "packagesPath": "C:\\Users\\del\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Foundation\\StingBIM.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\del\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "NLog": {
+              "target": "Package",
+              "version": "[5.2.8, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Foundation\\StingBIM.Data\\StingBIM.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Foundation\\StingBIM.Data\\StingBIM.Data.csproj",
+        "projectName": "StingBIM.Data",
+        "projectPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Foundation\\StingBIM.Data\\StingBIM.Data.csproj",
+        "packagesPath": "C:\\Users\\del\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Foundation\\StingBIM.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\del\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
+            "projectReferences": {
+              "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Foundation\\StingBIM.Core\\StingBIM.Core.csproj": {
+                "projectPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Foundation\\StingBIM.Core\\StingBIM.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.102.2, )"
+            },
+            "NLog": {
+              "target": "Package",
+              "version": "[5.2.8, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Foundation\\StingBIM.Standards\\StingBIM.Standards.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Foundation\\StingBIM.Standards\\StingBIM.Standards.csproj",
+        "projectName": "StingBIM.Standards",
+        "projectPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Foundation\\StingBIM.Standards\\StingBIM.Standards.csproj",
+        "packagesPath": "C:\\Users\\del\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Foundation\\StingBIM.Standards\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\del\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.NLP\\StingBIM.AI.NLP.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.NLP\\StingBIM.AI.NLP.csproj",
+        "projectName": "StingBIM.AI.NLP",
+        "projectPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.NLP\\StingBIM.AI.NLP.csproj",
+        "packagesPath": "C:\\Users\\del\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.NLP\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\del\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
+            "projectReferences": {
+              "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Analysis\\StingBIM.AI.Analysis.csproj": {
+                "projectPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Analysis\\StingBIM.AI.Analysis.csproj"
+              },
+              "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Core\\StingBIM.AI.Core.csproj": {
+                "projectPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Core\\StingBIM.AI.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "NLog": {
+              "target": "Package",
+              "version": "[5.2.8, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.UI\\StingBIM.AI.UI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.UI\\StingBIM.AI.UI.csproj",
+        "projectName": "StingBIM.AI.UI",
+        "projectPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.UI\\StingBIM.AI.UI.csproj",
+        "packagesPath": "C:\\Users\\del\\.nuget\\packages\\",
+        "outputPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.UI\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\del\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
+            "projectReferences": {
+              "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Analysis\\Intelligence\\StingBIM.AI.Intelligence.csproj": {
+                "projectPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Analysis\\Intelligence\\StingBIM.AI.Intelligence.csproj"
+              },
+              "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Analysis\\StingBIM.AI.Analysis.csproj": {
+                "projectPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Analysis\\StingBIM.AI.Analysis.csproj"
+              },
+              "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Core\\StingBIM.AI.Core.csproj": {
+                "projectPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.Core\\StingBIM.AI.Core.csproj"
+              },
+              "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.NLP\\StingBIM.AI.NLP.csproj": {
+                "projectPath": "C:\\Dev\\StingBIM\\src\\2_AI\\StingBIM.AI.NLP\\StingBIM.AI.NLP.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "Extended.Wpf.Toolkit": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
+            "NLog": {
+              "target": "Package",
+              "version": "[5.2.8, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

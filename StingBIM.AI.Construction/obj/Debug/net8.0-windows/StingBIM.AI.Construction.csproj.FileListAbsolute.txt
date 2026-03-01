@@ -1,0 +1,16 @@
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Construction\bin\Debug\net8.0-windows\StingBIM.AI.Construction.deps.json
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Construction\bin\Debug\net8.0-windows\StingBIM.AI.Construction.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Construction\bin\Debug\net8.0-windows\StingBIM.AI.Construction.pdb
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Construction\bin\Debug\net8.0-windows\StingBIM.AI.Core.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Construction\bin\Debug\net8.0-windows\StingBIM.AI.Knowledge.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Construction\bin\Debug\net8.0-windows\StingBIM.AI.Core.pdb
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Construction\bin\Debug\net8.0-windows\StingBIM.AI.Knowledge.pdb
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Construction\obj\Debug\net8.0-windows\StingBIM.AI.Construction.csproj.AssemblyReference.cache
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Construction\obj\Debug\net8.0-windows\StingBIM.AI.Construction.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Construction\obj\Debug\net8.0-windows\StingBIM.AI.Construction.csproj.CoreCompileInputs.cache
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Construction\obj\Debug\net8.0-windows\StingBIM.AI.Construction.sourcelink.json
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Construction\obj\Debug\net8.0-windows\StingBIM.3E7701B3.Up2Date
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Construction\obj\Debug\net8.0-windows\StingBIM.AI.Construction.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Construction\obj\Debug\net8.0-windows\refint\StingBIM.AI.Construction.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Construction\obj\Debug\net8.0-windows\StingBIM.AI.Construction.pdb
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Construction\obj\Debug\net8.0-windows\ref\StingBIM.AI.Construction.dll

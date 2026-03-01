@@ -1,0 +1,16 @@
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Design\bin\Release\net8.0-windows\StingBIM.AI.Design.deps.json
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Design\bin\Release\net8.0-windows\StingBIM.AI.Design.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Design\bin\Release\net8.0-windows\StingBIM.AI.Design.pdb
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Design\bin\Release\net8.0-windows\StingBIM.AI.Core.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Design\bin\Release\net8.0-windows\StingBIM.Standards.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Design\bin\Release\net8.0-windows\StingBIM.AI.Core.pdb
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Design\bin\Release\net8.0-windows\StingBIM.Standards.pdb
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Design\obj\Release\net8.0-windows\StingBIM.AI.Design.csproj.AssemblyReference.cache
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Design\obj\Release\net8.0-windows\StingBIM.AI.Design.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Design\obj\Release\net8.0-windows\StingBIM.AI.Design.csproj.CoreCompileInputs.cache
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Design\obj\Release\net8.0-windows\StingBIM.AI.Design.sourcelink.json
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Design\obj\Release\net8.0-windows\StingBIM.8AEF8E10.Up2Date
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Design\obj\Release\net8.0-windows\StingBIM.AI.Design.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Design\obj\Release\net8.0-windows\refint\StingBIM.AI.Design.dll
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Design\obj\Release\net8.0-windows\StingBIM.AI.Design.pdb
+C:\Dev\StingBIM\src\2_AI\StingBIM.AI.Design\obj\Release\net8.0-windows\ref\StingBIM.AI.Design.dll

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>StingBIM.AI.Creation</RootNamespace>
+    <AssemblyName>StingBIM.AI.Creation</AssemblyName>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Description>Element creation - Walls, floors, rooms, MEP, families, fabrication, generative placement, drawing generation</Description>
+    <Company>StingBIM</Company>
+    <Product>StingBIM AI</Product>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- JSON Serialization -->
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+
+    <!-- Logging -->
+    <PackageReference Include="NLog" Version="5.2.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StingBIM.AI.Core\StingBIM.AI.Core.csproj" />
+    <ProjectReference Include="..\StingBIM.AI.Knowledge\StingBIM.AI.Knowledge.csproj" />
+    <ProjectReference Include="..\StingBIM.AI.Collaboration\StingBIM.AI.Collaboration.csproj" />
+    <ProjectReference Include="..\StingBIM.AI.Automation\StingBIM.AI.Automation.csproj" />
+    <ProjectReference Include="..\StingBIM.AI.Analysis\StingBIM.AI.Analysis.csproj" />
+  </ItemGroup>
+
+  <!-- Revit API References -->
+  <ItemGroup>
+    <Reference Include="RevitAPI">
+      <HintPath>C:\Program Files\Autodesk\Revit 2025\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>C:\Program Files\Autodesk\Revit 2025\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

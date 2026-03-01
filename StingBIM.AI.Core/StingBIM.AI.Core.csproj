@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>StingBIM.AI</RootNamespace>
+    <AssemblyName>StingBIM.AI.Core</AssemblyName>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Description>AI Infrastructure - ONNX models, memory, NLP pipeline, knowledge graph, inference engine</Description>
+    <Company>StingBIM</Company>
+    <Product>StingBIM AI</Product>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- AI/ML Runtime -->
+    <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.16.3" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime.Managed" Version="1.16.3" />
+
+    <!-- SQLite for Knowledge Graph Vector Store -->
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.0" />
+
+    <!-- Audio Processing for Voice -->
+    <PackageReference Include="NAudio" Version="2.2.1" />
+
+    <!-- JSON Serialization -->
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+
+    <!-- Logging -->
+    <PackageReference Include="NLog" Version="5.2.8" />
+
+    <!-- Speech Recognition -->
+    <PackageReference Include="System.Speech" Version="8.0.0" />
+
+    <!-- Runtime Caching -->
+    <PackageReference Include="System.Runtime.Caching" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StingBIM.AI.Foundation\StingBIM.Standards\StingBIM.Standards.csproj" />
+  </ItemGroup>
+</Project>
