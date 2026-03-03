@@ -1,0 +1,376 @@
+<UserControl x:Class="StingBIM.AI.UI.Controls.KeyboardShortcutsOverlay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Name="Root"
+             Focusable="True"
+             KeyDown="Root_KeyDown">
+
+    <UserControl.Resources>
+        <!-- Shortcut Key Style -->
+        <Style x:Key="KeyStyle" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="MinWidth" Value="28"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Category Style -->
+        <Style x:Key="CategoryHeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+            <Setter Property="Margin" Value="0,16,0,8"/>
+        </Style>
+
+        <!-- Shortcut Row Style -->
+        <Style x:Key="ShortcutRowStyle" TargetType="Grid">
+            <Setter Property="Margin" Value="0,0,0,8"/>
+        </Style>
+    </UserControl.Resources>
+
+    <!-- Backdrop -->
+    <Grid Background="#CC000000">
+        <Grid.InputBindings>
+            <MouseBinding MouseAction="LeftClick" Command="{x:Static ApplicationCommands.Close}"/>
+        </Grid.InputBindings>
+
+        <!-- Content Container -->
+        <Border HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="{DynamicResource BackgroundBrush}"
+                CornerRadius="16"
+                Padding="24"
+                MaxWidth="700"
+                MaxHeight="600">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="40"
+                                  ShadowDepth="8"
+                                  Direction="270"
+                                  Opacity="0.5"/>
+            </Border.Effect>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Header -->
+                <Grid Grid.Row="0" Margin="0,0,0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Path Grid.Column="0"
+                          Data="M19.78,11.78L18.36,13.19L12,6.83L5.64,13.19L4.22,11.78L12,4L19.78,11.78M19.78,18.28L18.36,19.69L12,13.33L5.64,19.69L4.22,18.28L12,10.5L19.78,18.28Z"
+                          Fill="{DynamicResource AccentBrush}"
+                          Width="28" Height="28"
+                          Stretch="Uniform"
+                          VerticalAlignment="Center"/>
+
+                    <TextBlock Grid.Column="1"
+                               Text="Keyboard Shortcuts"
+                               FontSize="20"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource ForegroundBrush}"
+                               VerticalAlignment="Center"
+                               Margin="12,0,0,0"/>
+
+                    <Button Grid.Column="2"
+                            x:Name="CloseButton"
+                            Click="CloseButton_Click"
+                            Style="{DynamicResource IconButtonStyle}"
+                            ToolTip="Close (Esc)">
+                        <Path Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+                              Fill="{DynamicResource ForegroundSecondaryBrush}"
+                              Width="16" Height="16"
+                              Stretch="Uniform"/>
+                    </Button>
+                </Grid>
+
+                <!-- Search -->
+                <Border Grid.Row="1"
+                        Background="{DynamicResource CardBrush}"
+                        CornerRadius="8"
+                        Padding="12,8"
+                        Margin="0,0,0,16">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Path Grid.Column="0"
+                              Data="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
+                              Fill="{DynamicResource ForegroundSecondaryBrush}"
+                              Width="16" Height="16"
+                              Stretch="Uniform"
+                              VerticalAlignment="Center"
+                              Margin="0,0,10,0"/>
+                        <TextBox Grid.Column="1"
+                                 x:Name="SearchTextBox"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Foreground="{DynamicResource ForegroundBrush}"
+                                 FontSize="14"
+                                 VerticalAlignment="Center"
+                                 TextChanged="SearchTextBox_TextChanged"/>
+                        <TextBlock Grid.Column="1"
+                                   x:Name="PlaceholderText"
+                                   Text="Search shortcuts..."
+                                   Foreground="{DynamicResource ForegroundSecondaryBrush}"
+                                   FontSize="14"
+                                   VerticalAlignment="Center"
+                                   IsHitTestVisible="False"
+                                   Visibility="Visible"/>
+                    </Grid>
+                </Border>
+
+                <!-- Shortcuts Grid -->
+                <ScrollViewer Grid.Row="2"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled">
+                    <Grid x:Name="ShortcutsGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="24"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Left Column -->
+                        <StackPanel Grid.Column="0">
+                            <!-- General -->
+                            <TextBlock Text="GENERAL" Style="{StaticResource CategoryHeaderStyle}" Margin="0,0,0,8"/>
+
+                            <Grid Style="{StaticResource ShortcutRowStyle}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                    <Border Style="{StaticResource KeyStyle}">
+                                        <TextBlock Text="Ctrl" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Border>
+                                    <TextBlock Text="+" Margin="4,0" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundSecondaryBrush}"/>
+                                    <Border Style="{StaticResource KeyStyle}">
+                                        <TextBlock Text="Enter" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Border>
+                                </StackPanel>
+                                <TextBlock Grid.Column="1" Text="Send message" VerticalAlignment="Center" Margin="16,0,0,0" Foreground="{DynamicResource ForegroundBrush}"/>
+                            </Grid>
+
+                            <Grid Style="{StaticResource ShortcutRowStyle}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Style="{StaticResource KeyStyle}">
+                                    <TextBlock Text="Esc" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Cancel / Close" VerticalAlignment="Center" Margin="16,0,0,0" Foreground="{DynamicResource ForegroundBrush}"/>
+                            </Grid>
+
+                            <Grid Style="{StaticResource ShortcutRowStyle}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                    <Border Style="{StaticResource KeyStyle}">
+                                        <TextBlock Text="Ctrl" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Border>
+                                    <TextBlock Text="+" Margin="4,0" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundSecondaryBrush}"/>
+                                    <Border Style="{StaticResource KeyStyle}">
+                                        <TextBlock Text="K" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Border>
+                                </StackPanel>
+                                <TextBlock Grid.Column="1" Text="Command palette" VerticalAlignment="Center" Margin="16,0,0,0" Foreground="{DynamicResource ForegroundBrush}"/>
+                            </Grid>
+
+                            <Grid Style="{StaticResource ShortcutRowStyle}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                    <Border Style="{StaticResource KeyStyle}">
+                                        <TextBlock Text="Ctrl" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Border>
+                                    <TextBlock Text="+" Margin="4,0" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundSecondaryBrush}"/>
+                                    <Border Style="{StaticResource KeyStyle}">
+                                        <TextBlock Text="Q" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Border>
+                                </StackPanel>
+                                <TextBlock Grid.Column="1" Text="Quick actions" VerticalAlignment="Center" Margin="16,0,0,0" Foreground="{DynamicResource ForegroundBrush}"/>
+                            </Grid>
+
+                            <!-- Voice -->
+                            <TextBlock Text="VOICE" Style="{StaticResource CategoryHeaderStyle}"/>
+
+                            <Grid Style="{StaticResource ShortcutRowStyle}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                    <Border Style="{StaticResource KeyStyle}">
+                                        <TextBlock Text="Ctrl" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Border>
+                                    <TextBlock Text="+" Margin="4,0" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundSecondaryBrush}"/>
+                                    <Border Style="{StaticResource KeyStyle}">
+                                        <TextBlock Text="M" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Border>
+                                </StackPanel>
+                                <TextBlock Grid.Column="1" Text="Toggle voice input" VerticalAlignment="Center" Margin="16,0,0,0" Foreground="{DynamicResource ForegroundBrush}"/>
+                            </Grid>
+
+                            <Grid Style="{StaticResource ShortcutRowStyle}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Style="{StaticResource KeyStyle}">
+                                    <TextBlock Text="Space" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Push-to-talk (hold)" VerticalAlignment="Center" Margin="16,0,0,0" Foreground="{DynamicResource ForegroundBrush}"/>
+                            </Grid>
+                        </StackPanel>
+
+                        <!-- Right Column -->
+                        <StackPanel Grid.Column="2">
+                            <!-- Navigation -->
+                            <TextBlock Text="NAVIGATION" Style="{StaticResource CategoryHeaderStyle}" Margin="0,0,0,8"/>
+
+                            <Grid Style="{StaticResource ShortcutRowStyle}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                    <Border Style="{StaticResource KeyStyle}">
+                                        <TextBlock Text="Ctrl" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Border>
+                                    <TextBlock Text="+" Margin="4,0" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundSecondaryBrush}"/>
+                                    <Border Style="{StaticResource KeyStyle}">
+                                        <TextBlock Text="F" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Border>
+                                </StackPanel>
+                                <TextBlock Grid.Column="1" Text="Search chat" VerticalAlignment="Center" Margin="16,0,0,0" Foreground="{DynamicResource ForegroundBrush}"/>
+                            </Grid>
+
+                            <Grid Style="{StaticResource ShortcutRowStyle}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                    <Border Style="{StaticResource KeyStyle}">
+                                        <TextBlock Text="↑" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Border>
+                                    <TextBlock Text="/" Margin="4,0" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundSecondaryBrush}"/>
+                                    <Border Style="{StaticResource KeyStyle}">
+                                        <TextBlock Text="↓" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Border>
+                                </StackPanel>
+                                <TextBlock Grid.Column="1" Text="Command history" VerticalAlignment="Center" Margin="16,0,0,0" Foreground="{DynamicResource ForegroundBrush}"/>
+                            </Grid>
+
+                            <Grid Style="{StaticResource ShortcutRowStyle}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                    <Border Style="{StaticResource KeyStyle}">
+                                        <TextBlock Text="F1" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Border>
+                                    <TextBlock Text="or" Margin="6,0" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundSecondaryBrush}"/>
+                                    <Border Style="{StaticResource KeyStyle}">
+                                        <TextBlock Text="?" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Border>
+                                </StackPanel>
+                                <TextBlock Grid.Column="1" Text="Show shortcuts" VerticalAlignment="Center" Margin="16,0,0,0" Foreground="{DynamicResource ForegroundBrush}"/>
+                            </Grid>
+
+                            <!-- Editing -->
+                            <TextBlock Text="EDITING" Style="{StaticResource CategoryHeaderStyle}"/>
+
+                            <Grid Style="{StaticResource ShortcutRowStyle}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                    <Border Style="{StaticResource KeyStyle}">
+                                        <TextBlock Text="Ctrl" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Border>
+                                    <TextBlock Text="+" Margin="4,0" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundSecondaryBrush}"/>
+                                    <Border Style="{StaticResource KeyStyle}">
+                                        <TextBlock Text="Z" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Border>
+                                </StackPanel>
+                                <TextBlock Grid.Column="1" Text="Undo last action" VerticalAlignment="Center" Margin="16,0,0,0" Foreground="{DynamicResource ForegroundBrush}"/>
+                            </Grid>
+
+                            <Grid Style="{StaticResource ShortcutRowStyle}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                    <Border Style="{StaticResource KeyStyle}">
+                                        <TextBlock Text="Ctrl" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Border>
+                                    <TextBlock Text="+" Margin="4,0" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundSecondaryBrush}"/>
+                                    <Border Style="{StaticResource KeyStyle}">
+                                        <TextBlock Text="Y" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Border>
+                                </StackPanel>
+                                <TextBlock Grid.Column="1" Text="Redo" VerticalAlignment="Center" Margin="16,0,0,0" Foreground="{DynamicResource ForegroundBrush}"/>
+                            </Grid>
+
+                            <Grid Style="{StaticResource ShortcutRowStyle}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                    <Border Style="{StaticResource KeyStyle}">
+                                        <TextBlock Text="Ctrl" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Border>
+                                    <TextBlock Text="+" Margin="4,0" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundSecondaryBrush}"/>
+                                    <Border Style="{StaticResource KeyStyle}">
+                                        <TextBlock Text="L" FontFamily="Consolas" FontSize="11" Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Border>
+                                </StackPanel>
+                                <TextBlock Grid.Column="1" Text="Clear chat" VerticalAlignment="Center" Margin="16,0,0,0" Foreground="{DynamicResource ForegroundBrush}"/>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+
+                <!-- Footer -->
+                <Border Grid.Row="3"
+                        Background="{DynamicResource CardBrush}"
+                        CornerRadius="8"
+                        Padding="12,10"
+                        Margin="0,16,0,0">
+                    <TextBlock Text="Press Esc or click outside to close"
+                               FontSize="12"
+                               Foreground="{DynamicResource ForegroundSecondaryBrush}"
+                               HorizontalAlignment="Center"/>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- Click outside to close -->
+        <Border Background="Transparent"
+                MouseLeftButtonDown="Backdrop_MouseDown"/>
+    </Grid>
+</UserControl>

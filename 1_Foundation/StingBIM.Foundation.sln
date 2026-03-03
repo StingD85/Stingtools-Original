@@ -1,0 +1,41 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StingBIM.Core", "StingBIM.Core\StingBIM.Core.csproj", "{4F1D40AC-6A50-4608-A4F4-78CA4BF498FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StingBIM.Data", "StingBIM.Data\StingBIM.Data.csproj", "{D19FC906-BDFE-4D75-AE11-5F72F9B41068}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StingBIM.Standards", "StingBIM.Standards\StingBIM.Standards.csproj", "{D7B7643E-6726-4305-9970-B4229D5B9FAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StingBIM.Revit", "StingBIM.Revit\StingBIM.Revit.csproj", "{7F9CA2AC-558B-49A1-A6F7-A0A20E6824AD}"
+EndProject
+
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F1D40AC-6A50-4608-A4F4-78CA4BF498FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F1D40AC-6A50-4608-A4F4-78CA4BF498FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F1D40AC-6A50-4608-A4F4-78CA4BF498FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F1D40AC-6A50-4608-A4F4-78CA4BF498FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D19FC906-BDFE-4D75-AE11-5F72F9B41068}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D19FC906-BDFE-4D75-AE11-5F72F9B41068}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D19FC906-BDFE-4D75-AE11-5F72F9B41068}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D19FC906-BDFE-4D75-AE11-5F72F9B41068}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7B7643E-6726-4305-9970-B4229D5B9FAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7B7643E-6726-4305-9970-B4229D5B9FAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7B7643E-6726-4305-9970-B4229D5B9FAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7B7643E-6726-4305-9970-B4229D5B9FAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F9CA2AC-558B-49A1-A6F7-A0A20E6824AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F9CA2AC-558B-49A1-A6F7-A0A20E6824AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F9CA2AC-558B-49A1-A6F7-A0A20E6824AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F9CA2AC-558B-49A1-A6F7-A0A20E6824AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

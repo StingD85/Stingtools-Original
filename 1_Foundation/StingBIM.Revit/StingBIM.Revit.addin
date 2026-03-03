@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>StingBIM AI</Name>
+    <Assembly>StingBIM\StingBIM.Revit.dll</Assembly>
+    <AddInId>8A3F5B2C-1D4E-4F6A-9B8C-7D2E1F0A3B60</AddInId>
+    <FullClassName>StingBIM.Revit.Commands.StingBIMApplication</FullClassName>
+    <VendorId>StingBIM</VendorId>
+    <VendorDescription>StingBIM - AI-Powered BIM Automation</VendorDescription>
+    <VendorEmail>support@stingbim.com</VendorEmail>
+  </AddIn>
+</RevitAddIns>

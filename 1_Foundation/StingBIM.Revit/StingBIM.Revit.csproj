@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>StingBIM.Revit</RootNamespace>
+    <AssemblyName>StingBIM.Revit</AssemblyName>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Description>Revit API integration bridge for StingBIM - entry point for the add-in</Description>
+    <Company>StingBIM</Company>
+    <Product>StingBIM AI</Product>
+    <Version>7.0.0</Version>
+    <!-- Copy all dependencies to output for Revit add-in loading -->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <!-- WPF for dockable pane controls and WinForms for dialogs -->
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NLog" Version="5.2.8" />
+  </ItemGroup>
+
+  <!-- Reference Foundation projects via AI solution paths -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\2_AI\StingBIM.AI.Foundation\StingBIM.Core\StingBIM.Core.csproj" />
+    <ProjectReference Include="..\..\2_AI\StingBIM.AI.Foundation\StingBIM.Data\StingBIM.Data.csproj" />
+    <ProjectReference Include="..\..\2_AI\StingBIM.AI.Foundation\StingBIM.Standards\StingBIM.Standards.csproj" />
+  </ItemGroup>
+
+  <!-- AI module references for ChatCommandRouter integration -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\2_AI\StingBIM.AI.Analysis\StingBIM.AI.Analysis.csproj" />
+    <ProjectReference Include="..\..\2_AI\StingBIM.AI.Operations\StingBIM.AI.Operations.csproj" />
+    <ProjectReference Include="..\..\2_AI\StingBIM.AI.Operations\Automation\StingBIM.AI.Automation.csproj" />
+    <ProjectReference Include="..\..\2_AI\StingBIM.AI.Operations\QualityAssurance\StingBIM.AI.QualityAssurance.csproj" />
+    <ProjectReference Include="..\..\2_AI\StingBIM.AI.Operations\Parameters\StingBIM.AI.Parameters.csproj" />
+    <ProjectReference Include="..\..\2_AI\StingBIM.AI.Design\StingBIM.AI.Design.csproj" />
+    <ProjectReference Include="..\..\2_AI\StingBIM.AI.Design\Construction\StingBIM.AI.Construction.csproj" />
+  </ItemGroup>
+
+  <!-- Revit API References -->
+  <ItemGroup>
+    <Reference Include="RevitAPI">
+      <HintPath>C:\Program Files\Autodesk\Revit 2025\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>C:\Program Files\Autodesk\Revit 2025\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- Post-build: Deploy data files to %APPDATA%\StingBIM\Data -->
+  <Target Name="DeployDataFiles" AfterTargets="Build">
+    <PropertyGroup>
+      <StingBIMDataSource>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\..\..\data\ai'))</StingBIMDataSource>
+      <StingBIMDataTarget>$(APPDATA)\StingBIM\Data</StingBIMDataTarget>
+    </PropertyGroup>
+    <Message Text="Deploying StingBIM data files from $(StingBIMDataSource) to $(StingBIMDataTarget)" Importance="high" />
+    <MakeDir Directories="$(StingBIMDataTarget)" Condition="!Exists('$(StingBIMDataTarget)')" />
+    <ItemGroup>
+      <DataFilesToCopy Include="$(StingBIMDataSource)\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(DataFilesToCopy)"
+          DestinationFiles="@(DataFilesToCopy->'$(StingBIMDataTarget)\%(RecursiveDir)%(Filename)%(Extension)')"
+          SkipUnchangedFiles="true"
+          Condition="Exists('$(StingBIMDataSource)')" />
+  </Target>
+</Project>

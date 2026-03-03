@@ -1,0 +1,254 @@
+<Window x:Class="StingBIM.AI.UI.Panels.SettingsPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="StingBIM AI Settings"
+        Width="450" Height="550"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="{DynamicResource BackgroundBrush}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Themes/AITheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="{DynamicResource HeaderBrush}" Padding="16,12">
+            <StackPanel>
+                <TextBlock Text="AI Assistant Settings"
+                           FontSize="18" FontWeight="SemiBold"
+                           Foreground="{DynamicResource ForegroundBrush}"/>
+                <TextBlock Text="Configure voice, language, and behavior preferences"
+                           FontSize="12" Opacity="0.7"
+                           Foreground="{DynamicResource ForegroundBrush}"
+                           Margin="0,4,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Settings Content -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="16">
+            <StackPanel>
+
+                <!-- Voice Settings -->
+                <TextBlock Text="VOICE INPUT" Style="{DynamicResource SettingsCategoryStyle}"/>
+
+                <Border Style="{DynamicResource SettingsCardStyle}">
+                    <StackPanel>
+                        <!-- Enable Voice -->
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Enable Voice Input" Style="{DynamicResource SettingsLabelStyle}"/>
+                                <TextBlock Text="Use microphone for voice commands" Style="{DynamicResource SettingsDescriptionStyle}"/>
+                            </StackPanel>
+                            <CheckBox Grid.Column="1" x:Name="EnableVoiceCheckBox"
+                                      IsChecked="True" VerticalAlignment="Center"
+                                      Style="{DynamicResource ToggleSwitchStyle}"/>
+                        </Grid>
+
+                        <!-- Audio Device -->
+                        <StackPanel Margin="0,0,0,12">
+                            <TextBlock Text="Microphone" Style="{DynamicResource SettingsLabelStyle}"/>
+                            <ComboBox x:Name="AudioDeviceCombo"
+                                      Style="{DynamicResource SettingsComboBoxStyle}"
+                                      Margin="0,4,0,0"/>
+                        </StackPanel>
+
+                        <!-- Language -->
+                        <StackPanel Margin="0,0,0,12">
+                            <TextBlock Text="Language" Style="{DynamicResource SettingsLabelStyle}"/>
+                            <ComboBox x:Name="LanguageCombo"
+                                      Style="{DynamicResource SettingsComboBoxStyle}"
+                                      Margin="0,4,0,0">
+                                <ComboBoxItem Content="English" Tag="en" IsSelected="True"/>
+                                <ComboBoxItem Content="French" Tag="fr"/>
+                                <ComboBoxItem Content="Arabic" Tag="ar"/>
+                                <ComboBoxItem Content="Swahili" Tag="sw"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <!-- Wake Word -->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Wake Word" Style="{DynamicResource SettingsLabelStyle}"/>
+                                <TextBlock Text="Say &quot;Hey Sting&quot; to activate" Style="{DynamicResource SettingsDescriptionStyle}"/>
+                            </StackPanel>
+                            <CheckBox Grid.Column="1" x:Name="WakeWordCheckBox"
+                                      IsChecked="False" VerticalAlignment="Center"
+                                      Style="{DynamicResource ToggleSwitchStyle}"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- Response Settings -->
+                <TextBlock Text="RESPONSES" Style="{DynamicResource SettingsCategoryStyle}" Margin="0,16,0,0"/>
+
+                <Border Style="{DynamicResource SettingsCardStyle}">
+                    <StackPanel>
+                        <!-- Verbosity -->
+                        <StackPanel Margin="0,0,0,12">
+                            <TextBlock Text="Response Detail" Style="{DynamicResource SettingsLabelStyle}"/>
+                            <ComboBox x:Name="VerbosityCombo"
+                                      Style="{DynamicResource SettingsComboBoxStyle}"
+                                      Margin="0,4,0,0">
+                                <ComboBoxItem Content="Minimal - Brief confirmations" Tag="Minimal"/>
+                                <ComboBoxItem Content="Normal - Standard responses" Tag="Normal" IsSelected="True"/>
+                                <ComboBoxItem Content="Detailed - Full explanations" Tag="Detailed"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <!-- Show Suggestions -->
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Show Suggestions" Style="{DynamicResource SettingsLabelStyle}"/>
+                                <TextBlock Text="Display follow-up suggestions after commands" Style="{DynamicResource SettingsDescriptionStyle}"/>
+                            </StackPanel>
+                            <CheckBox Grid.Column="1" x:Name="ShowSuggestionsCheckBox"
+                                      IsChecked="True" VerticalAlignment="Center"
+                                      Style="{DynamicResource ToggleSwitchStyle}"/>
+                        </Grid>
+
+                        <!-- Confirmations -->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Confirm Destructive Actions" Style="{DynamicResource SettingsLabelStyle}"/>
+                                <TextBlock Text="Ask before deleting or modifying elements" Style="{DynamicResource SettingsDescriptionStyle}"/>
+                            </StackPanel>
+                            <CheckBox Grid.Column="1" x:Name="ConfirmActionsCheckBox"
+                                      IsChecked="True" VerticalAlignment="Center"
+                                      Style="{DynamicResource ToggleSwitchStyle}"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- AI Behavior -->
+                <TextBlock Text="AI BEHAVIOR" Style="{DynamicResource SettingsCategoryStyle}" Margin="0,16,0,0"/>
+
+                <Border Style="{DynamicResource SettingsCardStyle}">
+                    <StackPanel>
+                        <!-- Learning -->
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Learn from Usage" Style="{DynamicResource SettingsLabelStyle}"/>
+                                <TextBlock Text="Improve suggestions based on your patterns" Style="{DynamicResource SettingsDescriptionStyle}"/>
+                            </StackPanel>
+                            <CheckBox Grid.Column="1" x:Name="LearningCheckBox"
+                                      IsChecked="True" VerticalAlignment="Center"
+                                      Style="{DynamicResource ToggleSwitchStyle}"/>
+                        </Grid>
+
+                        <!-- Proactive Suggestions -->
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Proactive Assistance" Style="{DynamicResource SettingsLabelStyle}"/>
+                                <TextBlock Text="Offer help when detecting potential issues" Style="{DynamicResource SettingsDescriptionStyle}"/>
+                            </StackPanel>
+                            <CheckBox Grid.Column="1" x:Name="ProactiveCheckBox"
+                                      IsChecked="True" VerticalAlignment="Center"
+                                      Style="{DynamicResource ToggleSwitchStyle}"/>
+                        </Grid>
+
+                        <!-- Confidence Threshold -->
+                        <StackPanel>
+                            <TextBlock Text="Confidence Threshold" Style="{DynamicResource SettingsLabelStyle}"/>
+                            <TextBlock Text="Ask for clarification below this confidence" Style="{DynamicResource SettingsDescriptionStyle}"/>
+                            <Grid Margin="0,8,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+                                <Slider x:Name="ConfidenceSlider"
+                                        Minimum="0.3" Maximum="0.9" Value="0.6"
+                                        TickFrequency="0.1" IsSnapToTickEnabled="True"/>
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding Value, ElementName=ConfidenceSlider, StringFormat={}{0:P0}}"
+                                           HorizontalAlignment="Right" VerticalAlignment="Center"
+                                           Foreground="{DynamicResource ForegroundBrush}"/>
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Data & Privacy -->
+                <TextBlock Text="DATA &amp; PRIVACY" Style="{DynamicResource SettingsCategoryStyle}" Margin="0,16,0,0"/>
+
+                <Border Style="{DynamicResource SettingsCardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="All AI processing is performed locally on your machine. No data is sent to external servers."
+                                   TextWrapping="Wrap" FontSize="12" Opacity="0.8"
+                                   Foreground="{DynamicResource ForegroundBrush}"
+                                   Margin="0,0,0,12"/>
+
+                        <Button x:Name="ClearHistoryButton" Content="Clear Conversation History"
+                                Style="{DynamicResource SecondaryButtonStyle}"
+                                HorizontalAlignment="Left"
+                                Click="ClearHistoryButton_Click"/>
+
+                        <Button x:Name="ClearLearningButton" Content="Reset AI Learning Data"
+                                Style="{DynamicResource SecondaryButtonStyle}"
+                                HorizontalAlignment="Left"
+                                Margin="0,8,0,0"
+                                Click="ClearLearningButton_Click"/>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Footer Buttons -->
+        <Border Grid.Row="2" Background="{DynamicResource FooterBrush}"
+                BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,1,0,0"
+                Padding="16,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="1" Content="Cancel"
+                        Style="{DynamicResource SecondaryButtonStyle}"
+                        Width="80" Margin="0,0,8,0"
+                        Click="CancelButton_Click"/>
+
+                <Button Grid.Column="2" Content="Save"
+                        Style="{DynamicResource PrimaryButtonStyle}"
+                        Width="80"
+                        Click="SaveButton_Click"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

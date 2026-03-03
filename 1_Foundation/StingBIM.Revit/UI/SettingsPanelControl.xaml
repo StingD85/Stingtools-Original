@@ -1,0 +1,172 @@
+<UserControl x:Class="StingBIM.Revit.UI.SettingsPanelControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#1E1E1E">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="AccentBrush" Color="#4A90D9"/>
+        <SolidColorBrush x:Key="AccentLightBrush" Color="#6BA5E7"/>
+        <SolidColorBrush x:Key="HeaderBrush" Color="#323233"/>
+        <SolidColorBrush x:Key="CardBrush" Color="#2D2D30"/>
+        <SolidColorBrush x:Key="SurfaceBrush" Color="#252526"/>
+        <SolidColorBrush x:Key="FgBrush" Color="#E0E0E0"/>
+        <SolidColorBrush x:Key="FgSecondaryBrush" Color="#A0A0A0"/>
+        <SolidColorBrush x:Key="BorderBrush" Color="#404040"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="{StaticResource HeaderBrush}" Padding="16,12">
+            <StackPanel>
+                <TextBlock Text="AI Assistant Settings" FontSize="16" FontWeight="SemiBold"
+                           Foreground="{StaticResource FgBrush}"/>
+                <TextBlock Text="Configure StingBIM AI preferences"
+                           FontSize="11" Foreground="{StaticResource FgSecondaryBrush}" Margin="0,2,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Settings Content -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="12">
+            <StackPanel>
+
+                <!-- Region -->
+                <TextBlock Text="REGIONAL STANDARDS" FontSize="10" FontWeight="SemiBold"
+                           Foreground="{StaticResource FgSecondaryBrush}" Margin="4,0,0,8"/>
+                <Border Background="{StaticResource CardBrush}" CornerRadius="6" Padding="12" Margin="0,0,0,12">
+                    <StackPanel>
+                        <TextBlock Text="Default Region" FontSize="12" Foreground="{StaticResource FgBrush}"/>
+                        <ComboBox x:Name="RegionCombo" Margin="0,6,0,0" FontSize="12"
+                                  Background="{StaticResource SurfaceBrush}" Foreground="{StaticResource FgBrush}">
+                            <ComboBoxItem Content="East Africa" IsSelected="True"/>
+                            <ComboBoxItem Content="West Africa"/>
+                            <ComboBoxItem Content="Southern Africa"/>
+                            <ComboBoxItem Content="North America"/>
+                            <ComboBoxItem Content="Europe"/>
+                            <ComboBoxItem Content="Middle East"/>
+                        </ComboBox>
+                        <TextBlock Text="Determines which building codes are applied" FontSize="10"
+                                   Foreground="{StaticResource FgSecondaryBrush}" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- AI Features -->
+                <TextBlock Text="AI FEATURES" FontSize="10" FontWeight="SemiBold"
+                           Foreground="{StaticResource FgSecondaryBrush}" Margin="4,4,0,8"/>
+                <Border Background="{StaticResource CardBrush}" CornerRadius="6" Padding="12" Margin="0,0,0,12">
+                    <StackPanel>
+                        <!-- Learning -->
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Learn from Usage" FontSize="12" Foreground="{StaticResource FgBrush}"/>
+                                <TextBlock Text="Improve suggestions based on your patterns" FontSize="10"
+                                           Foreground="{StaticResource FgSecondaryBrush}" Margin="0,2,0,0"/>
+                            </StackPanel>
+                            <CheckBox Grid.Column="1" x:Name="LearningCheckBox" IsChecked="True"
+                                      VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <!-- Voice -->
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Voice Commands" FontSize="12" Foreground="{StaticResource FgBrush}"/>
+                                <TextBlock Text="Enable microphone input for commands" FontSize="10"
+                                           Foreground="{StaticResource FgSecondaryBrush}" Margin="0,2,0,0"/>
+                            </StackPanel>
+                            <CheckBox Grid.Column="1" x:Name="VoiceCheckBox" IsChecked="True"
+                                      VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <!-- Proactive -->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Proactive Assistance" FontSize="12" Foreground="{StaticResource FgBrush}"/>
+                                <TextBlock Text="Offer suggestions when issues detected" FontSize="10"
+                                           Foreground="{StaticResource FgSecondaryBrush}" Margin="0,2,0,0"/>
+                            </StackPanel>
+                            <CheckBox Grid.Column="1" x:Name="ProactiveCheckBox" IsChecked="True"
+                                      VerticalAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- Response -->
+                <TextBlock Text="RESPONSES" FontSize="10" FontWeight="SemiBold"
+                           Foreground="{StaticResource FgSecondaryBrush}" Margin="4,4,0,8"/>
+                <Border Background="{StaticResource CardBrush}" CornerRadius="6" Padding="12" Margin="0,0,0,12">
+                    <StackPanel>
+                        <TextBlock Text="Response Detail Level" FontSize="12" Foreground="{StaticResource FgBrush}"/>
+                        <ComboBox x:Name="VerbosityCombo" Margin="0,6,0,0" FontSize="12"
+                                  Background="{StaticResource SurfaceBrush}" Foreground="{StaticResource FgBrush}">
+                            <ComboBoxItem Content="Minimal - Brief confirmations"/>
+                            <ComboBoxItem Content="Normal - Standard responses" IsSelected="True"/>
+                            <ComboBoxItem Content="Detailed - Full explanations"/>
+                        </ComboBox>
+
+                        <Grid Margin="0,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Confirm Before Changes" FontSize="12" Foreground="{StaticResource FgBrush}"/>
+                                <TextBlock Text="Ask before modifying model elements" FontSize="10"
+                                           Foreground="{StaticResource FgSecondaryBrush}" Margin="0,2,0,0"/>
+                            </StackPanel>
+                            <CheckBox Grid.Column="1" x:Name="ConfirmCheckBox" IsChecked="True"
+                                      VerticalAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- Data -->
+                <TextBlock Text="DATA &amp; PRIVACY" FontSize="10" FontWeight="SemiBold"
+                           Foreground="{StaticResource FgSecondaryBrush}" Margin="4,4,0,8"/>
+                <Border Background="{StaticResource CardBrush}" CornerRadius="6" Padding="12" Margin="0,0,0,12">
+                    <StackPanel>
+                        <TextBlock Text="All AI processing is performed locally. No data is sent to external servers."
+                                   TextWrapping="Wrap" FontSize="11" Foreground="{StaticResource FgSecondaryBrush}"/>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Footer -->
+        <Border Grid.Row="2" Background="{StaticResource HeaderBrush}"
+                BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0"
+                Padding="12,8">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="StingBIM AI v7.0" FontSize="10" VerticalAlignment="Center"
+                           Foreground="{StaticResource FgSecondaryBrush}"/>
+
+                <Button Grid.Column="1" Content="Save Settings" Padding="16,6"
+                        Background="{StaticResource AccentBrush}" Foreground="White"
+                        BorderThickness="0" FontSize="12" Cursor="Hand"
+                        Click="SaveButton_Click"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

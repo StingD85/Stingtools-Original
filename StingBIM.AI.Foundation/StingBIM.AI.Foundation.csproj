@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>StingBIM.AI.Foundation</RootNamespace>
+    <AssemblyName>StingBIM.AI.Foundation</AssemblyName>
+    <!-- Exclude sub-project directories to prevent double compilation -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);StingBIM.Core\**;StingBIM.Data\**;StingBIM.Standards\**</DefaultItemExcludes>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Description>Foundation layer - Core config, logging, transactions, parameter loading, material database, schedule generation, formula evaluation</Description>
+    <Company>StingBIM</Company>
+    <Product>StingBIM AI</Product>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <!-- Exclude stale obj/bin folders from nested subdirectories -->
+  <ItemGroup>
+    <Compile Remove="**/obj/**" />
+    <Compile Remove="**/bin/**" />
+    <None Remove="**/obj/**" />
+    <None Remove="**/bin/**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- JSON Serialization -->
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+
+    <!-- Logging -->
+    <PackageReference Include="NLog" Version="5.2.8" />
+
+    <!-- Caching -->
+    <PackageReference Include="System.Runtime.Caching" Version="8.0.0" />
+
+    <!-- Excel reading for materials -->
+    <PackageReference Include="EPPlus" Version="7.0.0" />
+  </ItemGroup>
+
+  <!-- Revit API References - Update paths for your Revit installation -->
+  <ItemGroup>
+    <Reference Include="RevitAPI">
+      <HintPath>C:\Program Files\Autodesk\Revit 2025\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>C:\Program Files\Autodesk\Revit 2025\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

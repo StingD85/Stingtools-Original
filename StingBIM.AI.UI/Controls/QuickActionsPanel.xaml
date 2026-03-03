@@ -1,0 +1,283 @@
+<UserControl x:Class="StingBIM.AI.UI.Controls.QuickActionsPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:StingBIM.AI.UI.Converters"
+             x:Name="Root">
+
+    <UserControl.Resources>
+        <converters:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter"/>
+        <!-- Action Button Style -->
+        <Style x:Key="QuickActionButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource CardBrush}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Category Header Style -->
+        <Style x:Key="CategoryHeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundSecondaryBrush}"/>
+            <Setter Property="Margin" Value="8,12,8,6"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Border Background="{DynamicResource SurfaceBrush}"
+            BorderBrush="{DynamicResource BorderBrush}"
+            BorderThickness="1"
+            CornerRadius="8"
+            Padding="8">
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                      MaxHeight="400">
+            <StackPanel>
+                <!-- Header -->
+                <Grid Margin="8,4,8,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Quick Actions"
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource ForegroundBrush}"/>
+
+                    <Button Grid.Column="1"
+                            x:Name="CloseButton"
+                            Click="CloseButton_Click"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Padding="4"
+                            Cursor="Hand"
+                            ToolTip="Close">
+                        <Path Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+                              Fill="{DynamicResource ForegroundSecondaryBrush}"
+                              Width="14" Height="14" Stretch="Uniform"/>
+                    </Button>
+                </Grid>
+
+                <!-- Search Box -->
+                <Border Background="{DynamicResource CardBrush}"
+                        CornerRadius="6"
+                        Margin="4,0,4,8"
+                        Padding="8,6">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Path Grid.Column="0"
+                              Data="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
+                              Fill="{DynamicResource ForegroundSecondaryBrush}"
+                              Width="16" Height="16" Stretch="Uniform"
+                              Margin="0,0,8,0"
+                              VerticalAlignment="Center"/>
+
+                        <TextBox Grid.Column="1"
+                                 x:Name="SearchBox"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Foreground="{DynamicResource ForegroundBrush}"
+                                 FontSize="13"
+                                 VerticalContentAlignment="Center"
+                                 TextChanged="SearchBox_TextChanged"/>
+
+                        <TextBlock Grid.Column="1"
+                                   Text="Search actions..."
+                                   Foreground="{DynamicResource PlaceholderBrush}"
+                                   FontSize="13"
+                                   VerticalAlignment="Center"
+                                   IsHitTestVisible="False"
+                                   Visibility="{Binding Text.Length, ElementName=SearchBox, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
+                    </Grid>
+                </Border>
+
+                <!-- Create Category -->
+                <TextBlock Text="CREATE" Style="{StaticResource CategoryHeaderStyle}"/>
+                <WrapPanel x:Name="CreatePanel">
+                    <Button Style="{StaticResource QuickActionButtonStyle}"
+                            Tag="Create a wall" Click="ActionButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M3,3H21V5H3V3M3,7H21V9H3V7M3,11H21V13H3V11M3,15H21V17H3V15M3,19H21V21H3V19Z"
+                                  Fill="{DynamicResource AccentBrush}"
+                                  Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                            <TextBlock Text="Wall"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource QuickActionButtonStyle}"
+                            Tag="Create a floor" Click="ActionButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M13,17V9H17V17H13M9,17V5H13V17H9M5,17V13H9V17H5M19,17H21V19H3V17H5M5,9V5H9V9H5Z"
+                                  Fill="{DynamicResource AccentBrush}"
+                                  Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                            <TextBlock Text="Floor"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource QuickActionButtonStyle}"
+                            Tag="Create a room" Click="ActionButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M12,3L2,12H5V20H19V12H22L12,3M12,8.75A2.25,2.25 0 0,1 14.25,11A2.25,2.25 0 0,1 12,13.25A2.25,2.25 0 0,1 9.75,11A2.25,2.25 0 0,1 12,8.75Z"
+                                  Fill="{DynamicResource AccentBrush}"
+                                  Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                            <TextBlock Text="Room"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource QuickActionButtonStyle}"
+                            Tag="Add a door" Click="ActionButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M8,3C6.89,3 6,3.89 6,5V21H18V5C18,3.89 17.11,3 16,3H8M8,5H16V19H8V5M13,11A1,1 0 0,0 12,12A1,1 0 0,0 13,13A1,1 0 0,0 14,12A1,1 0 0,0 13,11Z"
+                                  Fill="{DynamicResource AccentBrush}"
+                                  Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                            <TextBlock Text="Door"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource QuickActionButtonStyle}"
+                            Tag="Add a window" Click="ActionButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M3,2H21V8H3V2M3,10H21V22H3V10M5,4V6H19V4H5M5,12V20H19V12H5M11,14H13V18H11V14Z"
+                                  Fill="{DynamicResource AccentBrush}"
+                                  Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                            <TextBlock Text="Window"/>
+                        </StackPanel>
+                    </Button>
+                </WrapPanel>
+
+                <!-- Analyze Category -->
+                <TextBlock Text="ANALYZE" Style="{StaticResource CategoryHeaderStyle}"/>
+                <WrapPanel x:Name="AnalyzePanel">
+                    <Button Style="{StaticResource QuickActionButtonStyle}"
+                            Tag="Check code compliance" Click="ActionButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                                  Fill="{DynamicResource SuccessBrush}"
+                                  Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                            <TextBlock Text="Code Check"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource QuickActionButtonStyle}"
+                            Tag="Analyze spatial layout" Click="ActionButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M21,16H3V4H21M21,2H3C1.89,2 1,2.89 1,4V16A2,2 0 0,0 3,18H10V20H8V22H16V20H14V18H21A2,2 0 0,0 23,16V4C23,2.89 22.1,2 21,2Z"
+                                  Fill="{DynamicResource InfoBrush}"
+                                  Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                            <TextBlock Text="Spatial Analysis"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource QuickActionButtonStyle}"
+                            Tag="Review MEP coordination" Click="ActionButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M11,9L12.42,10.42L8.83,14H18V4H20V16H8.83L12.42,19.58L11,21L5,15L11,9Z"
+                                  Fill="{DynamicResource WarningBrush}"
+                                  Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                            <TextBlock Text="MEP Review"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource QuickActionButtonStyle}"
+                            Tag="Calculate areas" Click="ActionButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M7,2H17A2,2 0 0,1 19,4V20A2,2 0 0,1 17,22H7A2,2 0 0,1 5,20V4A2,2 0 0,1 7,2M7,4V8H17V4H7M7,10V12H9V10H7M11,10V12H13V10H11M15,10V12H17V10H15M7,14V16H9V14H7M11,14V16H13V14H11M15,14V16H17V14H15M7,18V20H9V18H7M11,18V20H13V18H11M15,18V20H17V18H15Z"
+                                  Fill="{DynamicResource AccentBrush}"
+                                  Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                            <TextBlock Text="Area Calc"/>
+                        </StackPanel>
+                    </Button>
+                </WrapPanel>
+
+                <!-- Parameters Category -->
+                <TextBlock Text="PARAMETERS" Style="{StaticResource CategoryHeaderStyle}"/>
+                <WrapPanel x:Name="ParametersPanel">
+                    <Button Style="{StaticResource QuickActionButtonStyle}"
+                            Tag="Show element parameters" Click="ActionButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,10.5A1.5,1.5 0 0,1 13.5,12A1.5,1.5 0 0,1 12,13.5A1.5,1.5 0 0,1 10.5,12A1.5,1.5 0 0,1 12,10.5M7.5,10.5A1.5,1.5 0 0,1 9,12A1.5,1.5 0 0,1 7.5,13.5A1.5,1.5 0 0,1 6,12A1.5,1.5 0 0,1 7.5,10.5M16.5,10.5A1.5,1.5 0 0,1 18,12A1.5,1.5 0 0,1 16.5,13.5A1.5,1.5 0 0,1 15,12A1.5,1.5 0 0,1 16.5,10.5Z"
+                                  Fill="{DynamicResource AccentBrush}"
+                                  Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                            <TextBlock Text="View Params"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource QuickActionButtonStyle}"
+                            Tag="Set parameter value" Click="ActionButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
+                                  Fill="{DynamicResource AccentBrush}"
+                                  Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                            <TextBlock Text="Set Param"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource QuickActionButtonStyle}"
+                            Tag="Apply material" Click="ActionButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M17.5,12A1.5,1.5 0 0,1 16,10.5A1.5,1.5 0 0,1 17.5,9A1.5,1.5 0 0,1 19,10.5A1.5,1.5 0 0,1 17.5,12M14.5,8A1.5,1.5 0 0,1 13,6.5A1.5,1.5 0 0,1 14.5,5A1.5,1.5 0 0,1 16,6.5A1.5,1.5 0 0,1 14.5,8M9.5,8A1.5,1.5 0 0,1 8,6.5A1.5,1.5 0 0,1 9.5,5A1.5,1.5 0 0,1 11,6.5A1.5,1.5 0 0,1 9.5,8M6.5,12A1.5,1.5 0 0,1 5,10.5A1.5,1.5 0 0,1 6.5,9A1.5,1.5 0 0,1 8,10.5A1.5,1.5 0 0,1 6.5,12M12,3A9,9 0 0,0 3,12A9,9 0 0,0 12,21A1.5,1.5 0 0,0 13.5,19.5C13.5,19.11 13.35,18.76 13.11,18.5C12.88,18.23 12.73,17.88 12.73,17.5A1.5,1.5 0 0,1 14.23,16H16A5,5 0 0,0 21,11C21,6.58 16.97,3 12,3Z"
+                                  Fill="{DynamicResource AccentBrush}"
+                                  Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                            <TextBlock Text="Material"/>
+                        </StackPanel>
+                    </Button>
+                </WrapPanel>
+
+                <!-- Schedules Category -->
+                <TextBlock Text="SCHEDULES" Style="{StaticResource CategoryHeaderStyle}"/>
+                <WrapPanel x:Name="SchedulesPanel">
+                    <Button Style="{StaticResource QuickActionButtonStyle}"
+                            Tag="Create door schedule" Click="ActionButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M3,3H21V7H3V3M4,8H20V21H4V8M9.5,11A0.5,0.5 0 0,0 9,11.5V13H15V11.5A0.5,0.5 0 0,0 14.5,11H9.5Z"
+                                  Fill="{DynamicResource AccentBrush}"
+                                  Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                            <TextBlock Text="Door Schedule"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource QuickActionButtonStyle}"
+                            Tag="Create room schedule" Click="ActionButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M3,3H21V7H3V3M4,8H20V21H4V8M9.5,11A0.5,0.5 0 0,0 9,11.5V13H15V11.5A0.5,0.5 0 0,0 14.5,11H9.5Z"
+                                  Fill="{DynamicResource AccentBrush}"
+                                  Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                            <TextBlock Text="Room Schedule"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource QuickActionButtonStyle}"
+                            Tag="Create wall schedule" Click="ActionButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M3,3H21V7H3V3M4,8H20V21H4V8M9.5,11A0.5,0.5 0 0,0 9,11.5V13H15V11.5A0.5,0.5 0 0,0 14.5,11H9.5Z"
+                                  Fill="{DynamicResource AccentBrush}"
+                                  Width="16" Height="16" Stretch="Uniform" Margin="0,0,8,0"/>
+                            <TextBlock Text="Wall Schedule"/>
+                        </StackPanel>
+                    </Button>
+                </WrapPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Border>
+</UserControl>
