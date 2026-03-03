@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>StingBIM.AI</RootNamespace>
+    <AssemblyName>StingBIM.AI.Design</AssemblyName>
+    <!-- Exclude sub-project directories to prevent double compilation -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);Construction\**;Portfolio\**;Creation\**</DefaultItemExcludes>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Description>Design and Construction - Element creation, generative design, construction sequencing, portfolio analytics</Description>
+    <Company>StingBIM</Company>
+    <Product>StingBIM AI</Product>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <!-- Exclude stale obj/bin folders from nested subdirectories -->
+  <ItemGroup>
+    <Compile Remove="**/obj/**" />
+    <Compile Remove="**/bin/**" />
+    <None Remove="**/obj/**" />
+    <None Remove="**/bin/**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- JSON Serialization -->
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+
+    <!-- Logging -->
+    <PackageReference Include="NLog" Version="5.2.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StingBIM.AI.Core\StingBIM.AI.Core.csproj" />
+    <ProjectReference Include="..\StingBIM.AI.Creation\StingBIM.AI.Creation.csproj" />
+  </ItemGroup>
+
+  <!-- Revit API References -->
+  <ItemGroup>
+    <Reference Include="RevitAPI">
+      <HintPath>C:\Program Files\Autodesk\Revit 2025\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>C:\Program Files\Autodesk\Revit 2025\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>StingBIM.AI.Construction</RootNamespace>
+    <AssemblyName>StingBIM.AI.Construction</AssemblyName>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Description>Construction intelligence - Sequencing, 4D simulation, site logistics, progress tracking</Description>
+    <Company>StingBIM</Company>
+    <Product>StingBIM AI</Product>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- JSON Serialization -->
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+
+    <!-- Logging -->
+    <PackageReference Include="NLog" Version="5.2.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\StingBIM.AI.Core\StingBIM.AI.Core.csproj" />
+    <ProjectReference Include="..\..\StingBIM.AI.Foundation\StingBIM.Data\StingBIM.Data.csproj" />
+    <ProjectReference Include="..\..\StingBIM.AI.Analysis\StingBIM.AI.Analysis.csproj" />
+  </ItemGroup>
+
+  <!-- Revit API References - Update paths for your Revit installation -->
+  <ItemGroup>
+    <Reference Include="RevitAPI">
+      <HintPath>C:\Program Files\Autodesk\Revit 2025\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>C:\Program Files\Autodesk\Revit 2025\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+</Project>
